@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;                // For save/open parameters functionality
 using MathNet.Numerics.LinearAlgebra;
 
 namespace brachIOplexus
@@ -9,6 +10,8 @@ namespace brachIOplexus
     class PatternRec
     {
         int windowlength = 100;
+        int current_output_label = 0;
+        public dataLogger logger = new dataLogger();
 
         public PatternRec()
         {
@@ -23,6 +26,19 @@ namespace brachIOplexus
 
             return MAVdata;
 
+        }
+
+        public void LoadFile(string filepath)
+        {
+
+            string[] lines = System.IO.File.ReadAllLines(filepath);
+            
+
+
+            foreach (string line in lines)
+            {
+
+            }
         }
     }
 }

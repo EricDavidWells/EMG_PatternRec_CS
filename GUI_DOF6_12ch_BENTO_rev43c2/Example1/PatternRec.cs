@@ -54,7 +54,7 @@ namespace brachIOplexus
             }
         }
 
-        public void write_data_with_output(string[] data)
+        public void update_data_with_output(string[] data)
         {
             /*
             appends the current output label to the data and sends data to data logger
@@ -66,7 +66,7 @@ namespace brachIOplexus
             {
                 temp[i] = data[i];
             }
-            logger.write_data(temp);
+            logger.data_to_write = temp;
         }
 
         public void write_header_with_output(string[] data)
@@ -92,10 +92,9 @@ namespace brachIOplexus
 
         public void tick()
         {
-            logger.tick();
             if (trainFlag)
             {
-                long elapsed_time = logger.curtime - start_time;
+                long elapsed_time = (long)(logger.curtime - start_time);
                 long segment_time = relax_time + contraction_time;
 
                 current_output = (int)Math.Floor((decimal)elapsed_time / segment_time);
@@ -107,6 +106,7 @@ namespace brachIOplexus
 
                 if (current_cycle >= collection_cycles)
                 {
+                    logger.recordflag = false;
                     trainFlag = false;
                     logger.file.Flush();
                 }
@@ -115,10 +115,9 @@ namespace brachIOplexus
 
         public void start_train()
         {
-            logger.init_logger(logger.filepath);
             trainFlag = true;
             logger.tick();
-            start_time = logger.curtime;
+            start_time = (long)logger.curtime;
         }
 
         public void end_train()

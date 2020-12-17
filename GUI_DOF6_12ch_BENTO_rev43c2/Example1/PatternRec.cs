@@ -6,7 +6,10 @@ using System.IO;                // For save/open parameters functionality
 using MathNet.Numerics.LinearAlgebra;
 
 
+// dependencies: Accord, Accord.MachineLearning
+
 // useful: https://dotnetfiddle.net/
+// potential library: http://accord-framework.net/
 
 namespace brachIOplexus
 {
@@ -15,8 +18,7 @@ namespace brachIOplexus
         int windowlength = 100;
         public dataLogger logger = new dataLogger();
         public int current_output = 0;
-        public string[] output_labels;
-        public int output_num;
+
         public int contraction_time = 1000;
         public int relax_time = 3000;
         public long start_time = 0;
@@ -25,6 +27,17 @@ namespace brachIOplexus
 
         public bool trainFlag = false;  // flag to indicate training has begun
         public bool contractFlag = false;
+
+
+        public float[][] raw_data;
+        public float[][] input_data;
+        public int[] output_data;
+        public int num_cols;
+        public string[] output_labels;
+        public string[] input_labels;
+        public string[] raw_data_labels;
+        public int output_num;
+        public int input_num;
 
         public PatternRec()
         {
@@ -41,17 +54,75 @@ namespace brachIOplexus
 
         }
 
-        public void LoadFile(string filepath)
+        public bool LoadFile(string filepath)
         {
 
             string[] lines = System.IO.File.ReadAllLines(filepath);
-            
+            int num_cols = lines[0].Split(',').Length - 1; // number of data columns in the file (-1 for line label)
+            int num_lines = lines.Length - 1;    // number of lines in the data file (-1 for header)
 
-
-            foreach (string line in lines)
+            // initialize raw data jagged array
+            raw_data = new float[num_cols][];
+            for (int i = 0; i < num_cols; i++)
             {
-
+                raw_data[i] = new float[num_lines];
             }
+
+            // ensure header is first line in file
+            string headerline = lines[0];
+            if (headerline[0] != 'h')
+            {
+                return false;
+            }
+
+            // parse header line
+            char[] chars_to_trim = { 'd', 'h', ',' };
+            headerline = headerline.TrimStart(chars_to_trim);
+            raw_data_labels = headerline.Split(',');
+
+            // parse data lines
+            for (int i=0; i<num_lines-1; i++)
+            {
+                string line = lines[i+1];   // skip first line
+                
+                // ensure all lines have data stamp as first index
+                if (line[0] != 'd')
+                {
+                    return false;
+                }
+
+                line = line.TrimStart(chars_to_trim);
+                string[] vals = line.Split(',');
+                
+                for (int j=0; j<num_cols; j++)
+                {
+                    raw_data[j][i] = float.Parse(vals[j]);
+                }
+                
+            }
+
+            // split up into input and output data arrays
+            input_data = new float[num_cols-2][];
+            for (int i=0; i < num_cols - 2; i++)
+            {
+                input_data[i] = new float[num_lines];
+                input_data[i] = raw_data[i + 1];
+            }
+
+            output_data = new int[num_lines];
+            for (int i=0; i < num_lines; i++)
+            {
+                output_data[i] = (int)raw_data[num_cols][i];
+            }
+
+            return true;
+        }
+
+        public void train_model()
+        {
+            //var learner = new LinearDualCoordinateDescent();
+            //var teacher = new MulticlassSupportVectorMachine<Linear>(3, );
+
         }
 
         public void update_data_with_output(string[] data)
@@ -109,6 +180,7 @@ namespace brachIOplexus
                     logger.recordflag = false;
                     trainFlag = false;
                     logger.file.Flush();
+                    logger.close();
                 }
             }
         }
@@ -116,12 +188,15 @@ namespace brachIOplexus
         public void start_train()
         {
             trainFlag = true;
+            logger.start();
             logger.tick();
             start_time = (long)logger.curtime;
+            logger.recordflag = true;
         }
 
         public void end_train()
         {
+            logger.close();
             trainFlag = false;
         }
     }

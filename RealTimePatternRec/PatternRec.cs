@@ -21,7 +21,7 @@ using Accord.Statistics.Kernels;
 
 namespace RealTimePatternRec.PatternRec
 {
-    class PR_Logger
+    public class PR_Logger
     {
         int windowlength = 100;
         public dataLogger logger = new dataLogger();
@@ -43,8 +43,10 @@ namespace RealTimePatternRec.PatternRec
 
         public int model_update_freq = 50;
         public int model_window_time = 100;
-        public int model_window_overlap;
+        public int model_window_overlap = 10;
         public int model_window_n;
+        public int data_num_inputs;
+        public int data_num_outputs;
 
         public bool modelFlag = false;  // keeps track of whether a model is loaded
 
@@ -91,32 +93,23 @@ namespace RealTimePatternRec.PatternRec
             return filtered_values;
         }
 
-        public List<double> MAV(List<double> raw_values, int window_n)
+        public List<double> MAV(List<double> raw_values, int window_n, int window_overlap)
         {
-            // returns list of Mean Absolute Value features
-
-            List<double> filtered_values = new List<double>(raw_values.Count()-window_n+1);
-            double sum = 0;
-            for (int i = 0; i < window_n; i++)
+            List<double> filtered_values = new List<double>();
+           
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n-window_overlap))
             {
-                sum += raw_values[i];
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+                filtered_values.Add(sub_window.Sum() / window_n);
             }
-            filtered_values.Add(sum / (float)window_n);
 
-            for (int i = window_n; i < raw_values.Count; i++)
-            {
-
-                sum -= raw_values[i - window_n];
-                sum += raw_values[i];
-                filtered_values.Add(sum / (float)window_n);
-            }
             return filtered_values;
         }
 
         public List<double> MAV(List<double> raw_values)
         {
             // overloaded method to eliminate window time and requency input parameters
-            return MAV(raw_values, model_window_n);
+            return MAV(raw_values, model_window_n, model_window_overlap);
         }
 
         List<float> ZeroCrossings(List<float> raw_values, float window_time, float freq)
@@ -298,6 +291,8 @@ namespace RealTimePatternRec.PatternRec
             // find frequency used for logging
             model_update_freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
             model_window_n = (int)Math.Ceiling((double)model_window_time * model_update_freq / 1000);
+            data_num_inputs = input_num;
+            data_num_outputs = outputs.Max();
 
             return true;
         }
@@ -400,8 +395,13 @@ namespace RealTimePatternRec.PatternRec
                 }
             }
 
-            int new_feature_size = features[0].Count();
-            feature_outputs.AddRange(outputs.GetRange(0, new_feature_size));
+            for (int i=0; i <= (outputs.Count-model_window_n); i+=(model_window_n-model_window_overlap))
+            {
+                feature_outputs.Add(outputs[i]);
+            }
+
+            //feature_outputs.AddRange(outputs.GetRange(0, new_feature_size));
+            //feature_outputs.AddRange(outputs.Where((x, i) => (i+1) % (model_window_n - model_window_overlap) == 0));
             // trim outputs due to windowing of features
         }
 
@@ -472,7 +472,7 @@ namespace RealTimePatternRec.PatternRec
             double[][] features_row_format = invert_list_list(features).Select(a => a.ToArray()).ToArray();
             int[] feature_outputs_format = feature_outputs.ToArray();
 
-            var svm = teacher.Learn(features_row_format, feature_outputs.ToArray());
+            var svm = teacher.Learn(features_row_format, feature_outputs_format);
             model.learner = svm;
 
             // Compute the machine answers for the inputs

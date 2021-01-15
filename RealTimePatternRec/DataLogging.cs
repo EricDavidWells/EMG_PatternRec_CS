@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace RealTimePatternRec.DataLogging
 {
-    class dataLogger
+    public class dataLogger
     {
         public StreamWriter file;
         public bool recordflag = false;
@@ -154,6 +154,12 @@ namespace RealTimePatternRec.DataLogging
             string jsonString = jsonReader.ReadToEnd();
             obj = JsonConvert.DeserializeObject<T>(jsonString);
             return true;
+        }
+
+        public delegate string[] get_data_function();
+        public string[] get_data_to_string(get_data_function f) {
+
+            return f();
         }
 
         public void close()

@@ -44,7 +44,7 @@ TestResults
 *.suo
 *.user
 *.sln.docstates
-*/.vs
+.vs/
 
 # Build results
 [Dd]ebug/

@@ -577,7 +577,7 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
-    static class Tests
+    public static class Tests
     {
         public static float[] ListVsMatrixSpeedTestMAV(string filepath)
         {

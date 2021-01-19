@@ -129,6 +129,7 @@ namespace RealTimePatternRec.DataLogging
                 else
                 {
                     Thread.Sleep(100);
+                    tick();
                 }
             }
         }

@@ -51,10 +51,41 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Model
+    {
+        public int realtime_update_freq;    // frequency with which to update data
+        public int window_time;
+        public int window_overlap; 
+        public int window_n;
+        public int window_overlap_n;
+        public double train_test_split = 0.1;
+        public double accuracy;
+        public string model_type;
+        public Dictionary<string, string> model_params;
+
+        public delegate List<double> pipeline_func(List<double> data);
+        public List<pipeline_func> emg_pipeline = new List<pipeline_func>();
+        public List<pipeline_func> generic_pipeline = new List<pipeline_func>();
+        public dynamic model = new System.Dynamic.ExpandoObject();
+        
+    }
+
+    /// <summary>
+    /// static class of EMG and other feature mapping methods for time series data structured as Lists
+    /// </summary>
     public static class Features
     {
-        // class to hold all features used for EMG and Generic signal types
 
+        /// <summary>
+        /// Returns the windowed mean absolute value of a signal
+        /// </summary>
+        /// <param name="raw_values">List of unwindowed values</param>
+        /// <param name="window_n">Number of data points in each window</param>
+        /// <param name="window_overlap_n">Number of data points to overlap in each subsequent window</param>
+        /// <returns>"windowed mean absolute value"</returns>
         static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
         {
             // return list of windowed mean absolute value features
@@ -112,7 +143,6 @@ namespace RealTimePatternRec.PatternRec
 
     public class PR_Logger
     {
-        int windowlength = 100;
         public dataLogger logger = new dataLogger();
         public int current_output = 0;
 
@@ -122,43 +152,22 @@ namespace RealTimePatternRec.PatternRec
         public int collection_cycles = 1;
         public int current_cycle = 0;
         public int train_output_num;
-
         public bool trainFlag = false;  // flag to indicate training has begun
         public bool contractFlag = false;
 
         public List<string> output_labels = new List<string>();
         public List<string> input_labels = new List<string>();
 
-        public int model_update_freq;
-        public int model_window_time;
-        public int model_window_overlap;
-        public int model_window_n;
-        public int model_window_overlap_n;
-        public double model_train_test_split = 0.1;
-        public double model_accuracy;
-
-        public bool modelFlag = false;  // keeps track of whether a model is loaded
-        public string model_learner_type;
-        public List<string> model_params;
-
         public Data data;
+        public Model model;
 
-
-        public delegate List<double> pipeline_func(List<double> data);
-
-        public List<pipeline_func> emg_pipeline = new List<pipeline_func>();
-        public List<pipeline_func> generic_pipeline = new List<pipeline_func>();
-
-        public List<Func<Vector<double>, Vector<double>>> emg_pipeline_matrix = new List<Func<Vector<double>, Vector<double>>>();
-        public List<Func<Vector<double>, Vector<double>>> generic_pipeline_matrix = new List<Func<Vector<double>, Vector<double>>>();
-
-
-        public dynamic model = new System.Dynamic.ExpandoObject();
+        //public dynamic model = new System.Dynamic.ExpandoObject();
 
 
         public PR_Logger()
         {
             data = new Data();
+            model = new Model();
             return;
         }
 
@@ -240,27 +249,33 @@ namespace RealTimePatternRec.PatternRec
 
             return true;
         }
-
-        public static void shuffle_training_data<T>(List<List<T>> temp_inputs, List<int> temp_outputs)
+        /// <summary>
+        /// shuffles training data inputs and outputs
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="inputs"></param>
+        /// <param name="outputs"></param>
+        public static void shuffle_training_data<T>(List<List<T>> inputs, List<int> outputs)
         {
+
             Random rng = new Random();
-            int n = temp_outputs.Count;
+            int n = outputs.Count;
             while (n > 1)
             {
                 n--;
                 int k = rng.Next(n + 1);
 
                 // swap all data.inputs
-                for (int i = 0; i < temp_inputs.Count; i++)
+                for (int i = 0; i < inputs.Count; i++)
                 {
-                    T value_T = temp_inputs[i][k];
-                    temp_inputs[i][k] = temp_inputs[i][n];
-                    temp_inputs[i][n] = value_T;
+                    T value_T = inputs[i][k];
+                    inputs[i][k] = inputs[i][n];
+                    inputs[i][n] = value_T;
                 }
 
-                int value = temp_outputs[k];
-                temp_outputs[k] = temp_outputs[n];
-                temp_outputs[n] = value;
+                int value = outputs[k];
+                outputs[k] = outputs[n];
+                outputs[n] = value;
             }
 
             return;
@@ -277,14 +292,14 @@ namespace RealTimePatternRec.PatternRec
             {
                 if (data.input_types[i] == 0 && data.input_active_flags[i] == true)
                 {
-                    foreach (pipeline_func f in generic_pipeline)
+                    foreach (Model.pipeline_func f in model.generic_pipeline)
                     {
                         temp_features.Add(f(temp_inputs[i]));
                     }
                 }
                 else if (data.input_types[i] == 1 && data.input_active_flags[i] == true)
                 {
-                    foreach (pipeline_func f in emg_pipeline)
+                    foreach (Model.pipeline_func f in model.emg_pipeline)
                     {
                         temp_features.Add(f(temp_inputs[i]));
                     }
@@ -351,7 +366,7 @@ namespace RealTimePatternRec.PatternRec
             // split to test/train set
             List<List<double>> hmm = invert_list_list(data.features);
 
-            int N_train = (int)(hmm.Count * (1-model_train_test_split));
+            int N_train = (int)(hmm.Count * (1-model.train_test_split));
 
             List<List<double>> training_features = hmm.GetRange(0, N_train);
             List<int> training_outputs = data.feature_outputs.GetRange(0, N_train);
@@ -371,14 +386,14 @@ namespace RealTimePatternRec.PatternRec
 
 
 
-            model.learner = model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
+            model.model.learner = model.model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
 
             //// Compute the machine answers for the data.inputs
-            int[] answers = model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
+            int[] answers = model.model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
             bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
 
             double accuracy = (double)correct.Sum() / correct.Length;
-            model_accuracy = accuracy;
+            model.accuracy = accuracy;
         }
 
         public static List<List<T>> invert_list_list<T>(List<List<T>> list)
@@ -460,11 +475,6 @@ namespace RealTimePatternRec.PatternRec
                 {
                     end_data_collection();
                 }
-            }
-
-            if (modelFlag)
-            {
-
             }
         }
 

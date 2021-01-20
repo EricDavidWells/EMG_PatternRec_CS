@@ -26,24 +26,87 @@ namespace RealTimePatternRec.PatternRec
     {
         // Class to hold all information related to the data being used by the pattern rec class
         public List<double> timestamps = new List<double>();
-        public List<List<double>> inputs = new List<List<double>>();
-        public List<List<double>> features = new List<List<double>>();
-        public List<int> outputs = new List<int>();
-        public List<int> feature_outputs = new List<int>();
-        public List<int> input_types = new List<int>();
-        public List<bool> input_active_flags = new List<bool>();
-        public int input_num;
-        public int output_num;
+        public List<List<double>> inputs = new List<List<double>>();    // raw input values
+        public List<int> outputs = new List<int>(); // raw output values
+        public List<List<double>> features = new List<List<double>>();  // inputs after mapping to features
+        public List<int> feature_outputs = new List<int>(); // outputs trimmed to account for windowing
+        public List<int> input_types = new List<int>();     // types of input signals (0 = generic, 1 = emg)
+        public List<bool> input_active_flags = new List<bool>();    //  indicating which inputs are active in model
+        public int input_num;   // number of inputs in data
+        public int output_num;  // number of outputs in data
+        public int freq;    // frequency data was recorded at
 
         public void Clear()
         {
             timestamps.Clear();
             inputs.Clear();
-            features.Clear();
             outputs.Clear();
+            features.Clear();
             feature_outputs.Clear();
-            input_active_flags.Clear();
             input_types.Clear();
+            input_active_flags.Clear();
+            input_num = 0;
+            output_num = 0;
+            freq = 0;
+        }
+    }
+
+    public static class Features
+    {
+        // class to hold all features used for EMG and Generic signal types
+
+        static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            // return list of windowed mean absolute value features
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+
+                double sum = 0;
+                for (int j = 0; j < sub_window.Count; j++)
+                {
+                    sum += Math.Abs(sub_window[j]);
+                }
+                filtered_values.Add(sum / window_n);
+            }
+
+            return filtered_values;
+        }
+
+        static public List<double> ZeroCrossings(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            // returns list of windowed Zero Crossings features
+            List<double> filtered_values = new List<double>();
+
+            //for (int i = 0; i < (raw_values.Count - window_n); i++)
+            //{
+            //    List<double> window = raw_values.GetRange(i, window_n);
+
+            //    int crossing_count = 0;
+            //    bool positive_flag = (window[0] >= 0);    // true for 
+
+            //    foreach (float value in window)
+            //    {
+            //        if ((value >= 0) != positive_flag)
+            //        {
+            //            crossing_count++;
+            //            positive_flag = !positive_flag;
+            //        }
+            //    }
+            //    filtered_values.Add(crossing_count);
+            //}
+
+            return filtered_values;
+        }
+
+        static public List<double> SSC(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            // returns list of Slope Sign Change features
+            List<double> difference_values = raw_values.Zip(raw_values.Skip(1), (x, y) => y - x).ToList();
+            List<double> filtered_values = ZeroCrossings(difference_values, window_n, window_overlap_n);
+            return filtered_values;
         }
     }
 
@@ -79,13 +142,7 @@ namespace RealTimePatternRec.PatternRec
         public List<string> model_params;
 
         public Data data;
-        //public List<double> data.timestamps = new List<double>();
-        //public List<List<double>> features = new List<List<double>>();
 
-        //public List<int> data.outputs = new List<int>();
-        //public List<int> feature_data.outputs = new List<int>();
-        //public List<int> data.input_types = new List<int>();     // keep track of feature type, 0 = generic, 1 = EMG
-        //public List<bool> data.input_active_flags = new List<bool>();
 
         public delegate List<double> pipeline_func(List<double> data);
 
@@ -105,134 +162,6 @@ namespace RealTimePatternRec.PatternRec
             return;
         }
 
-        static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> filtered_values = new List<double>();
-
-            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
-            {
-                List<double> sub_window = raw_values.GetRange(i, window_n);
-
-                double sum = 0;
-                for (int j=0; j<sub_window.Count; j++)
-                {
-                    sum += Math.Abs(sub_window[j]);
-                }
-                filtered_values.Add(sum / window_n);
-            }
-
-            return filtered_values;
-        }
-
-        public List<double> MAV(List<double> raw_values)
-        {
-            // overloaded method to eliminate window time and requency input parameters
-            return MAV(raw_values, model_window_n, model_window_overlap);
-        }
-
-        List<float> ZeroCrossings(List<float> raw_values, float window_time, float freq)
-        {
-            // returns list of Zero Crossings features
-            List<float> filtered_values = new List<float>();
-            int window_n = (int)Math.Ceiling(window_time * freq / 1000);
-
-            for (int i = 0; i < (raw_values.Count - window_n); i++)
-            {
-                List<float> window = raw_values.GetRange(i, window_n);
-
-                int crossing_count = 0;
-                bool positive_flag = (window[0] >= 0);    // true for 
-
-                foreach (float value in window)
-                {
-                    if ((value >= 0) != positive_flag)
-                    {
-                        crossing_count++;
-                        positive_flag = !positive_flag;
-                    }
-                }
-                filtered_values.Add(crossing_count);
-            }
-
-            return filtered_values;
-        }
-
-        List<float> SSC(List<float> raw_values, float window_time, float freq)
-        {
-            // returns list of Slope Sign Change features
-            int window_n = (int)Math.Ceiling(window_time * freq / 1000);
-
-            List<float> difference_values = raw_values.Zip(raw_values.Skip(1), (x, y) => y - x).ToList();
-            List<float> filtered_values = ZeroCrossings(difference_values, windowlength, freq);
-            return filtered_values;
-        }
-
-        public bool LoadFileToListRows(string filepath)
-        {
-            // read data file into lists data.inputs and data.outputs, return false if unsuccessful
-
-            string[] lines_arr = System.IO.File.ReadAllLines(filepath);
-            List<string> lines = lines_arr.ToList();
-
-            data.inputs = new List<List<double>>();
-            data.outputs = new List<int>();
-            data.timestamps = new List<double>();
-
-            foreach (string line in lines)
-            {
-                // parse header line
-                if (line[0] == 'h')
-                {
-                    char[] chars_to_trim = { 'h', ',' };
-                    input_labels = line.TrimStart(chars_to_trim).Split(',').ToList<string>();
-
-                    if (input_labels.Last() != "output")
-                    {
-                        return false;  // return if there is no output column
-                    }
-                    else
-                    {
-                        input_labels.RemoveAt(input_labels.Count - 1);
-                        input_labels.RemoveAt(0);
-
-                        for (int i = 0; i < input_labels.Count; i++)
-                        {
-                            if (input_labels[i].ToLower().Contains("ch"))
-                            {
-                                data.input_types.Add(1);
-                            }
-                            else
-                            {
-                                data.input_types.Add(0);
-                            }
-                        }
-                    }
-                }
-                // parse data lines
-                else if (line[0] == 'd')
-                {
-                    char[] chars_to_trim = { 'd', ',' };
-                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
-                    data.outputs.Add((int)vals.Last());
-                    vals.RemoveAt(vals.Count - 1);
-
-                    data.timestamps.Add(vals.First());
-                    vals.RemoveAt(0);
-
-                    data.inputs.Add(vals);
-                }
-                else
-                {
-                    return false; // return if there is no leading character (i.e. not a proper data file)
-                }
-            }
-
-            // find frequency used for logging
-            model_update_freq = (int)Math.Round(data.timestamps.Count * 1000 / (data.timestamps.Last() - data.timestamps.First()));
-            model_window_n = (int)Math.Ceiling((double)model_window_time * model_update_freq / 1000);
-            return true;
-        }
-
         public bool LoadFileToListCols(string filepath)
         {
             // read data file into lists data.inputs and data.outputs, return false if unsuccessful
@@ -243,18 +172,6 @@ namespace RealTimePatternRec.PatternRec
             int input_num = lines[0].Split(',').Length - 3;
 
             data.Clear();
-            //public List<List<double>> inputs;
-            //public List<List<double>> features;
-            //public List<int> data.outputs;
-            //public List<int> feature_data.outputs;
-            //public List<int> data.input_types;
-            //public List<bool> data.input_active_flags;
-
-            //data.inputs.Clear();
-            //data.outputs.Clear();
-            //data.timestamps.Clear();
-            //data.input_types.Clear();
-            //data.input_active_flags.Clear();
 
             // preallocate data.inputs
             for (int i = 0; i < input_num; i++)
@@ -317,10 +234,9 @@ namespace RealTimePatternRec.PatternRec
             }
 
             // find frequency used for logging
-            model_update_freq = (int)Math.Round(data.timestamps.Count * 1000 / (data.timestamps.Last() - data.timestamps.First()));
-
             data.input_num = input_num;
             data.output_num = data.outputs.Max() + 1;
+            data.freq = (int)Math.Round(data.timestamps.Count * 1000 / (data.timestamps.Last() - data.timestamps.First()));
 
             return true;
         }
@@ -378,7 +294,7 @@ namespace RealTimePatternRec.PatternRec
             return temp_features;
         }
 
-        public void map_features_training_2()
+        public void map_features_training()
         {
             data.features.Clear();
             data.feature_outputs.Clear();
@@ -425,59 +341,11 @@ namespace RealTimePatternRec.PatternRec
 
         }
 
-        public void map_features_training()
-        {
-            data.features.Clear();
-            data.feature_outputs.Clear();
-
-            for (int i = 0; i < data.input_types.Count; i++)
-            {
-                if (data.input_types[i] == 0 && data.input_active_flags[i] == true)
-                {
-                    foreach (pipeline_func f in generic_pipeline)
-                    {
-                        List<double> temp_input = new List<double>();
-                        List<int> temp_output = new List<int>();
-                        int ind = 0;
-                        for (int j=0; j<data.output_num; j++)
-                        {
-                            int ind2 = data.outputs.FindLastIndex(x => x == j);
-                            List<double> wtfkk = data.inputs[i].GetRange(ind, ind2-ind+1);
-                            temp_input.AddRange(f(wtfkk));
-                            temp_output.AddRange(Enumerable.Repeat(j, wtfkk.Count));
-                            ind = ind2;
-                        }
-                        data.features.Add(temp_input);
-                        data.feature_outputs = temp_output;
-                    }
-                }
-                else if (data.input_types[i] == 1 && data.input_active_flags[i] == true)
-                {
-                    foreach (pipeline_func f in emg_pipeline)
-                    {
-                        List<double> temp_input = new List<double>();
-                        List<int> temp_output = new List<int>();
-                        int ind = 0;
-                        for (int j = 0; j < data.output_num; j++)
-                        {
-                            int ind2 = data.outputs.FindLastIndex(x => x == j);
-                            List<double> wtfkk = data.inputs[i].GetRange(ind, ind2 - ind + 1);
-                            temp_input.AddRange(f(wtfkk));
-                            temp_output.AddRange(Enumerable.Repeat(j, wtfkk.Count));
-                            ind = ind2;
-                        }
-                        data.features.Add(temp_input);
-                        data.feature_outputs = temp_output;
-                    }
-                }
-            }
-        }
-
         public void train_model_Accord_list()
         {
 
             //data.features = map_features(data.inputs);
-            map_features_training_2();
+            map_features_training();
             shuffle_training_data(data.features, data.feature_outputs);
 
             // split to test/train set

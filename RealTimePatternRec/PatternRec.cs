@@ -58,6 +58,7 @@ namespace RealTimePatternRec.PatternRec
         public long start_time = 0;
         public int collection_cycles = 1;
         public int current_cycle = 0;
+        public int train_output_num;
 
         public bool trainFlag = false;  // flag to indicate training has begun
         public bool contractFlag = false;
@@ -70,12 +71,12 @@ namespace RealTimePatternRec.PatternRec
         public int model_window_overlap;
         public int model_window_n;
         public int model_window_overlap_n;
-        public double model_train_test_split = 0.9;
+        public double model_train_test_split = 0.1;
+        public double model_accuracy;
 
         public bool modelFlag = false;  // keeps track of whether a model is loaded
-
-        public int train_output_num;
-        
+        public string model_learner_type;
+        public List<string> model_params;
 
         public Data data;
         //public List<double> data.timestamps = new List<double>();
@@ -111,7 +112,13 @@ namespace RealTimePatternRec.PatternRec
             for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
             {
                 List<double> sub_window = raw_values.GetRange(i, window_n);
-                filtered_values.Add(sub_window.Sum() / window_n);
+
+                double sum = 0;
+                for (int j=0; j<sub_window.Count; j++)
+                {
+                    sum += Math.Abs(sub_window[j]);
+                }
+                filtered_values.Add(sum / window_n);
             }
 
             return filtered_values;
@@ -471,20 +478,12 @@ namespace RealTimePatternRec.PatternRec
 
             //data.features = map_features(data.inputs);
             map_features_training_2();
-
             shuffle_training_data(data.features, data.feature_outputs);
-
-            //// resize outputs to match size of features (i.e. some lines are lost from windowing)
-            //data.feature_outputs.Clear();
-            //for (int i = 0; i <= (data.outputs.Count - model_window_n); i += (model_window_n - model_window_overlap_n))
-            //{
-            //    data.feature_outputs.Add(data.outputs[i]);
-            //}
 
             // split to test/train set
             List<List<double>> hmm = invert_list_list(data.features);
 
-            int N_train = (int)(hmm.Count * model_train_test_split);
+            int N_train = (int)(hmm.Count * (1-model_train_test_split));
 
             List<List<double>> training_features = hmm.GetRange(0, N_train);
             List<int> training_outputs = data.feature_outputs.GetRange(0, N_train);
@@ -493,24 +492,25 @@ namespace RealTimePatternRec.PatternRec
             List<int> testing_outputs = data.feature_outputs.GetRange(N_train, hmm.Count - N_train);
 
             // Train model
-            var teacher = new MulticlassSupportVectorLearning<Linear>()
-            {
-                Learner = (p) => new LinearDualCoordinateDescent()
-                {
-                    Loss = Loss.L2
-                }
-            };
+            //var teacher = new MulticlassSupportVectorLearning<Linear>()
+            //{
+            //    Learner = (p) => new LinearDualCoordinateDescent()
+            //    {
+            //        Loss = Loss.L2
+            //    }
+            //};
 
-            var svm = teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
 
-            model.learner = svm;
 
-            // Compute the machine answers for the data.inputs
-            int[] answers = model.learner.Decide(training_features.Select(a => a.ToArray()).ToArray());
-            bool[] correct = answers.Zip(training_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
+
+            model.learner = model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
+
+            //// Compute the machine answers for the data.inputs
+            int[] answers = model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
+            bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
 
             double accuracy = (double)correct.Sum() / correct.Length;
-            model.accuracy = accuracy;
+            model_accuracy = accuracy;
         }
 
         public static List<List<T>> invert_list_list<T>(List<List<T>> list)
@@ -570,9 +570,11 @@ namespace RealTimePatternRec.PatternRec
                 long elapsed_time = (long)(logger.curtime - start_time);
                 long segment_time = relax_time + contraction_time;
 
-                current_output = (int)Math.Floor((decimal)elapsed_time / segment_time);
+                int segment_number = (int)Math.Floor((decimal)elapsed_time / segment_time);
 
-                long local_time = elapsed_time - segment_time * current_output;
+                current_output = segment_number%train_output_num;
+
+                long local_time = elapsed_time - segment_time * segment_number;
                 contractFlag = local_time >= relax_time;
 
                 if (contractFlag)

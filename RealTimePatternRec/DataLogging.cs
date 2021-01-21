@@ -166,9 +166,17 @@ namespace RealTimePatternRec.DataLogging
         public void close()
         {
             // aborts thread and deletes filewriter
-            stop();
-            file.Close();
-            file = null;
+            if (t != null)
+            {
+                stop();
+            }
+
+            if (file != null)
+            {
+                file.Close();
+                file.Dispose();
+                file = null;
+            }
         }
     }
 }

@@ -28,10 +28,10 @@ namespace RealTimePatternRec.PatternRec
         public List<double> timestamps = new List<double>();
         public List<List<double>> inputs = new List<List<double>>();    // raw input values
         public List<int> outputs = new List<int>(); // raw output values
-        public List<List<double>> features = new List<List<double>>();  // inputs after mapping to features
-        public List<int> feature_outputs = new List<int>(); // outputs trimmed to account for windowing
         public List<int> input_types = new List<int>();     // types of input signals (0 = generic, 1 = emg)
         public List<bool> input_active_flags = new List<bool>();    //  indicating which inputs are active in model
+        public List<string> output_labels = new List<string>(); // list of output label names
+        public List<string> input_labels = new List<string>();  // list of input label names
         public int input_num;   // number of inputs in data
         public int output_num;  // number of outputs in data
         public int freq;    // frequency data was recorded at
@@ -41,13 +41,142 @@ namespace RealTimePatternRec.PatternRec
             timestamps.Clear();
             inputs.Clear();
             outputs.Clear();
-            features.Clear();
-            feature_outputs.Clear();
             input_types.Clear();
             input_active_flags.Clear();
+            output_labels.Clear();
+            input_labels.Clear();
             input_num = 0;
             output_num = 0;
             freq = 0;
+        }
+
+        public bool LoadFileToListCols(string filepath)
+        {
+            // read data file into lists data.inputs and data.outputs, return false if unsuccessful
+
+            string[] lines_arr = System.IO.File.ReadAllLines(filepath);
+            List<string> lines = lines_arr.ToList();
+
+            int input_num = lines[0].Split(',').Length - 3;
+
+            Clear();
+
+            // preallocate data.inputs
+            for (int i = 0; i < input_num; i++)
+            {
+                inputs.Add(new List<double>());
+            }
+
+            foreach (string line in lines)
+            {
+                // parse header line
+                if (line[0] == 'h')
+                {
+                    char[] chars_to_trim = { 'h', ',' };
+                    input_labels = line.TrimStart(chars_to_trim).Split(',').ToList<string>();
+
+                    if (input_labels.Last() != "output")
+                    {
+                        return false;  // return if there is no output column
+                    }
+                    else
+                    {
+                        input_labels.RemoveAt(input_labels.Count - 1);
+                        input_labels.RemoveAt(0);
+
+                        for (int i = 0; i < input_labels.Count; i++)
+                        {
+                            input_active_flags.Add(false);
+
+                            if (input_labels[i].ToLower().Contains("ch"))
+                            {
+                                input_types.Add(1);
+                            }
+                            else
+                            {
+                                input_types.Add(0);
+                            }
+                        }
+                    }
+                }
+                // parse data lines
+                else if (line[0] == 'd')
+                {
+                    char[] chars_to_trim = { 'd', ',' };
+                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
+                    outputs.Add((int)vals.Last());
+                    vals.RemoveAt(vals.Count - 1);
+
+                    timestamps.Add(vals.First());
+                    vals.RemoveAt(0);
+
+                    for (int i = 0; i < vals.Count; i++)
+                    {
+                        inputs[i].Add(vals[i]);
+                    }
+                }
+                else
+                {
+                    return false; // return if there is no leading character (i.e. not a proper data file)
+                }
+            }
+
+            // find frequency used for logging
+            input_num = input_num;
+            output_num = outputs.Max() + 1;
+            freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
+
+            return true;
+        }
+
+        /// <summary>
+        /// shuffles training data features and outputs (i.e. inputs/outputs passed by reference)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="inputs"></param>
+        /// <param name="outputs"></param>
+        public static void shuffle_training_data<T>(List<List<T>> inputs, List<int> outputs)
+        {
+
+            Random rng = new Random();
+            int n = outputs.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+
+                // swap all data.inputs
+                for (int i = 0; i < inputs.Count; i++)
+                {
+                    T value_T = inputs[i][k];
+                    inputs[i][k] = inputs[i][n];
+                    inputs[i][n] = value_T;
+                }
+
+                int value = outputs[k];
+                outputs[k] = outputs[n];
+                outputs[n] = value;
+            }
+
+            return;
+        }
+
+        /// <summary>
+        /// Transposes a list of lists (i.e. switches rows/columns)
+        /// </summary>
+        /// <typeparam name="T"> any primitive data type</typeparam>
+        /// <param name="list"> list of lists to transpose</param>
+        /// <returns></returns>
+        public static List<List<T>> transpose_list_list<T>(List<List<T>> list)
+        {
+            // https://stackoverflow.com/questions/39484996/rotate-transposing-a-listliststring-using-linq-c-sharp
+            List<List<T>> inverted_list = list
+                        .SelectMany(inner => inner.Select((item, index) => new { item, index }))
+                        .GroupBy(i => i.index, i => i.item)
+                        .Select(g => g.ToList())
+                        .ToList();            // *cries in LINQ*
+
+            return inverted_list;
         }
     }
 
@@ -66,11 +195,125 @@ namespace RealTimePatternRec.PatternRec
         public string model_type;
         public Dictionary<string, string> model_params;
 
+        public List<List<double>> features = new List<List<double>>();  // inputs after mapping to features
+        public List<int> feature_outputs = new List<int>(); // outputs trimmed to account for windowing
+
         public delegate List<double> pipeline_func(List<double> data);
         public List<pipeline_func> emg_pipeline = new List<pipeline_func>();
         public List<pipeline_func> generic_pipeline = new List<pipeline_func>();
-        public dynamic model = new System.Dynamic.ExpandoObject();
-        
+        public dynamic accord_model = new System.Dynamic.ExpandoObject();
+
+        public Model()
+        {
+        }
+
+        public List<List<double>> map_features(List<List<double>> temp_inputs, List<int> input_types, List<bool> input_active_flags)
+        {
+            // map inputs "temp_inputs" to features using the set "emg_pipeline" and "generic_pipeline"
+            // function lists.  Also requires that "data.input_types" are set and "data.input_active_flags" are set
+
+            List<List<double>> temp_features = new List<List<double>>();
+
+            for (int i = 0; i < input_types.Count; i++)
+            {
+                if (input_types[i] == 0 && input_active_flags[i] == true)
+                {
+                    foreach (Model.pipeline_func f in generic_pipeline)
+                    {
+                        temp_features.Add(f(temp_inputs[i]));
+                    }
+                }
+                else if (input_types[i] == 1 && input_active_flags[i] == true)
+                {
+                    foreach (Model.pipeline_func f in emg_pipeline)
+                    {
+                        temp_features.Add(f(temp_inputs[i]));
+                    }
+                }
+            }
+
+            return temp_features;
+        }
+
+        public void map_features_training(Data data)
+        {
+            features.Clear();
+            feature_outputs.Clear();
+
+            // get indices of output changes
+            List<int> output_change_indices = new List<int>();
+            output_change_indices.Add(0);
+            int cur_output = data.outputs[0];
+            for (int i = 1; i < data.outputs.Count; i++)
+            {
+                if (cur_output != data.outputs[i])
+                {
+                    output_change_indices.Add(i);
+                    cur_output = data.outputs[i];
+                }
+            }
+            output_change_indices.Add(data.outputs.Count);
+
+            int start_ind = output_change_indices[0];
+            for (int i = 1; i < output_change_indices.Count; i++)
+            {
+                int output_value = data.outputs[output_change_indices[i - 1]];
+                int end_ind = output_change_indices[i];
+
+                List<List<double>> temp_input = Data.transpose_list_list(Data.transpose_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
+                List<List<double>> temp_features = map_features(temp_input, data.input_types, data.input_active_flags);
+
+                if (features.Count == 0)
+                {
+                    for (int j = 0; j < temp_features.Count; j++)
+                    {
+                        features.Add(new List<double>());
+                    }
+                }
+                for (int j = 0; j < temp_features.Count; j++)
+                {
+                    features[j].AddRange(temp_features[j]);
+                }
+
+                feature_outputs.AddRange(Enumerable.Repeat(output_value, temp_features[0].Count));
+                start_ind = end_ind;
+            }
+        }
+
+        public void train_model_Accord_list()
+        {
+
+            //data.features = map_features(data.inputs);
+            Data.shuffle_training_data(features, feature_outputs);
+
+            // split to test/train set
+            List<List<double>> hmm = Data.transpose_list_list(features);
+
+            int N_train = (int)(hmm.Count * (1 - train_test_split));
+
+            List<List<double>> training_features = hmm.GetRange(0, N_train);
+            List<int> training_outputs = feature_outputs.GetRange(0, N_train);
+
+            List<List<double>> testing_features = hmm.GetRange(N_train, hmm.Count - N_train);
+            List<int> testing_outputs = feature_outputs.GetRange(N_train, hmm.Count - N_train);
+
+            // Train model
+            //var teacher = new MulticlassSupportVectorLearning<Linear>()
+            //{
+            //    Learner = (p) => new LinearDualCoordinateDescent()
+            //    {
+            //        Loss = Loss.L2
+            //    }
+            //};
+
+            accord_model.learner = accord_model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
+
+            //// Compute the machine answers for the data.inputs
+            int[] answers = accord_model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
+            bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
+
+            accuracy = (double)correct.Sum() / correct.Length;  
+        }
     }
 
     /// <summary>
@@ -143,20 +386,18 @@ namespace RealTimePatternRec.PatternRec
 
     public class PR_Logger
     {
-        public dataLogger logger = new dataLogger();
-        public int current_output = 0;
+        public dataLogger logger;
+        public int current_output;
 
-        public int contraction_time = 1000;
-        public int relax_time = 3000;
-        public long start_time = 0;
-        public int collection_cycles = 1;
-        public int current_cycle = 0;
+        public int contraction_time;
+        public int relax_time;
+        public long start_time;
+        public int collection_cycles;
+        public int current_cycle;
         public int train_output_num;
         public bool trainFlag = false;  // flag to indicate training has begun
         public bool contractFlag = false;
-
-        public List<string> output_labels = new List<string>();
-        public List<string> input_labels = new List<string>();
+        public List<string> output_labels;
 
         public Data data;
         public Model model;
@@ -166,246 +407,8 @@ namespace RealTimePatternRec.PatternRec
 
         public PR_Logger()
         {
-            data = new Data();
-            model = new Model();
+            logger = new dataLogger();
             return;
-        }
-
-        public bool LoadFileToListCols(string filepath)
-        {
-            // read data file into lists data.inputs and data.outputs, return false if unsuccessful
-
-            string[] lines_arr = System.IO.File.ReadAllLines(filepath);
-            List<string> lines = lines_arr.ToList();
-
-            int input_num = lines[0].Split(',').Length - 3;
-
-            data.Clear();
-
-            // preallocate data.inputs
-            for (int i = 0; i < input_num; i++)
-            {
-                data.inputs.Add(new List<double>());
-            }
-
-            foreach (string line in lines)
-            {
-                // parse header line
-                if (line[0] == 'h')
-                {
-                    char[] chars_to_trim = { 'h', ',' };
-                    input_labels = line.TrimStart(chars_to_trim).Split(',').ToList<string>();
-
-                    if (input_labels.Last() != "output")
-                    {
-                        return false;  // return if there is no output column
-                    }
-                    else
-                    {
-                        input_labels.RemoveAt(input_labels.Count - 1);
-                        input_labels.RemoveAt(0);
-
-                        for (int i = 0; i < input_labels.Count; i++)
-                        {
-                            data.input_active_flags.Add(false);
-
-                            if (input_labels[i].ToLower().Contains("ch"))
-                            {
-                                data.input_types.Add(1);
-                            }
-                            else
-                            {
-                                data.input_types.Add(0);
-                            }
-                        }
-                    }
-                }
-                // parse data lines
-                else if (line[0] == 'd')
-                {
-                    char[] chars_to_trim = { 'd', ',' };
-                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
-                    data.outputs.Add((int)vals.Last());
-                    vals.RemoveAt(vals.Count - 1);
-
-                    data.timestamps.Add(vals.First());
-                    vals.RemoveAt(0);
-
-                    for (int i = 0; i < vals.Count; i++)
-                    {
-                        data.inputs[i].Add(vals[i]);
-                    }
-                }
-                else
-                {
-                    return false; // return if there is no leading character (i.e. not a proper data file)
-                }
-            }
-
-            // find frequency used for logging
-            data.input_num = input_num;
-            data.output_num = data.outputs.Max() + 1;
-            data.freq = (int)Math.Round(data.timestamps.Count * 1000 / (data.timestamps.Last() - data.timestamps.First()));
-
-            return true;
-        }
-        /// <summary>
-        /// shuffles training data inputs and outputs
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="inputs"></param>
-        /// <param name="outputs"></param>
-        public static void shuffle_training_data<T>(List<List<T>> inputs, List<int> outputs)
-        {
-
-            Random rng = new Random();
-            int n = outputs.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-
-                // swap all data.inputs
-                for (int i = 0; i < inputs.Count; i++)
-                {
-                    T value_T = inputs[i][k];
-                    inputs[i][k] = inputs[i][n];
-                    inputs[i][n] = value_T;
-                }
-
-                int value = outputs[k];
-                outputs[k] = outputs[n];
-                outputs[n] = value;
-            }
-
-            return;
-        }
-
-        public List<List<double>> map_features(List<List<double>> temp_inputs)
-        {
-            // map inputs "temp_inputs" to features using the set "emg_pipeline" and "generic_pipeline"
-            // function lists.  Also requires that "data.input_types" are set and "data.input_active_flags" are set
-
-            List<List<double>> temp_features = new List<List<double>>();
-
-            for (int i = 0; i < data.input_types.Count; i++)
-            {
-                if (data.input_types[i] == 0 && data.input_active_flags[i] == true)
-                {
-                    foreach (Model.pipeline_func f in model.generic_pipeline)
-                    {
-                        temp_features.Add(f(temp_inputs[i]));
-                    }
-                }
-                else if (data.input_types[i] == 1 && data.input_active_flags[i] == true)
-                {
-                    foreach (Model.pipeline_func f in model.emg_pipeline)
-                    {
-                        temp_features.Add(f(temp_inputs[i]));
-                    }
-                }
-            }
-
-            return temp_features;
-        }
-
-        public void map_features_training()
-        {
-            data.features.Clear();
-            data.feature_outputs.Clear();
-
-            // get indices of output changes
-            List<int> output_change_indices = new List<int>();
-            output_change_indices.Add(0);
-            int cur_output = data.outputs[0];
-            for (int i=1; i<data.outputs.Count; i++)
-            {
-                if (cur_output != data.outputs[i])
-                {
-                    output_change_indices.Add(i);
-                    cur_output = data.outputs[i];
-                }
-            }
-            output_change_indices.Add(data.outputs.Count);
-
-            int start_ind = output_change_indices[0];
-            for (int i = 1; i < output_change_indices.Count; i++)
-            {
-                int output_value = data.outputs[output_change_indices[i-1]];
-                int end_ind = output_change_indices[i];
-
-                List<List<double>> temp_input = invert_list_list(invert_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
-                List<List<double>> temp_features = map_features(temp_input);
-                
-                if (data.features.Count == 0)
-                {
-                    for (int j = 0; j < temp_features.Count; j++)
-                    {
-                        data.features.Add(new List<double>());
-                    }
-                }
-                for (int j=0; j<temp_features.Count; j++)
-                {
-                    data.features[j].AddRange(temp_features[j]);
-                }
-
-                data.feature_outputs.AddRange(Enumerable.Repeat(output_value, temp_features[0].Count));
-
-                start_ind = end_ind;
-            }
-
-        }
-
-        public void train_model_Accord_list()
-        {
-
-            //data.features = map_features(data.inputs);
-            map_features_training();
-            shuffle_training_data(data.features, data.feature_outputs);
-
-            // split to test/train set
-            List<List<double>> hmm = invert_list_list(data.features);
-
-            int N_train = (int)(hmm.Count * (1-model.train_test_split));
-
-            List<List<double>> training_features = hmm.GetRange(0, N_train);
-            List<int> training_outputs = data.feature_outputs.GetRange(0, N_train);
-
-            List<List<double>> testing_features = hmm.GetRange(N_train, hmm.Count - N_train);
-            List<int> testing_outputs = data.feature_outputs.GetRange(N_train, hmm.Count - N_train);
-
-            // Train model
-            //var teacher = new MulticlassSupportVectorLearning<Linear>()
-            //{
-            //    Learner = (p) => new LinearDualCoordinateDescent()
-            //    {
-            //        Loss = Loss.L2
-            //    }
-            //};
-
-
-
-
-            model.model.learner = model.model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
-
-            //// Compute the machine answers for the data.inputs
-            int[] answers = model.model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
-            bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
-
-            double accuracy = (double)correct.Sum() / correct.Length;
-            model.accuracy = accuracy;
-        }
-
-        public static List<List<T>> invert_list_list<T>(List<List<T>> list)
-        {
-            // https://stackoverflow.com/questions/39484996/rotate-transposing-a-listliststring-using-linq-c-sharp
-            List<List<T>> inverted_list = list
-                        .SelectMany(inner => inner.Select((item, index) => new { item, index }))
-                        .GroupBy(i => i.index, i => i.item)
-                        .Select(g => g.ToList())
-                        .ToList();
-
-            return inverted_list;
         }
 
         public void update_data_with_output(string[] data)
@@ -480,6 +483,8 @@ namespace RealTimePatternRec.PatternRec
 
         public void start_data_collection()
         {
+            current_output = 0;
+            current_cycle = 0;
             trainFlag = true;
             logger.start();
             logger.tick();

@@ -10,29 +10,44 @@ using Newtonsoft.Json;
 
 namespace RealTimePatternRec.DataLogging
 {
+    public delegate List<string> get_data_func();
+
     public class dataLogger
     {
         public StreamWriter file;
         public bool recordflag = false;
         private bool timeflag = false;
         public Stopwatch sw = new Stopwatch();
-        public int samplefreq = 50;
+        public int samplefreq;
         public float prevtime;
         public float curtime;
         public string filepath;
         Thread t;
-        public string[] data_to_write;
+        public List<string> data_to_write;
+
+        public get_data_func get_data;
+
 
         public dataLogger()
         {
             // creates dataLogger object
         }
 
-        public void init_logger(string filepath_)
+        public void init_file(string filepath_)
         {
             // initiates filewriter
             filepath = filepath_;
             file = new StreamWriter(filepath);
+        }
+
+        public void close_file()
+        {
+            if (file != null)
+            {
+                file.Flush();
+                file.Dispose();
+                file = null;
+            }
         }
 
         public void start()
@@ -50,86 +65,60 @@ namespace RealTimePatternRec.DataLogging
         public void stop()
         {
             // stops thread and flushes file without deleting filewriter
-            sw.Stop();
-            t.Abort();
-            file.Flush();
+            if (t != null)
+            {
+                sw.Stop();
+                t.Abort();
+            }
         }
 
-        private void write_csv(string[] data)
+        protected void write_csv(List<string> data)
         {
             // writes data to file in csv format
             string newLine = "";
-            foreach (string s in data)
+            for (int i=0; i<data.Count; i++)
             {
-                newLine += s + ",";
+                newLine += data[i] + ",";
             }
             file.WriteLine(newLine.TrimEnd(','));
         }
 
-        public void write_header(string[] data)
+        public virtual void write_header(List<string> data)
         {
             // sends data to write_csv with a prepended "h" character to indicate header line
-
-            string[] temp = new string[data.Length + 1];
-            temp[0] = "h";
-            for (int i=0; i<data.Length; i++)
-            {
-                temp[i + 1] = data[i];
-            }
-            write_csv(temp);
+            data.Insert(0, "h");
+            write_csv(data);
         }
 
-        public void write_data_with_timestamp(string[] data)
+        public virtual void write_data_with_timestamp(List<string> data)
         {
             //sends data to write_csv with a prepended "d" character to indicate data line
-           
-            string[] temp = new string[data.Length + 2];
-            temp[0] = "d";
-            temp[1] = curtime.ToString("F3");
-            for (int i = 0; i < data.Length; i++)
-            {
-                temp[i + 2] = data[i];
-            }
-            write_csv(temp);
+
+            data.Insert(0, "d");
+            data.Insert(1, curtime.ToString("F3"));
+            write_csv(data);
         }
 
         public void tick()
         {
             // updates stopwatch and flips timeflag if enough time has passed to log another value
             
-            curtime = sw.Elapsed.Ticks*1000f / Stopwatch.Frequency;
-            if (curtime - prevtime > 1000f / samplefreq)
+            while (curtime - prevtime < 1000f / samplefreq)
             {
-                timeflag = true;
-                prevtime = curtime;
+                curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
             }
-            else
-            {
-                timeflag = false;
-            }
+            prevtime = curtime;
         }
 
         public void thread_loop()
         {
-            // data recording loop that logger thread sits in until aborted
-            // records data when recordflag == true and timeflag == true
-            // if recordflag != true sleeps thread in 100ms increments to not waste resources
             while (true)
             {
+                tick();
                 if (recordflag)
                 {
-                    tick();
-                    if (timeflag)
-                    {
-                        write_data_with_timestamp(data_to_write);
-                    }
-
-                Thread.Sleep(0);
-                }
-                else
-                {
-                    Thread.Sleep(100);
-                    tick();
+                    data_to_write = get_data();
+                    write_data_with_timestamp(data_to_write);
                 }
             }
         }
@@ -157,26 +146,12 @@ namespace RealTimePatternRec.DataLogging
             return true;
         }
 
-        public delegate string[] get_data_function();
-        public string[] get_data_to_string(get_data_function f) {
-
-            return f();
-        }
-
         public void close()
         {
             // aborts thread and deletes filewriter
-            if (t != null)
-            {
-                stop();
-            }
+            stop();
+            close_file();
 
-            if (file != null)
-            {
-                file.Close();
-                file.Dispose();
-                file = null;
-            }
         }
     }
 }

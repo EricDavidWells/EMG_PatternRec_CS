@@ -287,28 +287,20 @@ namespace RealTimePatternRec.PatternRec
             Data.shuffle_training_data(features, feature_outputs);
 
             // split to test/train set
-            List<List<double>> hmm = Data.transpose_list_list(features);
+            List<List<double>> features_rows = Data.transpose_list_list(features);
 
-            int N_train = (int)(hmm.Count * (1 - train_test_split));
+            int N_train = (int)(features_rows.Count * (1 - train_test_split));
 
-            List<List<double>> training_features = hmm.GetRange(0, N_train);
+            List<List<double>> training_features = features_rows.GetRange(0, N_train);
             List<int> training_outputs = feature_outputs.GetRange(0, N_train);
 
-            List<List<double>> testing_features = hmm.GetRange(N_train, hmm.Count - N_train);
-            List<int> testing_outputs = feature_outputs.GetRange(N_train, hmm.Count - N_train);
+            List<List<double>> testing_features = features_rows.GetRange(N_train, features_rows.Count - N_train);
+            List<int> testing_outputs = feature_outputs.GetRange(N_train, features_rows.Count - N_train);
 
-            // Train model
-            //var teacher = new MulticlassSupportVectorLearning<Linear>()
-            //{
-            //    Learner = (p) => new LinearDualCoordinateDescent()
-            //    {
-            //        Loss = Loss.L2
-            //    }
-            //};
-
+            // train model
             accord_model.learner = accord_model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
 
-            //// Compute the machine answers for the data.inputs
+            // Compute the machine answers for the data.inputs
             int[] answers = accord_model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
             bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
 
@@ -322,6 +314,32 @@ namespace RealTimePatternRec.PatternRec
     public static class Features
     {
 
+        static public List<double> RAW(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i+=(window_n - window_overlap_n))
+            {
+                
+                filtered_values.Add(raw_values[i]);
+            }
+
+            return filtered_values;
+        }
+
+        static public List<double> MV(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+                filtered_values.Add(sub_window.Sum() / window_n);
+            }
+
+            return filtered_values;
+        }
+
         /// <summary>
         /// Returns the windowed mean absolute value of a signal
         /// </summary>
@@ -331,7 +349,6 @@ namespace RealTimePatternRec.PatternRec
         /// <returns>"windowed mean absolute value"</returns>
         static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
         {
-            // return list of windowed mean absolute value features
             List<double> filtered_values = new List<double>();
 
             for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
@@ -349,37 +366,34 @@ namespace RealTimePatternRec.PatternRec
             return filtered_values;
         }
 
-        static public List<double> ZeroCrossings(List<double> raw_values, int window_n, int window_overlap_n)
+        static public List<double> ZC(List<double> raw_values, int window_n, int window_overlap_n)
         {
-            // returns list of windowed Zero Crossings features
             List<double> filtered_values = new List<double>();
 
-            //for (int i = 0; i < (raw_values.Count - window_n); i++)
-            //{
-            //    List<double> window = raw_values.GetRange(i, window_n);
-
-            //    int crossing_count = 0;
-            //    bool positive_flag = (window[0] >= 0);    // true for 
-
-            //    foreach (float value in window)
-            //    {
-            //        if ((value >= 0) != positive_flag)
-            //        {
-            //            crossing_count++;
-            //            positive_flag = !positive_flag;
-            //        }
-            //    }
-            //    filtered_values.Add(crossing_count);
-            //}
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+                int crossing_count = 0;
+                bool positive_flag = (sub_window[0] >= 0);    // true for 
+                for (int j = 0; j < sub_window.Count; j++)
+                {
+                    if ((sub_window[j] >= 0) ^ positive_flag)
+                    {
+                        crossing_count++;
+                        positive_flag = !positive_flag;
+                    }
+                }
+                filtered_values.Add(crossing_count);
+            }
 
             return filtered_values;
         }
 
         static public List<double> SSC(List<double> raw_values, int window_n, int window_overlap_n)
         {
-            // returns list of Slope Sign Change features
             List<double> difference_values = raw_values.Zip(raw_values.Skip(1), (x, y) => y - x).ToList();
-            List<double> filtered_values = ZeroCrossings(difference_values, window_n, window_overlap_n);
+            difference_values.Add(difference_values.Last());    // append final value since one is lost during difference calculation, keeps feature sizes consistent
+            List<double> filtered_values = ZC(difference_values, window_n, window_overlap_n);
             return filtered_values;
         }
     }

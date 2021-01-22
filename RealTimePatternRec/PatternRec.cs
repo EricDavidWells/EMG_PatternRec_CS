@@ -398,9 +398,9 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
-    public class PR_Logger
+    public class PR_Logger:dataLogger
     {
-        public dataLogger logger;
+        //public dataLogger logger;
         public int current_output;
 
         public int contraction_time;
@@ -413,46 +413,26 @@ namespace RealTimePatternRec.PatternRec
         public bool contractFlag = false;
         public List<string> output_labels;
 
-        public Data data;
-        public Model model;
-
-        //public dynamic model = new System.Dynamic.ExpandoObject();
-
 
         public PR_Logger()
         {
-            logger = new dataLogger();
+            //logger = new dataLogger();
             return;
         }
 
-        public void update_data_with_output(string[] data)
+        public override void write_header(List<string> data)
         {
-            /*
-            appends the current output label to the data and sends data to data logger
-            */
-            string[] temp = new string[data.Length + 1];
-            temp[data.Length] = current_output.ToString();
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                temp[i] = data[i];
-            }
-            logger.data_to_write = temp;
+            data.Insert(0, "h");
+            data.Add("output");
+            write_csv(data);
         }
 
-        public void write_header_with_output(string[] data)
+        public override void write_data_with_timestamp(List<string> data)
         {
-            /*
-            appends the current output label to the header and sends data to data logger
-            */
-            string[] temp = new string[data.Length + 1];
-            temp[data.Length] = "output";
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                temp[i] = data[i];
-            }
-            logger.write_header(temp);
+            data.Insert(0, "d");
+            data.Insert(1, curtime.ToString("F3"));
+            data.Add(current_output.ToString());
+            write_csv(data);
         }
 
         public void set_outputs(List<string> outputs_)
@@ -461,13 +441,13 @@ namespace RealTimePatternRec.PatternRec
             train_output_num = output_labels.Count;
         }
 
-        public void tick()
+        public void PR_tick()
         {
             // updates the flags corresponding to current action being performed during training
 
             if (trainFlag)
             {
-                long elapsed_time = (long)(logger.curtime - start_time);
+                long elapsed_time = (long)(curtime - start_time);
                 long segment_time = relax_time + contraction_time;
 
                 int segment_number = (int)Math.Floor((decimal)elapsed_time / segment_time);
@@ -479,11 +459,11 @@ namespace RealTimePatternRec.PatternRec
 
                 if (contractFlag)
                 {
-                    logger.recordflag = true;
+                    recordflag = true;
                 }
                 else
                 {
-                    logger.recordflag = false;
+                    recordflag = false;
                 }
 
                 current_cycle = (int)Math.Floor((decimal)elapsed_time / (segment_time * train_output_num));
@@ -500,17 +480,15 @@ namespace RealTimePatternRec.PatternRec
             current_output = 0;
             current_cycle = 0;
             trainFlag = true;
-            logger.start();
-            logger.tick();
-            start_time = (long)logger.curtime;
+            tick();
+            start_time = (long)curtime;
         }
 
         public void end_data_collection()
         {
-            logger.recordflag = false;
+            close_file();
+            recordflag = false;
             trainFlag = false;
-            logger.file.Flush();
-            logger.close();
         }
     }
 

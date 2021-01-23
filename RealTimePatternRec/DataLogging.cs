@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace RealTimePatternRec.DataLogging
 {
-    public delegate List<string> get_data_func();
+    public delegate List<T> get_data_func<T>();
 
     public class dataLogger
     {
@@ -23,10 +23,8 @@ namespace RealTimePatternRec.DataLogging
         public float curtime;
         public string filepath;
         Thread t;
-        public List<string> data_to_write;
-
-        public get_data_func get_data;
-
+        public List<double> data_to_write;
+        public get_data_func<double> get_data;
 
         public dataLogger()
         {
@@ -57,9 +55,12 @@ namespace RealTimePatternRec.DataLogging
             prevtime = sw.ElapsedMilliseconds;
             curtime = prevtime;
 
-            t = new Thread(thread_loop);
-            t.Start();
-            t.Priority = ThreadPriority.BelowNormal;
+            if (t == null)
+            {
+                t = new Thread(thread_loop);
+                t.Start();
+                t.Priority = ThreadPriority.BelowNormal;
+            }
         }
 
         public void stop()
@@ -69,6 +70,7 @@ namespace RealTimePatternRec.DataLogging
             {
                 sw.Stop();
                 t.Abort();
+                t = null;
             }
         }
 
@@ -118,7 +120,8 @@ namespace RealTimePatternRec.DataLogging
                 if (recordflag)
                 {
                     data_to_write = get_data();
-                    write_data_with_timestamp(data_to_write);
+                    List<string> str_data = data_to_write.Select(x => x.ToString()).ToList();
+                    write_data_with_timestamp(str_data);
                 }
             }
         }

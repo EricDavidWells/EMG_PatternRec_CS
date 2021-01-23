@@ -413,7 +413,6 @@ namespace RealTimePatternRec.PatternRec
         public bool contractFlag = false;
         public List<string> output_labels;
 
-
         public PR_Logger()
         {
             //logger = new dataLogger();

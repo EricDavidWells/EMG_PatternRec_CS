@@ -23,6 +23,7 @@ namespace RealTimePatternRec.DataLogging
         public float curtime;
         public string filepath;
         Thread t;
+
         public List<double> data_to_write;
         public get_data_func<double> get_data;
 
@@ -71,6 +72,7 @@ namespace RealTimePatternRec.DataLogging
                 sw.Stop();
                 t.Abort();
                 t = null;
+
             }
         }
 

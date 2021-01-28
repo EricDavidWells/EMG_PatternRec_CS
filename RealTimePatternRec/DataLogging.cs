@@ -16,7 +16,7 @@ namespace RealTimePatternRec.DataLogging
     {
         public StreamWriter file;
         public bool recordflag = false;
-        private bool timeflag = false;
+        public bool historyflag = false;
         public Stopwatch sw = new Stopwatch();
         public int samplefreq;
         public float prevtime;
@@ -24,8 +24,11 @@ namespace RealTimePatternRec.DataLogging
         public string filepath;
         Thread t;
 
-        public List<double> data_to_write;
+        public int signal_num;
+        public int history_num;
+        public List<double> data;
         public get_data_func<double> get_data;
+        public List<List<double>> data_history = new List<List<double>>();
 
         public dataLogger()
         {
@@ -56,11 +59,26 @@ namespace RealTimePatternRec.DataLogging
             prevtime = sw.ElapsedMilliseconds;
             curtime = prevtime;
 
+            if (historyflag)
+            {
+
+                data_history.Clear();
+                for (int i=0; i<signal_num; i++)
+                {
+                    List<double> temp_list = new List<double>();
+                    for (int j=0; j<history_num; j++)
+                    {
+                        temp_list.Add(0);
+                    }
+                    data_history.Add(temp_list);
+                }
+            }
+
             if (t == null)
             {
                 t = new Thread(thread_loop);
                 t.Start();
-                t.Priority = ThreadPriority.BelowNormal;
+                //t.Priority = ThreadPriority.BelowNormal;
             }
         }
 
@@ -72,7 +90,6 @@ namespace RealTimePatternRec.DataLogging
                 sw.Stop();
                 t.Abort();
                 t = null;
-
             }
         }
 
@@ -119,11 +136,20 @@ namespace RealTimePatternRec.DataLogging
             while (true)
             {
                 tick();
+                data = get_data();
                 if (recordflag)
                 {
-                    data_to_write = get_data();
-                    List<string> str_data = data_to_write.Select(x => x.ToString()).ToList();
+                    List<string> str_data = data.Select(x => x.ToString()).ToList();
                     write_data_with_timestamp(str_data);
+                }
+
+                if (historyflag)
+                {
+                    for (int i=0; i<signal_num; i++)
+                    {
+                        data_history[i].Add(data[i]);
+                        data_history[i].RemoveAt(0);
+                    }
                 }
             }
         }

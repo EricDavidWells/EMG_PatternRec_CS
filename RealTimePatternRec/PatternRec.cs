@@ -6,7 +6,7 @@ using System.IO;                // For save/open parameters functionality
 using System.Diagnostics;
 using MathNet.Numerics.LinearAlgebra;
 using RealTimePatternRec.DataLogging;
-
+using System.Threading;
 
 using Accord.Controls;
 using Accord.IO;
@@ -57,9 +57,9 @@ namespace RealTimePatternRec.PatternRec
             string[] lines_arr = System.IO.File.ReadAllLines(filepath);
             List<string> lines = lines_arr.ToList();
 
-            int input_num = lines[0].Split(',').Length - 3;
-
             Clear();
+
+            input_num = lines[0].Split(',').Length - 3;
 
             // preallocate data.inputs
             for (int i = 0; i < input_num; i++)
@@ -122,7 +122,6 @@ namespace RealTimePatternRec.PatternRec
             }
 
             // find frequency used for logging
-            input_num = input_num;
             output_num = outputs.Max() + 1;
             freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
 
@@ -185,13 +184,18 @@ namespace RealTimePatternRec.PatternRec
     /// </summary>
     public class Model
     {
-        public int realtime_update_freq;    // frequency with which to update data
+        public Data data;
+        public dataLogger logger;    // is this a good idea???c 
+
+        public int freq;    // frequency of data that model was trained on
         public int window_time;
         public int window_overlap; 
         public int window_n;
         public int window_overlap_n;
-        public double train_test_split = 0.1;
+        public double train_test_split;
         public double accuracy;
+
+        public bool modelFlag = false;
         public string model_type;
         public Dictionary<string, string> model_params;
 
@@ -203,9 +207,24 @@ namespace RealTimePatternRec.PatternRec
         public List<pipeline_func> generic_pipeline = new List<pipeline_func>();
         public dynamic accord_model = new System.Dynamic.ExpandoObject();
 
+        //Thread t;
+        //Stopwatch sw;
+        //public int prevtime;
+        //public int curtime;
+
         public Model()
         {
+            data = new Data();
+            accord_model.learner = null;
         }
+
+        //public void start_realtime()
+        //{
+        //    sw = new Stopwatch();
+        //    sw.Start();
+        //    prevtime = sw.ElapsedMilliseconds;
+
+        //}
 
         public List<List<double>> map_features(List<List<double>> temp_inputs, List<int> input_types, List<bool> input_active_flags)
         {
@@ -233,12 +252,13 @@ namespace RealTimePatternRec.PatternRec
             }
 
             return temp_features;
-        }
+        }  
 
-        public void map_features_training(Data data)
+        public void map_features_training()
         {
             features.Clear();
             feature_outputs.Clear();
+            freq = data.freq;
 
             // get indices of output changes
             List<int> output_change_indices = new List<int>();
@@ -283,7 +303,7 @@ namespace RealTimePatternRec.PatternRec
         public void train_model_Accord_list()
         {
 
-            //data.features = map_features(data.inputs);
+            map_features_training();
             Data.shuffle_training_data(features, feature_outputs);
 
             // split to test/train set
@@ -305,6 +325,16 @@ namespace RealTimePatternRec.PatternRec
             bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
 
             accuracy = (double)correct.Sum() / correct.Length;  
+        }
+
+        public double predict(List<List<double>> rawdata)
+        {
+            double result = 0;
+            List<List<double>> features_temp = map_features(rawdata, data.input_types, data.input_active_flags);
+            double[] temp = Data.transpose_list_list(features_temp)[0].ToArray();
+            result = (double)accord_model.learner.Decide(temp);
+
+            return result;
         }
     }
 

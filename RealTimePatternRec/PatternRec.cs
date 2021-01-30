@@ -21,7 +21,9 @@ using Accord.Statistics.Kernels;
 
 namespace RealTimePatternRec.PatternRec
 {
-
+    /// <summary>
+    /// class to hold all information from a data recording session
+    /// </summary>
     public class Data
     {
         // Class to hold all information related to the data being used by the pattern rec class
@@ -35,22 +37,91 @@ namespace RealTimePatternRec.PatternRec
         public int input_num;   // number of inputs in data
         public int output_num;  // number of outputs in data
         public int freq;    // frequency data was recorded at
+        public int collection_cycles;   // number of times outputs were iterated over during data collection
+        public int contraction_time;    // number of seconds per contraction during data collection
+        public int relaxation_time; // number of seconds for relaxation during data collection
+        public string json_filepath;  // path to json data configuration file
+        public string csv_filepath;     // path to csv data file
 
         public void Clear()
         {
             timestamps.Clear();
             inputs.Clear();
             outputs.Clear();
+        }
+
+        /// <summary>
+        /// sets the input types based on specified list of tuples
+        /// </summary>
+        /// <param name="map"> A list of tuples that map input titles to values</param>
+        public void SetInputTypes(List<Tuple<string, int>> map)
+        {
             input_types.Clear();
+            for (int i=0; i<input_labels.Count; i++)
+            {
+                int value = 0;
+                foreach (Tuple<string, int> pair in map)
+                {
+                    if (input_labels[i].ToLower().Contains(pair.Item1))
+                    {
+                        value = pair.Item2;
+                    }
+                }
+                input_types.Add(value);
+            }
+        }
+
+        public void SetInputActiveFlags(bool flag)
+        {
             input_active_flags.Clear();
-            output_labels.Clear();
-            input_labels.Clear();
-            input_num = 0;
-            output_num = 0;
-            freq = 0;
+            for (int i = 0; i < input_labels.Count; i++)
+            {
+                input_active_flags.Add(flag);
+            }
         }
 
         public bool LoadFileToListCols(string filepath)
+        {
+            string[] lines_arr = System.IO.File.ReadAllLines(filepath);
+            List<string> lines = lines_arr.ToList();
+
+            // if number of inputs in data file does not match set number of inputs
+            if (input_num != lines[0].Split(',').Length - 3)
+            {
+                return false;
+            }
+
+            // clear inputs/output lists and preallocate inputs
+            Clear();
+            for (int i = 0; i < input_num; i++)
+            {
+                inputs.Add(new List<double>());
+            }
+
+            foreach (string line in lines)
+            {
+                // parse data lines
+                if (line[0] == 'd')
+                {
+                    char[] chars_to_trim = { 'd', ',' };
+                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
+                    outputs.Add((int)vals.Last());
+                    vals.RemoveAt(vals.Count - 1);
+
+                    timestamps.Add(vals.First());
+                    vals.RemoveAt(0);
+
+                    for (int i = 0; i < vals.Count; i++)
+                    {
+                        inputs[i].Add(vals[i]);
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public bool LoadFileToListCols2(string filepath)
         {
             // read data file into lists data.inputs and data.outputs, return false if unsuccessful
 
@@ -123,7 +194,7 @@ namespace RealTimePatternRec.PatternRec
 
             // find frequency used for logging
             output_num = outputs.Max() + 1;
-            freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
+            //freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
 
             return true;
         }
@@ -180,7 +251,97 @@ namespace RealTimePatternRec.PatternRec
     }
 
     /// <summary>
-    /// 
+    /// static class of EMG and other feature mapping methods for time series data structured as Lists
+    /// </summary>
+    public static class Features
+    {
+
+        static public List<double> RAW(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+
+                filtered_values.Add(raw_values[i]);
+            }
+
+            return filtered_values;
+        }
+
+        static public List<double> MV(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+                filtered_values.Add(sub_window.Sum() / window_n);
+            }
+
+            return filtered_values;
+        }
+
+        /// <summary>
+        /// Returns the windowed mean absolute value of a signal
+        /// </summary>
+        /// <param name="raw_values">List of unwindowed values</param>
+        /// <param name="window_n">Number of data points in each window</param>
+        /// <param name="window_overlap_n">Number of data points to overlap in each subsequent window</param>
+        /// <returns>"windowed mean absolute value"</returns>
+        static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+
+                double sum = 0;
+                for (int j = 0; j < sub_window.Count; j++)
+                {
+                    sum += Math.Abs(sub_window[j]);
+                }
+                filtered_values.Add(sum / window_n);
+            }
+
+            return filtered_values;
+        }
+
+        static public List<double> ZC(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
+            {
+                List<double> sub_window = raw_values.GetRange(i, window_n);
+                int crossing_count = 0;
+                bool positive_flag = (sub_window[0] >= 0);    // true for 
+                for (int j = 0; j < sub_window.Count; j++)
+                {
+                    if ((sub_window[j] >= 0) ^ positive_flag)
+                    {
+                        crossing_count++;
+                        positive_flag = !positive_flag;
+                    }
+                }
+                filtered_values.Add(crossing_count);
+            }
+
+            return filtered_values;
+        }
+
+        static public List<double> SSC(List<double> raw_values, int window_n, int window_overlap_n)
+        {
+            List<double> difference_values = raw_values.Zip(raw_values.Skip(1), (x, y) => y - x).ToList();
+            difference_values.Add(difference_values.Last());    // append final value since one is lost during difference calculation, keeps feature sizes consistent
+            List<double> filtered_values = ZC(difference_values, window_n, window_overlap_n);
+            return filtered_values;
+        }
+    }
+
+    /// <summary>
+    /// class to hold all pattern recognition model information and capabilities
     /// </summary>
     public class Model
     {
@@ -203,28 +364,18 @@ namespace RealTimePatternRec.PatternRec
         public List<int> feature_outputs = new List<int>(); // outputs trimmed to account for windowing
 
         public delegate List<double> pipeline_func(List<double> data);
-        public List<pipeline_func> emg_pipeline = new List<pipeline_func>();
         public List<pipeline_func> generic_pipeline = new List<pipeline_func>();
-        public dynamic accord_model = new System.Dynamic.ExpandoObject();
+        public List<pipeline_func> emg_pipeline = new List<pipeline_func>();
+        public List<string> generic_pipeline_titles = new List<string>();
+        public List<string> emg_pipeline_titles = new List<string>();
 
-        //Thread t;
-        //Stopwatch sw;
-        //public int prevtime;
-        //public int curtime;
+        public dynamic accord_model = new System.Dynamic.ExpandoObject();
 
         public Model()
         {
             data = new Data();
             accord_model.learner = null;
         }
-
-        //public void start_realtime()
-        //{
-        //    sw = new Stopwatch();
-        //    sw.Start();
-        //    prevtime = sw.ElapsedMilliseconds;
-
-        //}
 
         public List<List<double>> map_features(List<List<double>> temp_inputs, List<int> input_types, List<bool> input_active_flags)
         {
@@ -339,188 +490,8 @@ namespace RealTimePatternRec.PatternRec
     }
 
     /// <summary>
-    /// static class of EMG and other feature mapping methods for time series data structured as Lists
+    /// class used to hold random tests I ran during development, will delete after
     /// </summary>
-    public static class Features
-    {
-
-        static public List<double> RAW(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> filtered_values = new List<double>();
-
-            for (int i = 0; i <= (raw_values.Count - window_n); i+=(window_n - window_overlap_n))
-            {
-                
-                filtered_values.Add(raw_values[i]);
-            }
-
-            return filtered_values;
-        }
-
-        static public List<double> MV(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> filtered_values = new List<double>();
-
-            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
-            {
-                List<double> sub_window = raw_values.GetRange(i, window_n);
-                filtered_values.Add(sub_window.Sum() / window_n);
-            }
-
-            return filtered_values;
-        }
-
-        /// <summary>
-        /// Returns the windowed mean absolute value of a signal
-        /// </summary>
-        /// <param name="raw_values">List of unwindowed values</param>
-        /// <param name="window_n">Number of data points in each window</param>
-        /// <param name="window_overlap_n">Number of data points to overlap in each subsequent window</param>
-        /// <returns>"windowed mean absolute value"</returns>
-        static public List<double> MAV(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> filtered_values = new List<double>();
-
-            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
-            {
-                List<double> sub_window = raw_values.GetRange(i, window_n);
-
-                double sum = 0;
-                for (int j = 0; j < sub_window.Count; j++)
-                {
-                    sum += Math.Abs(sub_window[j]);
-                }
-                filtered_values.Add(sum / window_n);
-            }
-
-            return filtered_values;
-        }
-
-        static public List<double> ZC(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> filtered_values = new List<double>();
-
-            for (int i = 0; i <= (raw_values.Count - window_n); i += (window_n - window_overlap_n))
-            {
-                List<double> sub_window = raw_values.GetRange(i, window_n);
-                int crossing_count = 0;
-                bool positive_flag = (sub_window[0] >= 0);    // true for 
-                for (int j = 0; j < sub_window.Count; j++)
-                {
-                    if ((sub_window[j] >= 0) ^ positive_flag)
-                    {
-                        crossing_count++;
-                        positive_flag = !positive_flag;
-                    }
-                }
-                filtered_values.Add(crossing_count);
-            }
-
-            return filtered_values;
-        }
-
-        static public List<double> SSC(List<double> raw_values, int window_n, int window_overlap_n)
-        {
-            List<double> difference_values = raw_values.Zip(raw_values.Skip(1), (x, y) => y - x).ToList();
-            difference_values.Add(difference_values.Last());    // append final value since one is lost during difference calculation, keeps feature sizes consistent
-            List<double> filtered_values = ZC(difference_values, window_n, window_overlap_n);
-            return filtered_values;
-        }
-    }
-
-    public class PR_Logger:dataLogger
-    {
-        //public dataLogger logger;
-        public int current_output;
-
-        public int contraction_time;
-        public int relax_time;
-        public long start_time;
-        public int collection_cycles;
-        public int current_cycle;
-        public int train_output_num;
-        public bool trainFlag = false;  // flag to indicate training has begun
-        public bool contractFlag = false;
-        public List<string> output_labels;
-
-        public PR_Logger()
-        {
-            //logger = new dataLogger();
-            return;
-        }
-
-        public override void write_header(List<string> data)
-        {
-            data.Insert(0, "h");
-            data.Add("output");
-            write_csv(data);
-        }
-
-        public override void write_data_with_timestamp(List<string> data)
-        {
-            data.Insert(0, "d");
-            data.Insert(1, curtime.ToString("F3"));
-            data.Add(current_output.ToString());
-            write_csv(data);
-        }
-
-        public void set_outputs(List<string> outputs_)
-        {
-            output_labels = outputs_;
-            train_output_num = output_labels.Count;
-        }
-
-        public void PR_tick()
-        {
-            // updates the flags corresponding to current action being performed during training
-
-            if (trainFlag)
-            {
-                long elapsed_time = (long)(curtime - start_time);
-                long segment_time = relax_time + contraction_time;
-
-                int segment_number = (int)Math.Floor((decimal)elapsed_time / segment_time);
-
-                current_output = segment_number%train_output_num;
-
-                long local_time = elapsed_time - segment_time * segment_number;
-                contractFlag = local_time >= relax_time;
-
-                if (contractFlag)
-                {
-                    recordflag = true;
-                }
-                else
-                {
-                    recordflag = false;
-                }
-
-                current_cycle = (int)Math.Floor((decimal)elapsed_time / (segment_time * train_output_num));
-
-                if (current_cycle >= collection_cycles)
-                {
-                    end_data_collection();
-                }
-            }
-        }
-
-        public void start_data_collection()
-        {
-            current_output = 0;
-            current_cycle = 0;
-            trainFlag = true;
-            tick();
-            start_time = (long)curtime;
-        }
-
-        public void end_data_collection()
-        {
-            close_file();
-            recordflag = false;
-            trainFlag = false;
-        }
-    }
-
     public static class Tests
     {
 

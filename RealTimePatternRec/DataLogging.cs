@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Threading;
 using Newtonsoft.Json;
 
-
 namespace RealTimePatternRec.DataLogging
 {
     public delegate List<T> get_data_func<T>();
@@ -18,7 +17,7 @@ namespace RealTimePatternRec.DataLogging
         public bool recordflag = false;
         public bool historyflag = false;
         public Stopwatch sw = new Stopwatch();
-        public int samplefreq;
+        public int freq;
         public float prevtime;
         public float curtime;
         public string filepath;
@@ -124,7 +123,7 @@ namespace RealTimePatternRec.DataLogging
         {
             // updates stopwatch and flips timeflag if enough time has passed to log another value
             
-            while (curtime - prevtime < 1000f / samplefreq)
+            while (curtime - prevtime < 1000f / freq)
             {
                 curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
             }
@@ -154,29 +153,6 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
-        public bool saveModelJson<T>(string filepath, T obj)
-        {
-            if (!filepath.EndsWith(".json"))
-            {
-                filepath += ".json";
-            }
-            StreamWriter jsonWriter = new StreamWriter(filepath);
-            string jsonString = JsonConvert.SerializeObject(obj);
-            jsonWriter.Write(jsonString);
-            jsonWriter.Flush();
-            jsonWriter.Close();
-
-            return true;
-        }
-
-        public bool loadModelJson<T>(string filepath, ref T obj)
-        {
-            StreamReader jsonReader = new StreamReader(filepath);
-            string jsonString = jsonReader.ReadToEnd();
-            obj = JsonConvert.DeserializeObject<T>(jsonString);
-            return true;
-        }
-
         public void close()
         {
             // aborts thread and deletes filewriter
@@ -185,4 +161,125 @@ namespace RealTimePatternRec.DataLogging
 
         }
     }
+
+    public class PR_Logger : dataLogger
+    {
+        //public dataLogger logger;
+        public int current_output;
+
+        public int contraction_time;
+        public int relax_time;
+        public long start_time;
+        public int collection_cycles;
+        public int current_cycle;
+        public int train_output_num;
+        public bool trainFlag = false;  // flag to indicate training has begun
+        public bool contractFlag = false;
+        public List<string> output_labels;
+
+        public PR_Logger()
+        {
+            //logger = new dataLogger();
+            return;
+        }
+
+        //public override void write_header(List<string> data)
+        //{
+        //    data.Insert(0, "h");
+        //    data.Add("output");
+        //    write_csv(data);
+        //}
+
+        public override void write_data_with_timestamp(List<string> data)
+        {
+            data.Insert(0, "d");
+            data.Insert(1, curtime.ToString("F3"));
+            data.Add(current_output.ToString());
+            write_csv(data);
+        }
+
+        public void set_outputs(List<string> outputs_)
+        {
+            output_labels = outputs_;
+            train_output_num = output_labels.Count;
+        }
+
+        public void PR_tick()
+        {
+            // updates the flags corresponding to current action being performed during training
+
+            if (trainFlag)
+            {
+                long elapsed_time = (long)(curtime - start_time);
+                long segment_time = relax_time + contraction_time;
+
+                int segment_number = (int)Math.Floor((decimal)elapsed_time / segment_time);
+
+                current_output = segment_number % train_output_num;
+
+                long local_time = elapsed_time - segment_time * segment_number;
+                contractFlag = local_time >= relax_time;
+
+                if (contractFlag)
+                {
+                    recordflag = true;
+                }
+                else
+                {
+                    recordflag = false;
+                }
+
+                current_cycle = (int)Math.Floor((decimal)elapsed_time / (segment_time * train_output_num));
+
+                if (current_cycle >= collection_cycles)
+                {
+                    end_data_collection();
+                }
+            }
+        }
+
+        public void start_data_collection()
+        {
+            current_output = 0;
+            current_cycle = 0;
+            trainFlag = true;
+            tick();
+            start_time = (long)curtime;
+        }
+
+        public void end_data_collection()
+        {
+            close_file();
+            recordflag = false;
+            trainFlag = false;
+        }
+    }
+
+    public static class ObjLogger
+    {
+        public static bool saveObjJson<T>(string filepath, T obj)
+        {
+            if (!filepath.EndsWith(".json"))
+            {
+                filepath += ".json";
+            }
+            StreamWriter jsonWriter = new StreamWriter(filepath);
+            string jsonString = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            jsonWriter.Write(jsonString);
+            jsonWriter.Flush();
+            jsonWriter.Close();
+            return true;
+        }
+
+        public static T loadObjJson<T>(string filepath)
+        {
+            StreamReader jsonReader = new StreamReader(filepath);
+            string jsonString = jsonReader.ReadToEnd();
+            T obj = JsonConvert.DeserializeObject<T>(jsonString);
+            return obj;
+        }
+    }  
 }

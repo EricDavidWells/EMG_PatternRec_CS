@@ -86,7 +86,6 @@ namespace RealTimePatternRec.DataLogging
             // stops thread and flushes file without deleting filewriter
             if (t != null)
             {
-                sw.Stop();
                 t.Abort();
                 t = null;
             }
@@ -173,22 +172,20 @@ namespace RealTimePatternRec.DataLogging
         public int collection_cycles;
         public int current_cycle;
         public int train_output_num;
+        public int timetonext;
         public bool trainFlag = false;  // flag to indicate training has begun
+        public bool trainEndFlag = true;
         public bool contractFlag = false;
         public List<string> output_labels;
 
+        Stopwatch PR_sw = new Stopwatch();
+
+
         public PR_Logger()
         {
-            //logger = new dataLogger();
             return;
         }
 
-        //public override void write_header(List<string> data)
-        //{
-        //    data.Insert(0, "h");
-        //    data.Add("output");
-        //    write_csv(data);
-        //}
 
         public override void write_data_with_timestamp(List<string> data)
         {
@@ -206,34 +203,35 @@ namespace RealTimePatternRec.DataLogging
 
         public void PR_tick()
         {
-            // updates the flags corresponding to current action being performed during training
-
             if (trainFlag)
             {
-                long elapsed_time = (long)(curtime - start_time);
-                long segment_time = relax_time + contraction_time;
+                long elapsed_time = PR_sw.ElapsedMilliseconds - start_time;
+                recordflag = elapsed_time >= relax_time;
 
-                int segment_number = (int)Math.Floor((decimal)elapsed_time / segment_time);
+                timetonext = (int)(relax_time - elapsed_time);
 
-                current_output = segment_number % train_output_num;
-
-                long local_time = elapsed_time - segment_time * segment_number;
-                contractFlag = local_time >= relax_time;
-
-                if (contractFlag)
+                if (elapsed_time >= relax_time + contraction_time)  // if single output relax and contract is complete
                 {
-                    recordflag = true;
-                }
-                else
-                {
-                    recordflag = false;
-                }
-
-                current_cycle = (int)Math.Floor((decimal)elapsed_time / (segment_time * train_output_num));
-
-                if (current_cycle >= collection_cycles)
-                {
-                    end_data_collection();
+                    if (current_output < train_output_num-1)    // if there are more classes to train
+                    {
+                        current_output += 1;
+                    }
+                    else
+                    {
+                        if (current_cycle < collection_cycles)  // if there are additional cycles to complete
+                        {
+                            current_cycle += 1;
+                            current_output = 0;
+                        }
+                        else
+                        {
+                            // if all cycles are complete
+                        }
+                        {
+                            end_data_collection();
+                        }
+                    }
+                    PR_sw.Restart();
                 }
             }
         }
@@ -243,8 +241,9 @@ namespace RealTimePatternRec.DataLogging
             current_output = 0;
             current_cycle = 0;
             trainFlag = true;
-            tick();
-            start_time = (long)curtime;
+            trainEndFlag = false;
+            PR_sw.Restart();
+            start_time = PR_sw.ElapsedMilliseconds;
         }
 
         public void end_data_collection()
@@ -252,6 +251,7 @@ namespace RealTimePatternRec.DataLogging
             close_file();
             recordflag = false;
             trainFlag = false;
+            trainEndFlag = true;
         }
     }
 
@@ -279,6 +279,8 @@ namespace RealTimePatternRec.DataLogging
             StreamReader jsonReader = new StreamReader(filepath);
             string jsonString = jsonReader.ReadToEnd();
             T obj = JsonConvert.DeserializeObject<T>(jsonString);
+
+            jsonReader.Close();
             return obj;
         }
     }  

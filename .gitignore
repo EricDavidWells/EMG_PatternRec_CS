@@ -1,5 +1,5 @@
 # Rico's specifics
-*.txt
+#*.txt
 
 # Compiled Object files
 *.slo

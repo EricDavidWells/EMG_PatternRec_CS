@@ -29,6 +29,8 @@ namespace RealTimePatternRec.DataLogging
         public get_data_func<double> get_data;
         public List<List<double>> data_history = new List<List<double>>();
 
+        public object lockObj = new object();  
+
         public dataLogger()
         {
             // creates dataLogger object
@@ -83,7 +85,7 @@ namespace RealTimePatternRec.DataLogging
 
         public void stop()
         {
-            // stops thread and flushes file without deleting filewriter
+            // stops thread
             if (t != null)
             {
                 t.Abort();
@@ -134,21 +136,24 @@ namespace RealTimePatternRec.DataLogging
             while (true)
             {
                 tick();
-                data = get_data();
-                if (recordflag)
+                lock (lockObj)
                 {
-                    List<string> str_data = data.Select(x => x.ToString()).ToList();
-                    write_data_with_timestamp(str_data);
-                }
-
-                if (historyflag)
-                {
-                    for (int i=0; i<signal_num; i++)
+                    data = get_data();
+                    if (recordflag)
                     {
-                        data_history[i].Add(data[i]);
-                        data_history[i].RemoveAt(0);
+                        List<string> str_data = data.Select(x => x.ToString()).ToList();
+                        write_data_with_timestamp(str_data);
                     }
-                }
+
+                    if (historyflag)
+                    {
+                        for (int i = 0; i < signal_num; i++)
+                        {
+                            data_history[i].Add(data[i]);
+                            data_history[i].RemoveAt(0);
+                        }
+                    }
+                }           
             }
         }
 

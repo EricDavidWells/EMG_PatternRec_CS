@@ -581,6 +581,16 @@ namespace RealTimePatternRec.PatternRec
 
             return filtered_values;
         }
+
+        static public List<double> NORM(List<double> raw_values, double max_value)
+        {
+            List<double> filtered_values = new List<double>();
+            for (int i = 0; i < raw_values.Count; i++)
+            {
+                filtered_values.Add(raw_values[i] / max_value);
+            }
+            return filtered_values;
+        }
     }
 
     /// <summary>
@@ -610,14 +620,14 @@ namespace RealTimePatternRec.PatternRec
         public List<string> generic_pipeline_titles = new List<string>();
         public List<string> emg_pipeline_titles = new List<string>();
 
-        public dynamic accord_model = new System.Dynamic.ExpandoObject();
+        public dynamic model = new System.Dynamic.ExpandoObject();
         public string model_save_filepath;
         public dynamic learner;
 
         public Model()
         {
             data = new Data();
-            accord_model.learner = null;
+            model.learner = null;
         }
 
         public List<List<double>> map_features(List<List<double>> temp_inputs, List<int> input_types, List<bool> input_active_flags)
@@ -695,7 +705,6 @@ namespace RealTimePatternRec.PatternRec
 
         public void train_model_Accord_list()
         {
-
             map_features_training();
             Data.shuffle_training_data(data.features, data.feature_outputs);
 
@@ -711,10 +720,10 @@ namespace RealTimePatternRec.PatternRec
             List<int> testing_outputs = data.feature_outputs.GetRange(N_train, features_rows.Count - N_train);
 
             // train model
-            accord_model.learner = accord_model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
+            model.learner = model.teacher.Learn(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
 
             // Compute the machine answers for the data.inputs
-            int[] answers = accord_model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
+            int[] answers = model.learner.Decide(testing_features.Select(a => a.ToArray()).ToArray());
             bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
 
             accuracy = (double)correct.Sum() / correct.Length;
@@ -726,7 +735,7 @@ namespace RealTimePatternRec.PatternRec
             double result = 0;
             List<List<double>> features_temp = map_features(rawdata, data.input_types, data.input_active_flags);
             double[] temp = Data.transpose_list_list(features_temp)[0].ToArray();
-            result = (double)accord_model.learner.Decide(temp);
+            result = (double)model.learner.Decide(temp);
 
             return result;
         }
@@ -736,76 +745,95 @@ namespace RealTimePatternRec.PatternRec
             model_save_filepath = filepath;
             if (modelFlag)
             {
-                Serializer.Save(accord_model.learner, model_save_filepath);
+                Serializer.Save(model.learner, model_save_filepath);
             }
         }
 
         public void load_model()
         {
             Serializer.Load(model_save_filepath, out learner);
-            accord_model.learner = learner;
+            model.learner = learner;
         }
     }
 
     /// <summary>
     /// holds a pre-trained Open Neural Network eXchange model and provides some simple functionality to manipulate input and output data
+    /// <para>
+    /// ML.NET complicates this process by requiring all data entering ML.NET to have "IDataView" interface implemented within it's own user defined
+    /// data class.  This makes it quite difficult to have a flexible data class which can handle arbitrary input size depending on the model fed to it.
+    /// 
+    /// </para>
     /// </summary>
     public class ONNXModel
     {
         public string filepath;
         public int num_inputs;
         public int num_outputs;
-        public Type inputType;
-        public Type outputType;
+        public string input_name;
+        public string output_name;
+        public Type input_type;
+        public Type output_type;
 
-        public SchemaDefinition schemadef;
+        SchemaDefinition input_schemadef;
+        SchemaDefinition output_schemadef;
         Microsoft.ML.Transforms.Onnx.OnnxTransformer transformer;
         MLContext mlContext = new MLContext();
 
+        public dataLogger logger;
+        public bool realtimeFlag = false;
+
         public ONNXModel()
         {
-            //mlContext = new MLContext();
             return;
         }
 
         /// <summary>
-        /// ML.Net requires a user defined class for input data.  The name of the variable being used must match that expected by the onxx model.
-        /// This class allows for various input feature sizes, as they are set in the load_model method
+        /// ML.Net requires a user defined class for input data
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public class DynamicDataType<T>
+        public class DynamicInputType<T>
         {
             public T[] input { get; set; }
         }
 
         /// <summary>
-        /// ML.net requires a user defined class for output data.  The name of the variable being used must match that expected by the onxx model.
-        /// This class will work with a neural network output layer defined "softmax"
+        /// ML.net requires a user defined class for output data"
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public class Prediction_softmax<T>
+        public class DynamicOutputType<T>
         {
-            public T[] softmax { get; set; }
+            public T[] output { get; set; }
         }
 
         /// <summary>
-        /// Load the ONNX model, resize user-defined input data class
+        /// Load the ONNX model
         /// </summary>
-        /// <typeparam name="Tinput"></typeparam>
-        /// <typeparam name="Toutput"></typeparam>
-        /// <param name="filepath_"></param>
-        /// <param name="num_inputs_"></param>
-        /// <param name="num_outputs_"></param>
-        public void load_model<Tinput>(string filepath_, int num_inputs_, int num_outputs_)
+        /// <typeparam name="Tinput">primitive data type (e.g. float) of the expected input layer</typeparam>
+        /// <typeparam name="Toutput">primitive data type (e.g. float) of the expected output layer</typeparam>
+        /// <param name="filepath_">"absolute path to the .onnx model"</param>
+        /// <param name="num_inputs_">"number of inputs in flattenned input layer"</param>
+        /// <param name="num_outputs_">"number of outputs in output layer</param>
+        public void load_model<Tinput, Toutput>(string filepath_, int num_inputs_, int num_outputs_, string input_name_, string output_name_)
         {
             filepath = filepath_;
             num_inputs = num_inputs_;
             num_outputs = num_outputs_;
+            input_name = input_name_;
+            output_name = output_name_;
+            input_type = typeof(Tinput);
+            output_type = typeof(Toutput);
 
-            // define schema and adjust size for number of inputs
-            schemadef = SchemaDefinition.Create(typeof(DynamicDataType<Tinput>));
-            var vectorItemType = ((VectorDataViewType)schemadef[0].ColumnType).ItemType;
-            schemadef[0].ColumnType = new VectorDataViewType(vectorItemType, num_inputs);
+            // define input schema
+            input_schemadef = SchemaDefinition.Create(typeof(DynamicInputType<Tinput>));
+            var vectorItemType = ((VectorDataViewType)input_schemadef[0].ColumnType).ItemType;
+            input_schemadef[0].ColumnType = new VectorDataViewType(vectorItemType, num_inputs); // adjust size of input schema to match .onnx model
+            input_schemadef[0].ColumnName = input_name; // adjust name of input schema to match .onnx model
+
+            // define output schema
+            output_schemadef = SchemaDefinition.Create(typeof(DynamicOutputType<Toutput>)); 
+            vectorItemType = ((VectorDataViewType)output_schemadef[0].ColumnType).ItemType; 
+            output_schemadef[0].ColumnType = new VectorDataViewType(vectorItemType, num_outputs);   // adjust size of output schema to match .onnx model
+            output_schemadef[0].ColumnName = output_name;   // adjust name of output schema to match .onnx model
 
             // create dummy data
             Tinput[] dummydata = new Tinput[num_inputs];
@@ -817,49 +845,47 @@ namespace RealTimePatternRec.PatternRec
         }
 
         /// <summary>
-        /// transforms array input to a dataview for ML.net
+        /// Transforms primitive type input array to dataview matching the required input schema definition
         /// </summary>
         /// <typeparam name="Tinput"></typeparam>
         /// <param name="data"></param>
         /// <returns></returns>
         public IDataView convert_input_to_dataview<Tinput>(Tinput[] data)
         {
-            IEnumerable<DynamicDataType<Tinput>> enumerable_data = new DynamicDataType<Tinput>[]
+            IEnumerable<DynamicInputType<Tinput>> enumerable_data = new DynamicInputType<Tinput>[]
             {
-                new DynamicDataType<Tinput> {input = data},
+                new DynamicInputType<Tinput> {input = data},
             };
-            IDataView dv = mlContext.Data.LoadFromEnumerable(enumerable_data, schemadef);
+            IDataView dv = mlContext.Data.LoadFromEnumerable(enumerable_data, input_schemadef);
             return dv;
         }
 
         /// <summary>
-        /// converts a dataview output from ML.net to the user-defined class specified to match the ONNX model
+        /// Transforms output dataview matching the required output schema definition to primitive type output array
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="dv"></param>
         /// <returns></returns>
-        public T convert_dataview_to_output_userdefined_class<T>(IDataView dv) where T : class, new()
+        public T[] convert_dataview_to_output<T>(IDataView dv)
         {
-            // must put into a list temporarily in order to convert from a dataview, only return the one output
-            List<T> output_list = mlContext.Data.CreateEnumerable<T>(dv, reuseRowObject: false).ToList();
-            return output_list[0];
+            List<DynamicOutputType<T>> output_list = mlContext.Data.CreateEnumerable<DynamicOutputType<T>>(dv, reuseRowObject: false, schemaDefinition: output_schemadef).ToList();
+            return output_list[0].output;
         }
 
         /// <summary>
-        /// transforms input into a user-defined class output specified to match the ONNX model
+        /// transforms primitive type input array to primitive type output array
         /// </summary>
         /// <typeparam name="Tinput"> primitive data type</typeparam>
         /// <typeparam name="Toutput"> user-defined data type</typeparam>
         /// <param name="input"> array of specified primitive data type</param>
         /// <returns></returns>
-        public Toutput predict<Tinput, Toutput>(Tinput[] input) where Toutput : class, new()
+        public Toutput[] predict<Tinput, Toutput>(Tinput[] input)
         {
             IDataView dv = convert_input_to_dataview<Tinput>(input);
             IDataView output_dv = transformer.Transform(dv);
-            Toutput outputs = convert_dataview_to_output_userdefined_class<Toutput>(output_dv);
+            Toutput[] outputs = convert_dataview_to_output<Toutput>(output_dv);
             return outputs;
         }
-
     }
 
     /// <summary>
@@ -873,7 +899,7 @@ namespace RealTimePatternRec.PatternRec
 
             string onnxfilepath = @"C:\Users\Rico\OneDrive\Documents\School\BLINC\Project\Development\BrachIOplexus Classifier\Heather ONNX\generalized_classifier.onnx";
             ONNXModel onnxmodel = new ONNXModel();
-            onnxmodel.load_model<float>(onnxfilepath, 8 * 33, 5);
+            onnxmodel.load_model<float, float>(onnxfilepath, 8 * 33, 5, "input", "softmax");
 
             // input data from rest class (fourth output)
             float[] input = new float[] {0.0334534935281074f,0.0155259186303412f,-0.00988409236361692f,-0.0108421774637829f,-0.0211299283338090f,-0.0242005834224005f,0.0298945136657577f,0.0240544283134423f,0.0113635604694395f,-0.0532899578437731f,0.0401483231298973f,0.00417206509488551f,-0.0581217757496608f,0.0442983477496809f,-0.00859965590939239f,0.0121959065640328f,0.0182280504588846f,-0.0453626761156503f,-0.0129707943654723f,0.0246754528699610f,0.0230689602799590f,0.0218181280180796f,-0.0315637994370069f,-0.0334857389074689f,0.00681954827632905f,0.0363738663877772f,-0.0121080635918214f,-0.0352708415138627f,0.0385137837747015f,0.00645001084846835f,-0.00453204568863537f,-0.00891359184945941f,0.00283703289316430f,
@@ -885,15 +911,7 @@ namespace RealTimePatternRec.PatternRec
                                         0.00182023409294589f,0.198127551142678f,-0.232202126230322f,-0.130649137363206f,0.115401506096051f,0.0437442114775829f,0.0411181545881474f,-0.0490202382532104f,-0.0116934271772505f,-0.0660284360016179f,0.0745403758139587f,0.0116345455682097f,0.0356911450296018f,0.0318722150346920f,-0.0544735861194019f,-0.433762253765705f,0.456069273332087f,0.258342346250226f,-0.264075561622713f,-0.0892963481537417f,-0.149768121180977f,0.199191396052974f,0.0721195066606695f,-0.100086424680931f,0.0106941201974265f,0.109104279100965f,-0.139594648357677f,0.00241612311370273f,0.0138049717426850f,0.0421390610206025f,-0.00799240194472854f,0.0122447960760187f,-0.0240246362541800f,
                                         0.000469164718398144f,0.0714409435984345f,-0.0423140285044708f,0.0301360549145895f,-0.0403588804685305f,0.0442081053884080f,-0.00960887539009872f,0.0419007759860559f,-0.0289610297110550f,-0.0780127252978121f,0.0156250122720084f,0.0648450371072024f,-0.0374142773669149f,0.0529216155751062f,-0.0288806156645492f,-0.0400369485200208f,0.0540327044034317f,-0.0138858145113757f,-0.0208983838984417f,0.0159751931822853f,-0.0390662228341190f,0.0339410185233548f,0.0192446047919084f,-0.00732704437632403f,-0.0118444222803623f,0.0227748418163459f,-0.0432041474352850f,0.00437652385679135f,0.00274759585217781f,0.0290552665823262f,-0.00574345675926528f,-0.000707867160478249f,-0.00603938754197877f};
 
-            ONNXModel.Prediction_softmax<float> output_list = onnxmodel.predict<float, ONNXModel.Prediction_softmax<float>>(input);
-
-            int n_outputs = output_list.softmax.Length;
-            float[] outputs = new float[n_outputs];
-            for (int i = 0; i < n_outputs; i++)
-            {
-                outputs[i] = output_list.softmax[i];
-            }
-
+            float[] outputs = onnxmodel.predict<float, float>(input);
             foreach (float output in outputs)
             {
                 Console.WriteLine(output);

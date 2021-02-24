@@ -13,7 +13,9 @@ namespace ExampleUse
     {
         static void Main(string[] args)
         {
-            Tests.ONNXTest();
+            //Tests.ONNXTest();
+            //Tests.AccordSVMTest();
+            Tests.ONNXSettingsTest();
             Console.Read();
         }
     }

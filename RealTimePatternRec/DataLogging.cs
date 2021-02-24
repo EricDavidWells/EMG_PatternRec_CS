@@ -271,7 +271,8 @@ namespace RealTimePatternRec.DataLogging
             StreamWriter jsonWriter = new StreamWriter(filepath);
             string jsonString = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                TypeNameHandling = TypeNameHandling.All
             });
             jsonWriter.Write(jsonString);
             jsonWriter.Flush();
@@ -283,10 +284,22 @@ namespace RealTimePatternRec.DataLogging
         {
             StreamReader jsonReader = new StreamReader(filepath);
             string jsonString = jsonReader.ReadToEnd();
-            T obj = JsonConvert.DeserializeObject<T>(jsonString);
+            T obj = JsonConvert.DeserializeObject<T>(jsonString, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            });
 
             jsonReader.Close();
             return obj;
+        }
+
+        public static dynamic loadObjJsonToDynamic(string filepath)
+        {
+            StreamReader jsonReader = new StreamReader(filepath);
+            string jsonString = jsonReader.ReadToEnd();
+            dynamic generic_obj = Newtonsoft.Json.Linq.JObject.Parse(jsonString);
+
+            return generic_obj;
         }
     }  
 }

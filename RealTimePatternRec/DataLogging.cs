@@ -9,40 +9,65 @@ using Newtonsoft.Json;
 
 namespace RealTimePatternRec.DataLogging
 {
-    public delegate List<T> get_data_func<T>();
+    public delegate List<T> get_data_f_func<T>();
 
+    /// <summary>
+    /// Creates an object that runs on it's own thread to manage data collection at reliable time intervals
+    /// <para> 
+    /// Note that the thread spins when not logging to update its timer and therefore clogs cpu usage.
+    /// This makes data sample rate as consistent as possible on a windows OS
+    /// </para>
+    /// </summary>
+    /// 
     public class dataLogger
     {
-        public StreamWriter file;
-        public bool recordflag = false;
-        public bool historyflag = false;
-        public Stopwatch sw = new Stopwatch();
-        public int freq;
-        public float prevtime;
-        public float curtime;
+        /// <summary>path to streamwriter file location</summary>
         public string filepath;
-        Thread t;
-
+        /// <summary>streamwriter object for writing values to file </summary>
+        public StreamWriter file;
+        /// <summary>flag to trigger data recording</summary>
+        public bool recordflag = false;
+        /// <summary>flag to trigger</summary>
+        public bool historyflag = false;
+        /// <summary>stopwatch to keep track of logging frequency</summary>
+        public Stopwatch sw = new Stopwatch();
+        /// <summary>frequency to log data in Hz</summary>
+        public int freq;
+        /// <summary>number of signals being logged</summary>
         public int signal_num;
+        /// <summary>number of data points to keep in history</summary>
         public int history_num;
+        /// <summary>current data</summary>
         public List<double> data;
-        public get_data_func<double> get_data;
+        /// <summary>data history</summary>
         public List<List<double>> data_history = new List<List<double>>();
+        /// <summary>delegate function used to grab data</summary>
+        public get_data_f_func<double> get_data_f;
+        /// <summary>object to be used in lock statement while reading data from logger</summary>
+        public object lockObj = new object();
 
-        public object lockObj = new object();  
+        protected float prevtime;
+        protected float curtime;
+        protected Thread t;
 
         public dataLogger()
         {
             // creates dataLogger object
         }
 
+        /// <summary>
+        /// initiates file stream writer
+        /// </summary>
+        /// <param name="filepath_"></param>
         public void init_file(string filepath_)
         {
-            // initiates filewriter
             filepath = filepath_;
             file = new StreamWriter(filepath);
         }
 
+        /// <summary>
+        /// closes file stream writer
+        /// </summary>
         public void close_file()
         {
             if (file != null)
@@ -53,16 +78,18 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
+        /// <summary>
+        /// starts data grabbing thread
+        /// </summary>
         public void start()
         {
-            // starts thread and initiates timing variables
             sw.Start();
             prevtime = sw.ElapsedMilliseconds;
             curtime = prevtime;
 
+            // initiate data history
             if (historyflag)
             {
-
                 data_history.Clear();
                 for (int i=0; i<signal_num; i++)
                 {
@@ -75,6 +102,7 @@ namespace RealTimePatternRec.DataLogging
                 }
             }
 
+            // start thread
             if (t == null)
             {
                 t = new Thread(thread_loop);
@@ -83,9 +111,11 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
+        /// <summary>
+        /// kills thread if thread is currently running
+        /// </summary>
         public void stop()
         {
-            // stops thread
             if (t != null)
             {
                 t.Abort();
@@ -93,9 +123,12 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
-        protected void write_csv(List<string> data)
+        /// <summary>
+        /// writes data to file as comma seperated values
+        /// </summary>
+        /// <param name="data">data to write as list of strings</param>
+        public void write_csv(List<string> data)
         {
-            // writes data to file in csv format
             string newLine = "";
             for (int i=0; i<data.Count; i++)
             {
@@ -104,26 +137,21 @@ namespace RealTimePatternRec.DataLogging
             file.WriteLine(newLine.TrimEnd(','));
         }
 
-        public virtual void write_header(List<string> data)
-        {
-            // sends data to write_csv with a prepended "h" character to indicate header line
-            data.Insert(0, "h");
-            write_csv(data);
-        }
-
+        /// <summary>
+        /// writes timestamp before writing data as comma seperated value
+        /// </summary>
+        /// <param name="data"></param>
         public virtual void write_data_with_timestamp(List<string> data)
         {
-            //sends data to write_csv with a prepended "d" character to indicate data line
-
-            data.Insert(0, "d");
-            data.Insert(1, curtime.ToString("F3"));
+            file.Write(curtime.ToString("F3") + ',');
             write_csv(data);
         }
 
+        /// <summary>
+        /// updates stopwatch and flips timeflag if enough time has passed to log another value
+        /// </summary>
         public void tick()
-        {
-            // updates stopwatch and flips timeflag if enough time has passed to log another value
-            
+        {            
             while (curtime - prevtime < 1000f / freq)
             {
                 curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
@@ -131,14 +159,17 @@ namespace RealTimePatternRec.DataLogging
             prevtime = curtime;
         }
 
+        /// <summary>
+        /// main loop for logging thread.  waits till sample frequency specified delay before grabbing data and writing to file
+        /// </summary>
         public void thread_loop()
         {
             while (true)
             {
                 tick();
-                lock (lockObj)
+                lock (lockObj)  // lock safe data writing
                 {
-                    data = get_data();
+                    data = get_data_f();
                     if (recordflag)
                     {
                         List<string> str_data = data.Select(x => x.ToString()).ToList();
@@ -162,60 +193,77 @@ namespace RealTimePatternRec.DataLogging
             // aborts thread and deletes filewriter
             stop();
             close_file();
-
         }
     }
 
+    /// <summary>
+    /// class derived from regular dataLogger class to facilitate data collection for pattern recognition with ground truth labels
+    /// </summary>
     public class PR_Logger : dataLogger
     {
-        //public dataLogger logger;
+        /// <summary>current ground truth output</summary>
         public int current_output;
-
+        /// <summary>amount of time for each contraction in ms</summary
         public int contraction_time;
+        /// <summary>amount of time for rest between contractions in ms</summary>
         public int relax_time;
-        public long start_time;
+        /// <summary>number of times to cycle through all output classest</summary>
         public int collection_cycles;
+        /// <summary>number of times to cycle through all output classest</summary
         public int current_cycle;
+        /// <summary>number of outputs to train</summary>
         public int train_output_num;
+        /// <summary>time in ms to next contraction</summary>
         public int timetonext;
-        public bool trainFlag = false;  // flag to indicate training has begun
-        public bool trainEndFlag = true;
+        /// <summary>flag indicating training is happening</summary>
+        public bool trainFlag = false;
+        /// <summary>flag indicating that participant should be contracting</summary>
         public bool contractFlag = false;
+        /// <summary>list of output labels</summary>
         public List<string> output_labels;
 
-        Stopwatch PR_sw = new Stopwatch();
-
+        private long start_time;
+        private Stopwatch PR_sw = new Stopwatch();
 
         public PR_Logger()
         {
             return;
         }
 
-
+        /// <summary>
+        /// writes data with timestamp and appended ground truth output class
+        /// </summary>
+        /// <param name="data">data to write as list of strings</param>
         public override void write_data_with_timestamp(List<string> data)
         {
-            data.Insert(0, "d");
-            data.Insert(1, curtime.ToString("F3"));
+            file.Write(curtime.ToString("F3") + ',');
             data.Add(current_output.ToString());
             write_csv(data);
         }
 
+        /// <summary>
+        /// sets the class labels to train with
+        /// </summary>
+        /// <param name="outputs_">list of class labels</param>
         public void set_outputs(List<string> outputs_)
         {
             output_labels = outputs_;
             train_output_num = output_labels.Count;
         }
 
+        /// <summary>
+        /// updates data collection variables
+        /// </summary>
         public void PR_tick()
         {
             if (trainFlag)
             {
                 long elapsed_time = PR_sw.ElapsedMilliseconds - start_time;
-                recordflag = elapsed_time >= relax_time;
+                recordflag = elapsed_time >= relax_time;    // turn recording on
 
                 timetonext = (int)(relax_time - elapsed_time);
 
-                if (elapsed_time >= relax_time + contraction_time)  // if single output relax and contract is complete
+                if (elapsed_time >= relax_time + contraction_time)  // if single output relax and contract cycle is complete
                 {
                     if (current_output < train_output_num-1)    // if there are more classes to train
                     {
@@ -223,7 +271,7 @@ namespace RealTimePatternRec.DataLogging
                     }
                     else
                     {
-                        if (current_cycle < collection_cycles)  // if there are additional cycles to complete
+                        if (current_cycle < collection_cycles-1)  // if there are additional cycles to complete
                         {
                             current_cycle += 1;
                             current_output = 0;
@@ -231,8 +279,6 @@ namespace RealTimePatternRec.DataLogging
                         else
                         {
                             // if all cycles are complete
-                        }
-                        {
                             end_data_collection();
                         }
                     }
@@ -241,27 +287,42 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
+        /// <summary>
+        /// initiates data collection sequence
+        /// </summary>
         public void start_data_collection()
         {
             current_output = 0;
             current_cycle = 0;
             trainFlag = true;
-            trainEndFlag = false;
             PR_sw.Restart();
             start_time = PR_sw.ElapsedMilliseconds;
         }
 
+        /// <summary>
+        /// ends data collection sequence
+        /// </summary>
         public void end_data_collection()
         {
             close_file();
             recordflag = false;
             trainFlag = false;
-            trainEndFlag = true;
         }
     }
 
+    /// <summary>
+    /// uses Newtonsoft.json to serialize and deserialize objects
+    /// </summary>
     public static class ObjLogger
     {
+
+        /// <summary>
+        /// saves object to json file
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filepath"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static bool saveObjJson<T>(string filepath, T obj)
         {
             if (!filepath.EndsWith(".json"))
@@ -280,6 +341,12 @@ namespace RealTimePatternRec.DataLogging
             return true;
         }
 
+        /// <summary>
+        /// loads json file to object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         public static T loadObjJson<T>(string filepath)
         {
             StreamReader jsonReader = new StreamReader(filepath);

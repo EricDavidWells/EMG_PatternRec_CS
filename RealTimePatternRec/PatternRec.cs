@@ -88,13 +88,18 @@ namespace RealTimePatternRec.PatternRec
             }
         }
 
+        /// <summary>
+        /// loads data file into inputs and outputs fields
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         public bool LoadFileToListCols(string filepath)
         {
             string[] lines_arr = System.IO.File.ReadAllLines(filepath);
             List<string> lines = lines_arr.ToList();
 
             // if number of inputs in data file does not match set number of inputs
-            if (input_num != lines[0].Split(',').Length - 3)
+            if (input_num != lines[0].Split(',').Length - 2)
             {
                 return false;
             }
@@ -109,100 +114,18 @@ namespace RealTimePatternRec.PatternRec
             foreach (string line in lines)
             {
                 // parse data lines
-                if (line[0] == 'd')
+                List<double> vals = Array.ConvertAll(line.Split(','), Double.Parse).ToList();
+                outputs.Add((int)vals.Last());
+                vals.RemoveAt(vals.Count - 1);
+
+                timestamps.Add(vals.First());
+                vals.RemoveAt(0);
+
+                for (int i = 0; i < vals.Count; i++)
                 {
-                    char[] chars_to_trim = { 'd', ',' };
-                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
-                    outputs.Add((int)vals.Last());
-                    vals.RemoveAt(vals.Count - 1);
-
-                    timestamps.Add(vals.First());
-                    vals.RemoveAt(0);
-
-                    for (int i = 0; i < vals.Count; i++)
-                    {
-                        inputs[i].Add(vals[i]);
-                    }
+                    inputs[i].Add(vals[i]);
                 }
             }
-
-            return true;
-        }
-
-        public bool LoadFileToListCols2(string filepath)
-        {
-            // read data file into lists data.inputs and data.outputs, return false if unsuccessful
-
-            string[] lines_arr = System.IO.File.ReadAllLines(filepath);
-            List<string> lines = lines_arr.ToList();
-
-            Clear();
-
-            input_num = lines[0].Split(',').Length - 3;
-
-            // preallocate data.inputs
-            for (int i = 0; i < input_num; i++)
-            {
-                inputs.Add(new List<double>());
-            }
-
-            foreach (string line in lines)
-            {
-                // parse header line
-                if (line[0] == 'h')
-                {
-                    char[] chars_to_trim = { 'h', ',' };
-                    input_labels = line.TrimStart(chars_to_trim).Split(',').ToList<string>();
-
-                    if (input_labels.Last() != "output")
-                    {
-                        return false;  // return if there is no output column
-                    }
-                    else
-                    {
-                        input_labels.RemoveAt(input_labels.Count - 1);
-                        input_labels.RemoveAt(0);
-
-                        for (int i = 0; i < input_labels.Count; i++)
-                        {
-                            input_active_flags.Add(false);
-
-                            if (input_labels[i].ToLower().Contains("ch"))
-                            {
-                                input_types.Add(1);
-                            }
-                            else
-                            {
-                                input_types.Add(0);
-                            }
-                        }
-                    }
-                }
-                // parse data lines
-                else if (line[0] == 'd')
-                {
-                    char[] chars_to_trim = { 'd', ',' };
-                    List<double> vals = Array.ConvertAll(line.TrimStart(chars_to_trim).Split(','), Double.Parse).ToList();
-                    outputs.Add((int)vals.Last());
-                    vals.RemoveAt(vals.Count - 1);
-
-                    timestamps.Add(vals.First());
-                    vals.RemoveAt(0);
-
-                    for (int i = 0; i < vals.Count; i++)
-                    {
-                        inputs[i].Add(vals[i]);
-                    }
-                }
-                else
-                {
-                    return false; // return if there is no leading character (i.e. not a proper data file)
-                }
-            }
-
-            // find frequency used for logging
-            output_num = outputs.Max() + 1;
-            //freq = (int)Math.Round(timestamps.Count * 1000 / (timestamps.Last() - timestamps.First()));
 
             return true;
         }

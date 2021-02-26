@@ -37,18 +37,43 @@ namespace RealTimePatternRec.DataLogging
         public int signal_num;
         /// <summary>number of data points to keep in history</summary>
         public int history_num;
-        /// <summary>current data</summary>
-        public List<double> data;
-        /// <summary>data history</summary>
-        public List<List<double>> data_history = new List<List<double>>();
         /// <summary>delegate function used to grab data</summary>
         public get_data_f_func<double> get_data_f;
         /// <summary>object to be used in lock statement while reading data from logger</summary>
         public object lockObj = new object();
 
+        protected List<double> _data;
+        /// <summary>current data</summary>
+        public List<double> Data
+        {
+            get
+            {
+                lock (lockObj)
+                {
+                    return _data;
+                }
+            }
+        }
+        protected List<List<double>> _data_history = new List<List<double>>();
+        /// <summary>data history property</summary>
+        public List<List<double>> Data_history
+        {
+            get
+            {
+                lock (lockObj)
+                {
+                    return _data_history;
+                }
+            }
+        }
+
+        // thread and timing variables
         protected float prevtime;
         protected float curtime;
         protected Thread t;
+
+        /// <summary>format specifier for converting data values from double to strings</summary>
+        protected string formatspec = "F4";
 
         public dataLogger()
         {
@@ -90,7 +115,7 @@ namespace RealTimePatternRec.DataLogging
             // initiate data history
             if (historyflag)
             {
-                data_history.Clear();
+                _data_history.Clear();
                 for (int i=0; i<signal_num; i++)
                 {
                     List<double> temp_list = new List<double>();
@@ -98,7 +123,7 @@ namespace RealTimePatternRec.DataLogging
                     {
                         temp_list.Add(0);
                     }
-                    data_history.Add(temp_list);
+                    _data_history.Add(temp_list);
                 }
             }
 
@@ -143,7 +168,7 @@ namespace RealTimePatternRec.DataLogging
         /// <param name="data"></param>
         public virtual void write_data_with_timestamp(List<string> data)
         {
-            file.Write(curtime.ToString("F3") + ',');
+            file.Write(curtime.ToString(formatspec) + ',');
             write_csv(data);
         }
 
@@ -169,10 +194,10 @@ namespace RealTimePatternRec.DataLogging
                 tick();
                 lock (lockObj)  // lock safe data writing
                 {
-                    data = get_data_f();
+                    _data = get_data_f();
                     if (recordflag)
                     {
-                        List<string> str_data = data.Select(x => x.ToString()).ToList();
+                        List<string> str_data = _data.Select(x => x.ToString(formatspec)).ToList();
                         write_data_with_timestamp(str_data);
                     }
 
@@ -180,8 +205,8 @@ namespace RealTimePatternRec.DataLogging
                     {
                         for (int i = 0; i < signal_num; i++)
                         {
-                            data_history[i].Add(data[i]);
-                            data_history[i].RemoveAt(0);
+                            _data_history[i].Add(_data[i]);
+                            _data_history[i].RemoveAt(0);
                         }
                     }
                 }           
@@ -236,7 +261,7 @@ namespace RealTimePatternRec.DataLogging
         /// <param name="data">data to write as list of strings</param>
         public override void write_data_with_timestamp(List<string> data)
         {
-            file.Write(curtime.ToString("F3") + ',');
+            file.Write(curtime.ToString(formatspec) + ',');
             data.Add(current_output.ToString());
             write_csv(data);
         }

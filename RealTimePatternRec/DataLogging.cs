@@ -358,7 +358,7 @@ namespace RealTimePatternRec.DataLogging
             string jsonString = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                TypeNameHandling = TypeNameHandling.All
+                TypeNameHandling = TypeNameHandling.Auto
             });
             jsonWriter.Write(jsonString);
             jsonWriter.Flush();
@@ -378,7 +378,7 @@ namespace RealTimePatternRec.DataLogging
             string jsonString = jsonReader.ReadToEnd();
             T obj = JsonConvert.DeserializeObject<T>(jsonString, new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.All
+                TypeNameHandling = TypeNameHandling.Auto
             });
 
             jsonReader.Close();

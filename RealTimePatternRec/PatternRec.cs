@@ -92,8 +92,8 @@ namespace RealTimePatternRec.PatternRec
         /// loads data file into inputs and outputs fields
         /// </summary>
         /// <param name="filepath"></param>
-        /// <returns></returns>
-        public bool LoadFileToListCols(string filepath)
+        /// <returns>0 if successful, 1 if not successful</returns>
+        public int LoadFileToListCols(string filepath)
         {
             string[] lines_arr = System.IO.File.ReadAllLines(filepath);
             List<string> lines = lines_arr.ToList();
@@ -101,7 +101,7 @@ namespace RealTimePatternRec.PatternRec
             // if number of inputs in data file does not match set number of inputs
             if (input_num != lines[0].Split(',').Length - 2)
             {
-                return false;
+                return 1;
             }
 
             // clear inputs/output lists and preallocate inputs
@@ -127,7 +127,7 @@ namespace RealTimePatternRec.PatternRec
                 }
             }
 
-            return true;
+            return 0;
         }
 
         /// <summary>
@@ -557,9 +557,9 @@ namespace RealTimePatternRec.PatternRec
         public double train_test_split;
         public double accuracy;
 
-        public bool modelFlag = false;
+        //public bool modelFlag = false;
         public bool realtimeFlag = false;
-        public string model_type;
+        //public string model_type;
         public Dictionary<string, string> model_params;
 
         public delegate List<double> pipeline_func(List<double> data_);
@@ -574,7 +574,6 @@ namespace RealTimePatternRec.PatternRec
         public List<string> generic_filter_pipeline_titles = new List<string>();
         public List<string> emg_filter_pipeline_titles = new List<string>();
 
-        //public dynamic model = new System.Dynamic.ExpandoObject();
         public string model_save_filepath;
         public dynamic learner;
 
@@ -658,7 +657,7 @@ namespace RealTimePatternRec.PatternRec
             }
         }
 
-        public void train_model_Accord_list()
+        public void train_model()
         {
             // map inputs to features and shuffle
             map_features_training();
@@ -684,34 +683,8 @@ namespace RealTimePatternRec.PatternRec
                 double[] scores = model.predict(testing_features[i].ToArray());
                 answers[i] = scores.IndexOf(scores.Max());
             }
-
             bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
             accuracy = (double)correct.Sum() / correct.Length;
-            modelFlag = true; 
-        }
-
-        //public double predict(List<List<double>> rawdata)
-        //{
-        //    List<List<double>> features_temp = map_features(rawdata, data.input_types, data.input_active_flags);
-        //    double[] temp = Data.transpose_list_list(features_temp)[0].ToArray();
-        //    double result = (double)model.learner.Decide(temp);
-
-        //    return result;
-        //}
-
-        public void save_model(string filepath)
-        {
-            model_save_filepath = filepath;
-            if (modelFlag)
-            {
-                Serializer.Save(model, model_save_filepath);
-            }
-        }
-
-        public void load_model()
-        {
-            Serializer.Load(model_save_filepath, out learner);
-            model = learner;
         }
     }
 

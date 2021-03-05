@@ -20,9 +20,6 @@ using Accord.Statistics.Analysis;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 
-// useful: https://dotnetfiddle.net/
-// potential library: http://accord-framework.net/
-
 namespace RealTimePatternRec.PatternRec
 {
     /// <summary>
@@ -30,24 +27,36 @@ namespace RealTimePatternRec.PatternRec
     /// </summary>
     public class Data
     {
-        // Class to hold all information related to the data being used by the pattern rec class
+        /// <summary>timestamp data</summary>
         public List<double> timestamps = new List<double>();
-        public List<List<double>> inputs = new List<List<double>>();    // raw input values
-        public List<int> outputs = new List<int>(); // raw output values
-        public List<int> input_types = new List<int>();     // types of input signals (0 = generic, 1 = emg)
-        public List<List<double>> features = new List<List<double>>();  // inputs after mapping to features
-        public List<int> feature_outputs = new List<int>(); // outputs trimmed to account for windowing
-        public List<bool> input_active_flags = new List<bool>();    //  indicating which inputs are active in model
-        public List<string> output_labels = new List<string>(); // list of output label names
-        public List<string> input_labels = new List<string>();  // list of input label names
-        public int input_num;   // number of inputs in data
-        public int output_num;  // number of outputs in data
-        public int freq;    // frequency data was recorded at
-        public int collection_cycles;   // number of times outputs were iterated over during data collection
-        public int contraction_time;    // number of seconds per contraction during data collection
-        public int relaxation_time; // number of seconds for relaxation during data collection
-        public string json_filepath;  // path to json data configuration file
-        public string csv_filepath;     // path to csv data file
+        /// <summary>raw input values</summary>
+        public List<List<double>> inputs = new List<List<double>>();
+        /// <summary>raw output values</summary>
+        public List<int> outputs = new List<int>();
+        /// <summary>types of input signals (0 = generic, 1 = emg)</summary>
+        public List<int> input_types = new List<int>();
+        /// <summary>inputs after mapping to features</summary>
+        public List<List<double>> features = new List<List<double>>();
+        /// <summary>outputs trimmed to account for windowing</summary>
+        public List<int> feature_outputs = new List<int>();
+        /// <summary>indicating which inputs are active in model</summary>
+        public List<bool> input_active_flags = new List<bool>();
+        /// <summary>output label names</summary>
+        public List<string> output_labels = new List<string>();
+        /// <summary>list of input label names</summary>
+        public List<string> input_labels = new List<string>();
+        /// <summary>number of inputs in data</summary>
+        public int input_num;
+        /// <summary>number of outputs in data</summary>
+        public int output_num;
+        /// <summary>frequency data was recorded at</summary>
+        public int freq;
+        /// <summary>number of times outputs were iterated over during data collection</summary>
+        public int collection_cycles;
+        /// <summary>number of seconds per contraction during data collection</summary>
+        public int contraction_time;
+        /// <summary>number of seconds for relaxation during data collection</summary>
+        public int relaxation_time;
 
         public void Clear()
         {
@@ -65,7 +74,7 @@ namespace RealTimePatternRec.PatternRec
         public void SetInputTypes(List<Tuple<string, int>> map)
         {
             input_types.Clear();
-            for (int i=0; i<input_labels.Count; i++)
+            for (int i = 0; i < input_labels.Count; i++)
             {
                 int value = 0;
                 foreach (Tuple<string, int> pair in map)
@@ -79,7 +88,11 @@ namespace RealTimePatternRec.PatternRec
             }
         }
 
-        public void SetInputActiveFlags(bool flag)
+        /// <summary>
+        /// sets all input active flags
+        /// </summary>
+        /// <param name="flag"></param>
+        public void SetAllInputActiveFlags(bool flag)
         {
             input_active_flags.Clear();
             for (int i = 0; i < input_labels.Count; i++)
@@ -181,48 +194,16 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
-    public static class Fiters
-    {
-        static public List<double> MinMaxScaling(List<double> raw_values)
-        {
-            List<double> filtered_values = new List<double>();
-
-            double min_value = raw_values.Min();
-            double max_value = raw_values.Max();
-
-            for (int i = 0; i < raw_values.Count; i++)
-            {
-                double new_value = (raw_values[i] - min_value) / (max_value - min_value);
-                filtered_values.Add(new_value);
-            }
-            return filtered_values;
-        }
-
-        static public List<double> ZeroCentering(List<double> raw_values)
-        {
-            List<double> filtered_values = new List<double>();
-
-            double mean_value = raw_values.Average();
-
-            for (int i = 0; i < raw_values.Count; i++)
-            {
-                double new_value = raw_values[i] - mean_value;
-                filtered_values.Add(new_value);
-            }
-            return filtered_values;
-        }
-    }
-
     /// <summary>
-    /// static class of EMG and other feature mapping methods for time series data structured as Lists
+    /// static class of window based feature mapping methods for time series data structured as Lists
     /// </summary>
-    /// 
-    // list of sources:
-    // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7250028/
-    // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3821366/
-    // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5017469/
-    // https://doi.org/10.1016/j.eswa.2012.01.102
-
+    /// <para>
+    /// list of sources:
+    /// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7250028/
+    /// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3821366/
+    /// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5017469/
+    /// https://doi.org/10.1016/j.eswa.2012.01.102
+    /// </para>
     public static class Features
     {
 
@@ -381,7 +362,7 @@ namespace RealTimePatternRec.PatternRec
                     }
                     else
                     {
-                        w = 4*(j-window_size_n)/window_size_n;
+                        w = 4 * (j - window_size_n) / window_size_n;
                     }
                     sum += (w * Math.Abs(sub_window[j]));
                 }
@@ -501,9 +482,9 @@ namespace RealTimePatternRec.PatternRec
             {
                 List<double> sub_window = raw_values.GetRange(i, window_size_n);
                 double length = 0;
-                for (int j=1; j<sub_window.Count; j++)
+                for (int j = 1; j < sub_window.Count; j++)
                 {
-                    length += Math.Abs(sub_window[j] - sub_window[j-1]);
+                    length += Math.Abs(sub_window[j] - sub_window[j - 1]);
                 }
                 filtered_values.Add(length);
             }
@@ -542,52 +523,171 @@ namespace RealTimePatternRec.PatternRec
     }
 
     /// <summary>
-    /// class to hold all pattern recognition model information and capabilities
+    /// static class of various scaling techniques for preprocessing data.  These functions are designed for use with the "scaler_pipeline_func" delegate.
+    /// since the information required(min_values, max_values, and mean_values) will change after each function is performed, only one of these functions should be called
     /// </summary>
-    public class Model
+    public static class Scalers
     {
-        public Data data;
-        public dataLogger logger;
-
-        public int window_time;
-        public int window_overlap; 
-        public int window_size_n;   // number of timesteps per window
-        public int window_overlap_n;    // number of timesteps to overalp
-        public int window_n;    // number of windows per model input
-        public double train_test_split;
-        public double accuracy;
-
-        //public bool modelFlag = false;
-        public bool realtimeFlag = false;
-        //public string model_type;
-        public Dictionary<string, string> model_params;
-
-        public delegate List<double> pipeline_func(List<double> data_);
-
-        public List<pipeline_func> generic_feature_pipeline = new List<pipeline_func>();
-        public List<pipeline_func> emg_feature_pipeline = new List<pipeline_func>();
-        public List<string> generic_feature_pipeline_titles = new List<string>();
-        public List<string> emg_feature_pipeline_titles = new List<string>();
-
-        public List<pipeline_func> generic_filter_pipeline = new List<pipeline_func>();
-        public List<pipeline_func> emg_filter_pipeline = new List<pipeline_func>();
-        public List<string> generic_filter_pipeline_titles = new List<string>();
-        public List<string> emg_filter_pipeline_titles = new List<string>();
-
-        public string model_save_filepath;
-        public dynamic learner;
-
-        public IPredictor model;
-
-        public Model()
+        /// <summary>
+        /// performs both MinMaxScaling and ZeroCentering simultaneously to avoid the need to recalculate each channel's min/max/mean values after each scaling function independently.
+        /// (i.e. the min, max, and mean values change after zero shifting, or after min max scaling)
+        /// </summary>
+        /// <param name="raw_values"></param>
+        /// <param name="min_values"></param>
+        /// <param name="max_values"></param>
+        /// <param name="mean_values"></param>
+        /// <param name="channel_num"></param>
+        /// <returns></returns>
+        static public List<double> MinMaxZeroCenter(List<double> raw_values, List<double> min_values, List<double> max_values, List<double> mean_values, int channel_num)
         {
-            data = new Data();
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i < raw_values.Count; i++)
+            {
+                double new_value = ((raw_values[i] - min_values[channel_num]) / (max_values[channel_num] - min_values[channel_num])) - 0.5;
+                filtered_values.Add(new_value);
+            }
+
+            return filtered_values;
         }
 
-        public List<List<double>> map_features(List<List<double>> temp_inputs, List<int> input_types, List<bool> input_active_flags)
+        /// <summary>
+        /// scales all inputs to a value between 0 (minimum) and 1 (maximum)
+        /// </summary>
+        /// <param name="raw_values"></param>
+        /// <param name="min_values">list of minimum values for each input signal</param>
+        /// <param name="max_values">list of maximum values for each input signal</param>
+        /// <param name="channel_num">input signal number, used to select which min_value and which max_value to use for scaling</param>
+        /// <returns></returns>
+        static public List<double> MinMaxScaling(List<double> raw_values, List<double> min_values, List<double> max_values, int channel_num)
         {
-            // map inputs "temp_inputs" to features using the set "emg_feature_pipeline" and "generic_feature_pipeline"
-            // function lists.  Also requires that "data.input_types" are set and "data.input_active_flags" are set
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i < raw_values.Count; i++)
+            {
+                double new_value = (raw_values[i] - min_values[channel_num]) / (max_values[channel_num] - min_values[channel_num]);
+                filtered_values.Add(new_value);
+            }
+
+            return filtered_values;
+        }
+
+        /// <summary>
+        /// centers all inputs to have a mean value of 0
+        /// </summary>
+        /// <param name="raw_values"></param>
+        /// <param name="mean_values">list of mean values for each input signal</param>
+        /// <param name="channel_num">input signal number, used to select which min_value and which max_value to use for scaling</param>
+        /// <returns></returns>
+        static public List<double> ZeroCentering(List<double> raw_values, List<double> mean_values, int channel_num)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i < raw_values.Count; i++)
+            {
+                double new_value = raw_values[i] - mean_values[channel_num];
+                filtered_values.Add(new_value);
+            }
+
+            return filtered_values;
+        }
+    }
+
+    /// <summary>
+    /// utilizes Scalers, Features, and Filters functions to create a pipeline mapping raw input signals to features
+    /// </summary>
+    public class Mapper
+    {
+        /// <summary>number of timesteps per window</summary>
+        public int window_size_n;
+        /// <summary>number of timesteps to overlap</summary>
+        public int window_overlap_n;    
+        /// <summary>number of windows to use per model input</summary>
+        public int window_n;
+
+        /// <summary>
+        /// delegate for Feature functions
+        /// </summary>
+        /// <param name="data_">input signal</param>
+        /// <returns>features from input signal</returns>
+        public delegate List<double> feature_pipeline_func(List<double> data_);
+
+        /// <summary>list of Feature functions pipeline will iterate through for generic signals</summary>
+        public List<feature_pipeline_func> generic_feature_pipeline = new List<feature_pipeline_func>();
+        /// <summary>list of Feature functions pipeline will iterate through for emg signals</summary>
+        public List<feature_pipeline_func> emg_feature_pipeline = new List<feature_pipeline_func>();
+        /// <summary>list of Feature function keywords for generic signals</summary>
+        public List<string> generic_feature_pipeline_titles = new List<string>();
+        /// <summary>list of Feature function keywords for emg signals</summary>
+        public List<string> emg_feature_pipeline_titles = new List<string>();
+
+        /// <summary>
+        /// delegate for Scaler functions
+        /// </summary>
+        /// <param name="data_">input signal</param>
+        /// <param name="channel_num_">input channel num, used for selecting which min/max/mean value to use fo scaling</param>
+        /// <returns></returns>
+        public delegate List<double> scaler_pipeline_func(List<double> data_, int channel_num_);
+
+        /// <summary>list of scaler functions pipeline will iterate through for generic signals</summary>
+        public List<scaler_pipeline_func> generic_scaler_pipeline = new List<scaler_pipeline_func>();
+        /// <summary>list of scaler functions pipeline will iterate through for emg signals</summary>
+        public List<scaler_pipeline_func> emg_scaler_pipeline = new List<scaler_pipeline_func>();
+        /// <summary>list of Scaler function keywords for generic signals</summary>
+        public List<string> generic_scaler_pipeline_titles = new List<string>();
+        /// <summary>list of Scaler function keywords for emg signals</summary>
+        public List<string> emg_scaler_pipeline_titles = new List<string>();
+
+        // variables required for Scalers
+        public List<double> max_values;
+        public List<double> min_values;
+        public List<double> mean_values;
+
+        public Mapper()
+        {
+            return;
+        }
+
+        /// <summary>
+        /// Apply all Scaler functions in scaler pipelines to both generic and emg signals
+        /// </summary>
+        /// <param name="raw_inputs">raw signals</param>
+        /// <param name="input_types">signal types (0 for generic, 1 for emg)</param>
+        /// <param name="input_active_flags">indicates whether each signal is being used (true/false)</param>
+        /// <returns></returns>
+        public List<List<double>> scale_signals(List<List<double>> raw_inputs, List<int> input_types, List<bool> input_active_flags)
+        {
+            List<List<double>> scaled_values = new List<List<double>>(raw_inputs);
+
+            for (int i = 0; i < input_types.Count; i++)
+            {
+                if (input_types[i] == 0 && input_active_flags[i] == true)
+                {
+                    foreach (scaler_pipeline_func f in generic_scaler_pipeline)
+                    {
+                        scaled_values[i] = (f(scaled_values[i], i));
+                    }
+                }
+                else if (input_types[i] == 1 && input_active_flags[i] == true)
+                {
+                    foreach (scaler_pipeline_func f in emg_scaler_pipeline)
+                    {
+                        scaled_values[i] = (f(scaled_values[i], i));
+                    }
+                }
+            }
+            return scaled_values;
+        }
+
+        /// <summary>
+        /// Apply all Feature functions in feature pipelines to both generic and emg signals
+        /// </summary>
+        /// <param name="raw_inputs">raw signals</param>
+        /// <param name="input_types">signal types (0 for generic, 1 for emg)</param>
+        /// <param name="input_active_flags">indicates whether each signal is being used (true/false)</param>
+        /// <returns></returns>
+        public List<List<double>> map_features(List<List<double>> raw_inputs, List<int> input_types, List<bool> input_active_flags)
+        {
 
             List<List<double>> temp_features = new List<List<double>>();
 
@@ -595,99 +695,35 @@ namespace RealTimePatternRec.PatternRec
             {
                 if (input_types[i] == 0 && input_active_flags[i] == true)
                 {
-                    foreach (Model.pipeline_func f in generic_feature_pipeline)
+                    foreach (feature_pipeline_func f in generic_feature_pipeline)
                     {
-                        temp_features.Add(f(temp_inputs[i]));
+                        temp_features.Add(f(raw_inputs[i]));
                     }
                 }
                 else if (input_types[i] == 1 && input_active_flags[i] == true)
                 {
-                    foreach (Model.pipeline_func f in emg_feature_pipeline)
+                    foreach (feature_pipeline_func f in emg_feature_pipeline)
                     {
-                        temp_features.Add(f(temp_inputs[i]));
+                        temp_features.Add(f(raw_inputs[i]));
                     }
                 }
             }
 
             return temp_features;
-        }  
-
-        public void map_features_training()
-        {
-            data.features.Clear();
-            data.feature_outputs.Clear();
-
-            // get indices of output changes
-            List<int> output_change_indices = new List<int>();
-            output_change_indices.Add(0);
-            int cur_output = data.outputs[0];
-            for (int i = 1; i < data.outputs.Count; i++)
-            {
-                if (cur_output != data.outputs[i])
-                {
-                    output_change_indices.Add(i);
-                    cur_output = data.outputs[i];
-                }
-            }
-            output_change_indices.Add(data.outputs.Count);
-
-            int start_ind = output_change_indices[0];
-            for (int i = 1; i < output_change_indices.Count; i++)
-            {
-                int output_value = data.outputs[output_change_indices[i - 1]];
-                int end_ind = output_change_indices[i];
-
-                List<List<double>> temp_input = Data.transpose_list_list(Data.transpose_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
-                List<List<double>> temp_features = map_features(temp_input, data.input_types, data.input_active_flags);
-
-                if (data.features.Count == 0)
-                {
-                    for (int j = 0; j < temp_features.Count; j++)
-                    {
-                        data.features.Add(new List<double>());
-                    }
-                }
-                for (int j = 0; j < temp_features.Count; j++)
-                {
-                    data.features[j].AddRange(temp_features[j]);
-                }
-
-                data.feature_outputs.AddRange(Enumerable.Repeat(output_value, temp_features[0].Count));
-                start_ind = end_ind;
-            }
         }
 
-        public void train_model()
+        public List<List<double>> map_all(List<List<double>> raw_inputs, List<int> input_types, List<bool> input_active_flags)
         {
-            // map inputs to features and shuffle
-            map_features_training();
-            Data.shuffle_training_data(data.features, data.feature_outputs);
+            List<List<double>> scaled_inputs = scale_signals(raw_inputs, input_types, input_active_flags);
+            List<List<double>> features = map_features(scaled_inputs, input_types, input_active_flags);
 
-            // split to test/train set
-            List<List<double>> features_rows = Data.transpose_list_list(data.features);
-            int N_train = (int)(features_rows.Count * (1 - train_test_split));
-
-            List<List<double>> training_features = features_rows.GetRange(0, N_train);
-            List<int> training_outputs = data.feature_outputs.GetRange(0, N_train);
-
-            List<List<double>> testing_features = features_rows.GetRange(N_train, features_rows.Count - N_train);
-            List<int> testing_outputs = data.feature_outputs.GetRange(N_train, features_rows.Count - N_train);
-
-            // train model
-            model.train(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
-
-            // assess model
-            int[] answers = new int[testing_features.Count];
-            for (int i=0; i<testing_features.Count; i++)
-            {
-                double[] scores = model.predict(testing_features[i].ToArray());
-                answers[i] = scores.IndexOf(scores.Max());
-            }
-            bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
-            accuracy = (double)correct.Sum() / correct.Length;
+            return features;
         }
     }
 
+    /// <summary>
+    /// Predictor interface to standardize implemented predictors
+    /// </summary>
     public interface IPredictor
     {
         string model_type { get; set; }
@@ -698,14 +734,22 @@ namespace RealTimePatternRec.PatternRec
         void load(string filepath);
     }
 
-    public class AccordSVMGaussianModel:IPredictor
+    /// <summary>
+    /// SVM predictor with gaussian kernel using model from ACCORD.NET library
+    /// </summary>
+    public class AccordSVMGaussianModel : IPredictor
     {
-        public MulticlassSupportVectorLearning<Gaussian> teacher;
+        /// <summary>ACCORD.NET model</summary>
         public MulticlassSupportVectorMachine<Gaussian> learner;
+        /// <summary>type of model</summary>
         public string model_type { get; set; } = "svmgaussian";
+        /// <summary>SVM hyperparameter</summary>
         public double gamma;
+        /// <summary>SVM hyperparameter</summary>
         public double complexity;
+        /// <summary>if true ACCORD.NET will autoestimate gamma and complexity</summary>
         public bool autoestimate = true;
+        /// <summary>indicates model has been trained</summary>
         public bool is_trained { get; set; } = false;
 
         public AccordSVMGaussianModel()
@@ -713,8 +757,14 @@ namespace RealTimePatternRec.PatternRec
             return;
         }
 
+        /// <summary>
+        /// trains model
+        /// </summary>
+        /// <param name="inputs">input features</param>
+        /// <param name="outputs">ground truth classes</param>
         public void train(double[][] inputs, int[] outputs)
         {
+            MulticlassSupportVectorLearning<Gaussian> teacher;
 
             if (autoestimate)
             {
@@ -744,23 +794,34 @@ namespace RealTimePatternRec.PatternRec
             is_trained = true;
         }
 
+        /// <summary>
+        /// predicts output
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public double[] predict(double[] input)
         {
             double[] results = learner.Scores(input);
             return results;
         }
 
-
+        /// <summary>
+        /// serializes model to a .bin file and deletes model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void save(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
             string new_filepath = filepath.Substring(0, ind) + ".bin";
             Serializer.Save(learner, new_filepath);
 
-            teacher = null;
             learner = null;
         }
 
+        /// <summary>
+        /// deserializes .bin file into model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void load(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
@@ -770,13 +831,20 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
+    /// <summary>
+    /// SVM predictor with gaussian kernel using model from ACCORD.NET library
+    /// </summary>
     public class AccordSVMLinearModel : IPredictor
     {
-        public MulticlassSupportVectorLearning<Linear> teacher;
+        /// <summary>ACCORD.NET model</summary>
         public MulticlassSupportVectorMachine<Linear> learner;
+        /// <summary>type of model</summary>
         public string model_type { get; set; } = "svmlinear";
+        /// <summary>SVM hyperparameter</summary>
         public double complexity;
+        /// <summary>if true ACCORD.NET will autoestimate gamma and complexity</summary>
         public bool autoestimate = true;
+        /// <summary>indicates model has been trained</summary>
         public bool is_trained { get; set; } = false;
 
         public AccordSVMLinearModel()
@@ -784,8 +852,15 @@ namespace RealTimePatternRec.PatternRec
             return;
         }
 
+        /// <summary>
+        /// trains model
+        /// </summary>
+        /// <param name="inputs">input features</param>
+        /// <param name="outputs">ground truth classes</param>
         public void train(double[][] inputs, int[] outputs)
         {
+            MulticlassSupportVectorLearning<Linear> teacher;
+
             if (autoestimate)
             {
                 teacher = new MulticlassSupportVectorLearning<Linear>()
@@ -811,22 +886,34 @@ namespace RealTimePatternRec.PatternRec
             is_trained = true;
         }
 
+        /// <summary>
+        /// predicts output
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public double[] predict(double[] input)
         {
             double[] results = learner.Scores(input);
             return results;
         }
 
+        /// <summary>
+        /// serializes model to a .bin file and deletes model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void save(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
             string new_filepath = filepath.Substring(0, ind) + ".bin";
             Serializer.Save(learner, new_filepath);
 
-            teacher = null;
             learner = null;
         }
 
+        /// <summary>
+        /// deserializes .bin file into model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void load(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
@@ -836,13 +923,16 @@ namespace RealTimePatternRec.PatternRec
         }
     }
 
+    /// <summary>
+    /// LDA predictor using model from ACCORD.NET library
+    /// </summary>
     public class AccordLDAModel : IPredictor
     {
-        public LinearDiscriminantAnalysis teacher;
+        /// <summary>ACCORD.NET model</summary>
         public LinearDiscriminantAnalysis.Pipeline learner;
+        /// <summary>type of model</summary>
         public string model_type { get; set; } = "lda";
-        public double complexity;
-        public bool autoestimate = true;
+        /// <summary>indicates model has been trained</summary>
         public bool is_trained { get; set; } = false;
 
         public AccordLDAModel()
@@ -850,29 +940,46 @@ namespace RealTimePatternRec.PatternRec
             return;
         }
 
+        /// <summary>
+        /// trains model
+        /// </summary>
+        /// <param name="inputs">input features</param>
+        /// <param name="outputs">ground truth classes</param>
         public void train(double[][] inputs, int[] outputs)
         {
-            teacher = new LinearDiscriminantAnalysis();
+            LinearDiscriminantAnalysis teacher = new LinearDiscriminantAnalysis();
             learner = teacher.Learn(inputs, outputs);
             is_trained = true;
         }
 
+        /// <summary>
+        /// predicts output
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public double[] predict(double[] input)
         {
             double[] results = learner.Scores(input);
             return results;
         }
 
+        /// <summary>
+        /// serializes model to a .bin file and deletes model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void save(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
             string new_filepath = filepath.Substring(0, ind) + ".bin";
             Serializer.Save(learner, new_filepath);
 
-            teacher = null;
             learner = null;
         }
 
+        /// <summary>
+        /// deserializes .bin file into model
+        /// </summary>
+        /// <param name="filepath"></param>
         public void load(string filepath)
         {
             int ind = filepath.LastIndexOf('.');
@@ -890,22 +997,29 @@ namespace RealTimePatternRec.PatternRec
     /// Right now, the primitive_type variable must match both the input and output layer primitive data type.
     /// </para>
     /// </summary>
-    public class ONNXModel:IPredictor
+    public class ONNXModel : IPredictor
     {
+        /// <summary>type of model</summary>
         public string model_type { get; set; } = "onnx";
-
+        /// <summary>path to onnx file</summary>
         public string filepath;
+        /// <summary>number of inputs into onnx model</summary>
         public int input_num;
+        /// <summary>number of outputs from onnx model</summary>
         public int output_num;
+        /// <summary>name of input layer name, see netron.app to find out</summary>
         public string input_layer_name;
+        /// <summary>name of output layer name, see netron.app to find out</summary>
         public string output_layer_name;
+        /// <summary>name of input/output primitive type, see netron.app to find out</summary>
         public string primitive_type;
-
-        SchemaDefinition input_schemadef;
-        SchemaDefinition output_schemadef;
-        Microsoft.ML.Transforms.Onnx.OnnxTransformer transformer;
-        MLContext mlContext = new MLContext();
+        /// <summary>indicates model has been trained</summary>
         public bool is_trained { get; set; } = false;
+
+        private SchemaDefinition input_schemadef;
+        private SchemaDefinition output_schemadef;
+        private Microsoft.ML.Transforms.Onnx.OnnxTransformer transformer;
+        private MLContext mlContext = new MLContext();
 
         public ONNXModel()
         {
@@ -955,8 +1069,8 @@ namespace RealTimePatternRec.PatternRec
             input_schemadef[0].ColumnName = input_layer_name; // adjust name of input schema to match .onnx model
 
             // define output schema
-            output_schemadef = SchemaDefinition.Create(typeof(DynamicOutputType<Toutput>)); 
-            vectorItemType = ((VectorDataViewType)output_schemadef[0].ColumnType).ItemType; 
+            output_schemadef = SchemaDefinition.Create(typeof(DynamicOutputType<Toutput>));
+            vectorItemType = ((VectorDataViewType)output_schemadef[0].ColumnType).ItemType;
             output_schemadef[0].ColumnType = new VectorDataViewType(vectorItemType, output_num);   // adjust size of output schema to match .onnx model
             output_schemadef[0].ColumnName = output_layer_name;   // adjust name of output schema to match .onnx model
 
@@ -1037,7 +1151,11 @@ namespace RealTimePatternRec.PatternRec
             }
         }
 
-        // onnx models are preloaded, and don't need to be trained.  This function exists to satisfy interface requirements
+        /// <summary>
+        /// onnx models are preloaded, and don't need to be trained.  This function exists to satisfy interface requirements
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <param name="outputs"></param>
         public void train(double[][] inputs, int[] outputs)
         {
             return;
@@ -1053,7 +1171,8 @@ namespace RealTimePatternRec.PatternRec
             new_filepath = new_filepath.Substring(0, ind);
             new_filepath = new_filepath + ".onnx";
 
-            if (File.Exists(filepath)){
+            if (File.Exists(filepath))
+            {
                 File.Copy(filepath, new_filepath, true);
             }
             transformer = null;
@@ -1079,18 +1198,303 @@ namespace RealTimePatternRec.PatternRec
                 load_onnx<double, double>(model_filepath, input_num, output_num, input_layer_name, output_layer_name);
             }
         }
-}
+    }
+
+    /// <summary>
+    /// class to hold all pattern recognition model information and capabilities
+    /// </summary>
+    public class Model
+    {
+        public Data data;
+        public DataLogger logger;
+        public Mapper mapper;
+        public IPredictor model;
+
+        /// <summary>percentage of total data to use for testing data</summary>
+        public double train_test_split;
+        /// <summary>accuracy of trained model</summary>
+        public double accuracy;
+        /// <summary>flag to indicate whether real-time is enabled</summary>
+        public bool realtimeFlag = false;
+
+        public Model()
+        {
+            data = new Data();
+            mapper = new Mapper();
+            logger = new DataLogger();
+        }
+
+        /// <summary>
+        /// runs all of the training data through the Mapper pipeline and stores features and outputs in the Data object
+        /// </summary>
+        public void map_trainingdata_to_features()
+        {
+            // clear features
+            data.features.Clear();
+            data.feature_outputs.Clear();
+
+            // get indices of where the output changes to split up data, since windowing technique will overlap into various classes if data is not split up
+            List<int> output_change_indices = new List<int>();
+            output_change_indices.Add(0);
+            int cur_output = data.outputs[0];
+            for (int i = 1; i < data.outputs.Count; i++)
+            {
+                if (cur_output != data.outputs[i])
+                {
+                    output_change_indices.Add(i);
+                    cur_output = data.outputs[i];
+                }
+            }
+            output_change_indices.Add(data.outputs.Count);
+
+            int start_ind = output_change_indices[0];
+
+            // put all inputs through mapper in sections corresponding to output changes
+            for (int i = 1; i < output_change_indices.Count; i++)
+            {
+                int output_value = data.outputs[output_change_indices[i - 1]];
+                int end_ind = output_change_indices[i];
+
+                List<List<double>> temp_input = Data.transpose_list_list(Data.transpose_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
+                //List<List<double>> temp_input_scaled = mapper.scale_signals(temp_input, data.input_types, data.input_active_flags);
+                //List<List<double>> temp_features = mapper.map_features(temp_input_scaled, data.input_types, data.input_active_flags);
+                List<List<double>> temp_features = mapper.map_all(temp_input, data.input_types, data.input_active_flags);
+
+                // initialize features to size fitting the number of computed features
+                if (data.features.Count == 0)
+                {
+                    for (int j = 0; j < temp_features.Count; j++)
+                    {
+                        data.features.Add(new List<double>());
+                    }
+                }
+
+                // add computed features to features variable
+                for (int j = 0; j < temp_features.Count; j++)
+                {
+                    data.features[j].AddRange(temp_features[j]);
+                }
+
+                // add outputs corresponding to features
+                data.feature_outputs.AddRange(Enumerable.Repeat(output_value, temp_features[0].Count));
+                start_ind = end_ind;
+            }
+        }
+
+        /// <summary>
+        /// Splits data into training and testing set, trains model, and calculates accuracy
+        /// </summary>
+        public void train_model()
+        {
+            // map inputs to features and shuffle
+            map_trainingdata_to_features();
+            Data.shuffle_training_data(data.features, data.feature_outputs);
+
+            // split to test/train set
+            List<List<double>> features_rows = Data.transpose_list_list(data.features);
+            int N_train = (int)(features_rows.Count * (1 - train_test_split));
+
+            List<List<double>> training_features = features_rows.GetRange(0, N_train);
+            List<int> training_outputs = data.feature_outputs.GetRange(0, N_train);
+
+            List<List<double>> testing_features = features_rows.GetRange(N_train, features_rows.Count - N_train);
+            List<int> testing_outputs = data.feature_outputs.GetRange(N_train, features_rows.Count - N_train);
+
+            // train model
+            model.train(training_features.Select(a => a.ToArray()).ToArray(), training_outputs.ToArray());
+
+            // assess model
+            int[] answers = new int[testing_features.Count];
+            for (int i=0; i<testing_features.Count; i++)
+            {
+                double[] scores = model.predict(testing_features[i].ToArray());
+                answers[i] = scores.IndexOf(scores.Max());
+            }
+            bool[] correct = answers.Zip(testing_outputs.ToArray(), (x, y) => x == y).ToArray<bool>();
+            accuracy = (double)correct.Sum() / correct.Length;
+        }
+
+        /// <summary>
+        /// predicts scores for a single input
+        /// </summary>
+        /// <param name="inputs_"></param>
+        /// <returns></returns>
+        public double[] get_scores(List<List<double>> input)
+        {
+            List<List<double>> features_ = mapper.map_all(input, data.input_types, data.input_active_flags);
+            double[] features_flattenned = Data.transpose_list_list(features_).SelectMany(i => i).ToArray();
+            double[] scores = model.predict(features_flattenned);
+            return scores;
+        }
+    }
 
     /// <summary>
     /// class used to hold random tests I ran during development, will delete after
     /// </summary>
     public static class Tests
     {
+        public static DataLogger DataLoggerBasicUsage()
+        {
+
+            DataLogger logger = new DataLogger();   // create logger
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string dataFilePath = Path.Combine(solutionFilePath, @"data\dataloggerdemo.csv");
+
+            logger.init_file(dataFilePath); // create filewriter
+            logger.freq = 100;   // set frequency to 100Hz
+            logger.signal_num = 8;  // set number of signals to 8
+            get_data_f_func<double> f = () => data_grabber(logger.signal_num);   // create data grabbing function
+            logger.get_data_f = f;  // set data grabbing function
+
+            logger.start(); // start thread
+            logger.recordflag = true; // start recording
+            Thread.Sleep(3000); // record for 3 seconds
+            logger.recordflag = false;  // stop recording
+            logger.stop();  // stop thread
+            logger.close_file();    // close file
+
+            return logger;
+        }
+
+        public static PR_Logger PR_LoggerBasicUsage()
+        {
+
+            PR_Logger PR_logger = new PR_Logger();
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
+            string jsonfilepath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
+
+            PR_logger.init_file(dataFilePath);  // create filewriter
+            PR_logger.freq = 100;    // set frequency to 100Hz
+            PR_logger.signal_num = 8;   // set number of signals to 8
+            get_data_f_func<double> f = () => data_grabber(PR_logger.signal_num);   // create data grabbing function to grab 8 inputs
+            PR_logger.get_data_f = f;  // set data grabbing function
+
+            PR_logger.collection_cycles = 1;    // set number of colleciton cycles
+            PR_logger.contraction_time = 1000;   // set contraction time per output class to 500ms
+            PR_logger.relax_time = 100;     // set relaxation time between outputs to 100ms
+            PR_logger.output_labels = new List<string> { "rest", "extension", "flexion" };  // set output labels
+            PR_logger.train_output_num = PR_logger.output_labels.Count; // set number of outputs
+
+            PR_logger.start_data_collection();  // start data collection
+            while (PR_logger.trainFlag) { PR_logger.PR_tick(); };
+
+            // put all relevant information to Data object and save as JSON for future pattern rec use
+            Data data = new Data();
+            data.freq = PR_logger.freq;
+            data.input_labels = new List<string> { "ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8" };
+            data.input_num = data.input_labels.Count;
+            data.output_labels = PR_logger.output_labels;
+            data.output_num = PR_logger.output_labels.Count;
+            data.collection_cycles = PR_logger.collection_cycles;
+            data.relaxation_time = PR_logger.relax_time;
+            data.contraction_time = PR_logger.contraction_time;
+            data.SetAllInputActiveFlags(true);  // set all inputs to active
+            data.input_types = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1 };
+            ObjLogger.saveObjJson(jsonfilepath, data);
+
+            return PR_logger;
+        }
+
+        public static Mapper MapperBasicUsage()
+        {
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string dataSettingsFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
+            string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
+
+            // load data (this file has only emg inputs)
+            Data data = ObjLogger.loadObjJson<Data>(dataSettingsFilePath);
+            data.LoadFileToListCols(dataFilePath);
+
+            // create mapping object
+            Mapper mapper = new Mapper();
+            mapper.window_size_n = 5;
+            mapper.window_overlap_n = 2;
+            mapper.window_n = 1;
+
+            // add scalers to pipeline for emg inputs
+            mapper.mean_values = new List<double>();
+            mapper.max_values = new List<double>();
+            mapper.min_values = new List<double>();
+
+            foreach (List<double> channel in data.inputs)
+            {
+                mapper.mean_values.Add(channel.Average());
+                mapper.max_values.Add(channel.Max());
+                mapper.min_values.Add(channel.Min());
+            }
+
+            mapper.emg_scaler_pipeline.Add((x, i) => Scalers.MinMaxZeroCenter(x, mapper.min_values, mapper.max_values, mapper.mean_values, i));
+
+            // add features to pipeling for emg inputs
+            mapper.emg_feature_pipeline.Add(x => Features.RAW(x, mapper.window_size_n, mapper.window_overlap_n));
+            mapper.emg_feature_pipeline.Add(x => Features.MAV(x, mapper.window_size_n, mapper.window_overlap_n));
+            mapper.emg_feature_pipeline.Add(x => Features.VAR(x, mapper.window_size_n, mapper.window_overlap_n));
+
+            // get raw values
+            List<List<double>> raw_values = data.inputs;
+            List<int> input_types = data.input_types;
+            List<bool> input_active_flags = data.input_active_flags;
+
+            // get filtered values
+            List<List<double>> filtered_values = mapper.scale_signals(raw_values, input_types, input_active_flags);
+
+            // get features using filtered values
+            List<List<double>> features = mapper.map_features(filtered_values, input_types, input_active_flags);
+
+            return mapper;
+        }
+
+        public static Model ModelBasicUsage()
+        {
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string dataSettingsFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
+            string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
+            string mapperSettingsFilePath = Path.Combine(solutionFilePath, @"data\mappingdemo.json");
+
+            Model model = new Model();  // create model
+            model.data = ObjLogger.loadObjJson<Data>(dataSettingsFilePath); // load data settings from DataLogger file 
+            model.data.LoadFileToListCols(dataFilePath);    // load data from corresponding data file
+            model.mapper = MapperBasicUsage();  // set up mapping
+            model.model = new AccordLDAModel(); // create predictor
+
+            model.train_test_split = 0.9;   // set test/train split
+            model.train_model();    // train model
+
+            // create random garbage input
+            List<List<double>> random_input = new List<List<double>>();
+            for (int i = 0; i < model.data.input_num; i++)
+            {
+                List<double> temp_input = new List<double>();
+                for (int j = 0; j < model.mapper.window_size_n; j++)
+                {
+                    temp_input.Add(0.1);
+                }
+                random_input.Add(temp_input);
+            }
+
+            double[] scores = model.get_scores(random_input);   // predict score
+
+            return model;
+        }
+
+        private static List<double> data_grabber(int datanum)
+        {
+            List<double> data = new List<double>();
+            for (int i = 0; i < datanum; i++)
+            {
+                Random rng = new Random();
+                data.Add(rng.Next());
+            }
+            return data;
+        }
+
         public static void ONNXTest()
         {
-            Console.WriteLine("Testing ONNX model");
-        
-            string onnxfilepath = @"C:\Users\Rico\Desktop\garbage data\generalized_classifier_v3.onnx";
+
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
+
             ONNXModel onnxmodel = new ONNXModel();
             onnxmodel.primitive_type = "float";
             onnxmodel.input_num = 256;
@@ -1130,12 +1534,12 @@ namespace RealTimePatternRec.PatternRec
 
         public static void ONNXSettingsTest()
         {
-            Console.WriteLine("Testing loading of ONNX model settings");
 
-            string settings_filepath = @"C:\Users\Rico\Desktop\garbage data\generalized_classifier_v3.json";
-            string onnxfilepath = @"C:\Users\Rico\Desktop\garbage data\generalized_classifier_v3.onnx";
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string modelSettingsFilePath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.json");
+            string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
 
-            Model model = ObjLogger.loadObjJson<Model>(settings_filepath);
+            Model model = ObjLogger.loadObjJson<Model>(modelSettingsFilePath);
             model.model.load(onnxfilepath);
 
             // input data from rest class (fourth output)
@@ -1198,8 +1602,7 @@ namespace RealTimePatternRec.PatternRec
             double[] scores = learner.Score(inputs);
         }
 
-
-        public static void generate_random_data(string filepath, int input_num, int num_lines)
+        private static void generate_random_data(string filepath, int input_num, int num_lines)
         {
 
             List<List<double>> dummy_data = new List<List<double>>(); ;

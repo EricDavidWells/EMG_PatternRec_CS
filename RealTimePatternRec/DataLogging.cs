@@ -9,6 +9,11 @@ using Newtonsoft.Json;
 
 namespace RealTimePatternRec.DataLogging
 {
+    /// <summary>
+    /// delegate function used by DataLogger class to update data at fixed intervals
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public delegate List<T> get_data_f_func<T>();
 
     /// <summary>
@@ -19,7 +24,7 @@ namespace RealTimePatternRec.DataLogging
     /// </para>
     /// </summary>
     /// 
-    public class dataLogger
+    public class DataLogger
     {
         /// <summary>path to streamwriter file location</summary>
         public string filepath;
@@ -42,8 +47,7 @@ namespace RealTimePatternRec.DataLogging
         /// <summary>object to be used in lock statement while reading data from logger</summary>
         public object lockObj = new object();
 
-        protected List<double> _data;
-        /// <summary>current data</summary>
+        /// <summary>read only current data property</summary>
         public List<double> Data
         {
             get
@@ -54,8 +58,8 @@ namespace RealTimePatternRec.DataLogging
                 }
             }
         }
-        protected List<List<double>> _data_history = new List<List<double>>();
-        /// <summary>data history property</summary>
+
+        /// <summary>read only data history property</summary>
         public List<List<double>> Data_history
         {
             get
@@ -67,17 +71,21 @@ namespace RealTimePatternRec.DataLogging
             }
         }
 
-        // thread and timing variables
+        /// <summary>format specifier for converting data values from double to strings</summary>
+        protected string formatspec = "F4";
+
+        // field to hold data history
+        protected List<List<double>> _data_history = new List<List<double>>();
+        // field to hold current data
+        protected List<double> _data;
+        // variables for threading/timing
         protected float prevtime;
         protected float curtime;
         protected Thread t;
 
-        /// <summary>format specifier for converting data values from double to strings</summary>
-        protected string formatspec = "F4";
-
-        public dataLogger()
+        public DataLogger()
         {
-            // creates dataLogger object
+            // creates DataLogger object
         }
 
         /// <summary>
@@ -155,7 +163,7 @@ namespace RealTimePatternRec.DataLogging
         public void write_csv(List<string> data)
         {
             string newLine = "";
-            for (int i=0; i<data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
                 newLine += data[i] + ",";
             }
@@ -170,18 +178,6 @@ namespace RealTimePatternRec.DataLogging
         {
             file.Write(curtime.ToString(formatspec) + ',');
             write_csv(data);
-        }
-
-        /// <summary>
-        /// updates stopwatch and flips timeflag if enough time has passed to log another value
-        /// </summary>
-        public void tick()
-        {            
-            while (curtime - prevtime < 1000f / freq)
-            {
-                curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
-            }
-            prevtime = curtime;
         }
 
         /// <summary>
@@ -209,8 +205,20 @@ namespace RealTimePatternRec.DataLogging
                             _data_history[i].RemoveAt(0);
                         }
                     }
-                }           
+                }
             }
+        }
+
+        /// <summary>
+        /// updates stopwatch and flips timeflag if enough time has passed to log another value
+        /// </summary>
+        public void tick()
+        {            
+            while (curtime - prevtime < 1000f / freq)
+            {
+                curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
+            }
+            prevtime = curtime;
         }
 
         public void close()
@@ -222,9 +230,9 @@ namespace RealTimePatternRec.DataLogging
     }
 
     /// <summary>
-    /// class derived from regular dataLogger class to facilitate data collection for pattern recognition with ground truth labels
+    /// class derived from regular DataLogger class to facilitate data collection for pattern recognition with ground truth labels
     /// </summary>
-    public class PR_Logger : dataLogger
+    public class PR_Logger : DataLogger
     {
         /// <summary>current ground truth output</summary>
         public int current_output;
@@ -264,16 +272,6 @@ namespace RealTimePatternRec.DataLogging
             file.Write(curtime.ToString(formatspec) + ',');
             data.Add(current_output.ToString());
             write_csv(data);
-        }
-
-        /// <summary>
-        /// sets the class labels to train with
-        /// </summary>
-        /// <param name="outputs_">list of class labels</param>
-        public void set_outputs(List<string> outputs_)
-        {
-            output_labels = outputs_;
-            train_output_num = output_labels.Count;
         }
 
         /// <summary>
@@ -322,6 +320,7 @@ namespace RealTimePatternRec.DataLogging
             trainFlag = true;
             PR_sw.Restart();
             start_time = PR_sw.ElapsedMilliseconds;
+            start();
         }
 
         /// <summary>
@@ -329,6 +328,7 @@ namespace RealTimePatternRec.DataLogging
         /// </summary>
         public void end_data_collection()
         {
+            stop();
             close_file();
             recordflag = false;
             trainFlag = false;

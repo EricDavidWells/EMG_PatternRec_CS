@@ -81,6 +81,8 @@ namespace RealTimePatternRec.DataLogging
         // variables for threading/timing
         protected float prevtime;
         protected float curtime;
+        protected float next_tick_time;
+        
         protected Thread t;
 
         public DataLogger()
@@ -119,6 +121,7 @@ namespace RealTimePatternRec.DataLogging
             sw.Start();
             prevtime = sw.ElapsedMilliseconds;
             curtime = prevtime;
+            next_tick_time = curtime + 1000f / freq;
 
             // initiate data history
             if (historyflag)
@@ -213,14 +216,23 @@ namespace RealTimePatternRec.DataLogging
         /// updates stopwatch and flips timeflag if enough time has passed to log another value
         /// </summary>
         public void tick()
-        {            
-            while (curtime - prevtime < 1000f / freq)
+        {
+            //while (curtime - prevtime <= 1000f / freq)
+            //{
+            //    curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
+            //}
+            //prevtime = curtime;
+
+            while (curtime <= next_tick_time)
             {
                 curtime = sw.Elapsed.Ticks * 1000f / Stopwatch.Frequency;
             }
-            prevtime = curtime;
+            next_tick_time += 1000f / freq;
         }
 
+        /// <summary>
+        /// ends thread and closes file
+        /// </summary>
         public void close()
         {
             // aborts thread and deletes filewriter

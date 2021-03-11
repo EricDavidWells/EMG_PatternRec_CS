@@ -243,7 +243,7 @@ namespace RealTimePatternRec
             List<double> data = new List<double>();
             for (int i = 0; i < datanum; i++)
             {
-                Random rng = new Random();
+                Random rng = new Random(1);
                 data.Add(rng.Next());
             }
             return data;

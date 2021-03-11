@@ -1315,6 +1315,7 @@ namespace RealTimePatternRec.PatternRec
         public DataLogger logger;
         public Mapper mapper;
         public IPredictor model;
+        public PostProcessor postprocessor;
 
         /// <summary>percentage of total data to use for testing data</summary>
         public double train_test_split;
@@ -1328,6 +1329,7 @@ namespace RealTimePatternRec.PatternRec
             data = new Data();
             mapper = new Mapper();
             logger = new DataLogger();
+            postprocessor = new PostProcessor();
         }
 
         /// <summary>
@@ -1430,6 +1432,118 @@ namespace RealTimePatternRec.PatternRec
             List<List<double>> features_ = mapper.map_all(input, data.input_types, data.input_active_flags);
             double[] features_flattenned = Data.transpose_list_list(features_).SelectMany(i => i).ToArray();
             double[] scores = model.predict(features_flattenned);
+            double[] post_processed_scores = postprocessor.process(scores);
+            return post_processed_scores;
+        }
+    }
+
+    public class PostProcessor
+    {
+        int num_outputs;
+
+        Queue<int> majorityVotingQueue;
+        int majorityVotingLength;
+        public bool majorityVoteFlag = false;
+
+        List<double> velocityRampScore;
+        int velocityRampMaxCount;
+        double velocityRampIncrement;
+        public bool velocityRampFlag = false;
+
+        public PostProcessor()
+        {
+            return;
+        }
+
+        public void init_majorityVoting(int majorityVotingLength_)
+        {
+            majorityVotingLength = majorityVotingLength_;
+
+            majorityVotingQueue = new Queue<int>();
+            for (int i = 0; i < majorityVotingLength; i++)
+            {
+                majorityVotingQueue.Enqueue(0);
+            }
+
+            majorityVoteFlag = true;
+        }
+
+        public void init_velocityRamping(int num_outputs_, double velocityRampIncrement_)
+        {
+            num_outputs = num_outputs_;
+            velocityRampIncrement = velocityRampIncrement_;
+
+            velocityRampScore = new List<double>();
+            for (int i = 0; i < num_outputs; i++)
+            {
+                velocityRampScore.Add(0);
+            }
+
+            velocityRampFlag = true;
+        }
+
+        public double[] majorityVoting(double[] scores)
+        {
+            int current_output = scores.IndexOf(scores.Max());
+            
+            majorityVotingQueue.Dequeue();
+            majorityVotingQueue.Enqueue(current_output);
+            int mode = getMode(majorityVotingQueue);
+
+            // one-hot encode scores
+            for (int i = 0; i < scores.Length; i++)
+            {
+                if (i == mode)
+                {
+                    scores[i] = 1;
+                }
+                else
+                {
+                    scores[i] = 0;
+                }
+            }
+
+            return scores;
+        }
+
+        private T getMode<T>(IEnumerable<T> list)
+        {
+            T mode = list.GroupBy(i => i).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First();
+            return mode;
+        }
+
+        public double[] velocityRamp(double[] scores)
+        {
+            int current_output = scores.IndexOf(scores.Max());
+
+            for (int i=0; i< num_outputs; i++)
+            {
+                if (i == current_output)
+                {
+                    velocityRampScore[i] = Math.Min(velocityRampScore[i] + velocityRampIncrement, 1);
+                }
+                else
+                {
+                    velocityRampScore[i] = Math.Max(velocityRampScore[i] - velocityRampIncrement, 0);
+                }
+            }
+
+            return velocityRampScore.ToArray();
+        }
+
+        public double[] process(double[] scores)
+        {
+
+            if (majorityVoteFlag)
+            {
+                scores = majorityVoting(scores);
+
+            }
+            if (velocityRampFlag)
+            {
+                scores = velocityRamp(scores);
+            }
+
             return scores;
         }
     }

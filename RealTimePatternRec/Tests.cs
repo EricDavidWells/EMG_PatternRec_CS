@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;                // For save/open parameters functionality
 using System.Dynamic;
 using System.Diagnostics;
-using RealTimePatternRec.DataLogging;
 using System.Threading;
 
 using RealTimePatternRec.PatternRec;
@@ -196,21 +195,21 @@ namespace RealTimePatternRec
             string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string dataSaveFilePath = Path.Combine(solutionFilePath, @"data\filterdemo.csv");
 
-            int n_points = 200;
-            double fs = 200;
+            int n_points = 200; // number of data points
+            double fs = 200;    // sample rate (Hz)
             
             // raw data
             List<double> data = sinusoid_data_grabber(n_points, fs, new double[] { 5, 10, 60 });
             List<double> time = time_data_grabber(n_points, fs);
 
             // notch filter
-            double notch_fc = 60;
+            double notch_fc = 60;   // cutoff frequency (Hz)
             var NotchFilter = Filters.create_notch_filter(notch_fc, fs);
             List<double> notch_filtered_data = Filters.apply_filter(NotchFilter, data);
 
             // low pass filter
-            double LP_fc = 20;
-            int LP_order = 5;
+            double LP_fc = 20;  // cutoff frequency (Hz)
+            int LP_order = 5;   // filter order (number of terms)
             var LPfilter = Filters.create_lowpass_butterworth_filter(LP_fc, fs, LP_order);
             List<double> LP_filtered_data = Filters.apply_filter(LPfilter, data);
 
@@ -221,7 +220,6 @@ namespace RealTimePatternRec
             List<double> HP_filtered_data = Filters.apply_filter(HPfilter, data);
 
             // moving average filter
-            double MA_fc = 50;
             int MA_order = 10;
             var MAfilter = Filters.create_movingaverage_filter(MA_order);
             List<double> MA_filtered_data = Filters.apply_filter(MAfilter, data);

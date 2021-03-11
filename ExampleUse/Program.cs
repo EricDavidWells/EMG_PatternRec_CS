@@ -23,8 +23,8 @@ namespace ExampleUse
             //Console.WriteLine("Testing loading of ONNX model settings");
             //Tests.ONNXSettingsTest();
 
-            Console.WriteLine("Running Mapper Example");
-            Tests.MapperBasicUsage();
+            //Console.WriteLine("Running Mapper Example");
+            //Tests.MapperBasicUsage();
 
             //Console.WriteLine("Testing Data Logger Basic Usage");
             //Tests.DataLoggerBasicUsage();

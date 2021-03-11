@@ -1446,7 +1446,6 @@ namespace RealTimePatternRec.PatternRec
         public bool majorityVoteFlag = false;
 
         List<double> velocityRampScore;
-        int velocityRampMaxCount;
         double velocityRampIncrement;
         public bool velocityRampFlag = false;
 

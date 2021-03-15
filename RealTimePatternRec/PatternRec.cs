@@ -623,17 +623,6 @@ namespace RealTimePatternRec.PatternRec
             return maFilter;
         }
 
-        public static List<double> apply_filter<T>(T filter, List<double> raw_values) where T: NWaves.Filters.Base.IOnlineFilter
-        {
-            List<double> filtered_values = new List<double>();
-            for (int i=0; i<raw_values.Count; i++)
-            {
-                filtered_values.Add(filter.Process((float)raw_values[i]));
-            }
-
-            return filtered_values;
-        }
-
         public static List<double> apply_filter(NWaves.Filters.Base.IOnlineFilter filter, List<double> raw_values) 
         {
             List<double> filtered_values = new List<double>();
@@ -644,7 +633,6 @@ namespace RealTimePatternRec.PatternRec
 
             return filtered_values;
         }
-
     }
     
     /// <summary>
@@ -692,6 +680,11 @@ namespace RealTimePatternRec.PatternRec
         /// <summary>list of Scaler function keywords for emg signals</summary>
         public List<string> emg_scaler_pipeline_titles = new List<string>();
 
+        // variables required for Scalers
+        public List<double> max_values;
+        public List<double> min_values;
+        public List<double> mean_values;
+
         /// <summary>
         /// delegate for Filter functions
         /// </summary>
@@ -710,11 +703,9 @@ namespace RealTimePatternRec.PatternRec
         /// <summary>list of filter function keywords for emg signals</summary>
         public List<string> emg_filter_pipeline_titles = new List<string>();
 
-
-        // variables required for Scalers
-        public List<double> max_values;
-        public List<double> min_values;
-        public List<double> mean_values;
+        // variables required for saving filters
+        public Dictionary<string, double> emg_filter_params = new Dictionary<string, double>();
+        public Dictionary<string, double> generic_filter_params = new Dictionary<string, double>();
 
         public Mapper()
         {
@@ -783,7 +774,6 @@ namespace RealTimePatternRec.PatternRec
             return filtered_values;
         }
 
-
         /// <summary>
         /// Apply all Feature functions in feature pipelines to both generic and emg signals
         /// </summary>
@@ -819,9 +809,9 @@ namespace RealTimePatternRec.PatternRec
 
         public List<List<double>> map_all(List<List<double>> raw_inputs, List<int> input_types, List<bool> input_active_flags)
         {
-            List<List<double>> scaled_inputs = scale_signals(raw_inputs, input_types, input_active_flags);
-            List<List<double>> filtered_inputs = filter_signals(scaled_inputs, input_types, input_active_flags);
-            List<List<double>> features = map_features(filtered_inputs, input_types, input_active_flags);
+            List<List<double>> filtered_inputs = filter_signals(raw_inputs, input_types, input_active_flags);
+            List<List<double>> scaled_inputs = scale_signals(filtered_inputs, input_types, input_active_flags);
+            List<List<double>> features = map_features(scaled_inputs, input_types, input_active_flags);
 
             return features;
         }

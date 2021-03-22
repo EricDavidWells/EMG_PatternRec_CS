@@ -75,8 +75,8 @@ namespace RealTimePatternRec
             PR_logger.start_data_collection();  // start data collection
             while (PR_logger.trainFlag) { PR_logger.PR_tick(); };
 
-            // put all relevant information to Data object and save as JSON for future pattern rec use
-            Data data = new Data();
+            // put all relevant information to DataManager object and save as JSON for future pattern rec use
+            DataManager data = new DataManager();
             data.freq = PR_logger.freq;
             data.input_labels = new List<string> { "ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8" };
             data.input_num = data.input_labels.Count;
@@ -99,7 +99,7 @@ namespace RealTimePatternRec
             string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
 
             // load data (this file has only emg inputs)
-            Data data = ObjLogger.loadObjJson<Data>(dataSettingsFilePath);
+            DataManager data = ObjLogger.loadObjJson<DataManager>(dataSettingsFilePath);
             data.LoadFileToListCols(dataFilePath);
 
             // create mapping object
@@ -126,7 +126,13 @@ namespace RealTimePatternRec
             double notch_fc = 60;
             double fs = data.freq;
             var NotchFilter = Filters.create_notch_filter(notch_fc, fs);
-            mapper.emg_filter_pipeline.Add((x) => Filters.apply_filter(NotchFilter, x));
+
+            List<NWaves.Filters.Base.IOnlineFilter> notchfilters50Hz = new List<NWaves.Filters.Base.IOnlineFilter>();
+            for (int i = 0; i < data.input_num; i++)
+            {
+                notchfilters50Hz.Add(NotchFilter);
+            }
+            mapper.emg_filter_pipeline.Add((x, i) => Filters.apply_filter(notchfilters50Hz, x, i));
 
 
             // add features to pipeling for emg inputs
@@ -139,14 +145,14 @@ namespace RealTimePatternRec
             List<int> input_types = data.input_types;
             List<bool> input_active_flags = data.input_active_flags;
 
-            // get scaled values
-            List<List<double>> scaled_values = mapper.scale_signals(raw_values, input_types, input_active_flags);
-
             // get filtered values
             List<List<double>> filtered_values = mapper.filter_signals(raw_values, input_types, input_active_flags);
 
-            // get features using filtered values
-            List<List<double>> features = mapper.map_features(filtered_values, input_types, input_active_flags);
+            // get scaled values using filtered values
+            List<List<double>> scaled_values = mapper.scale_signals(filtered_values, input_types, input_active_flags);
+
+            // get features using scaled values
+            List<List<double>> features = mapper.map_features(scaled_values, input_types, input_active_flags);
 
             return mapper;
         }
@@ -159,7 +165,7 @@ namespace RealTimePatternRec
             string mapperSettingsFilePath = Path.Combine(solutionFilePath, @"data\mappingdemo.json");
 
             Model model = new Model();  // create model
-            model.data = ObjLogger.loadObjJson<Data>(dataSettingsFilePath); // load data settings from DataLogger file 
+            model.data = ObjLogger.loadObjJson<DataManager>(dataSettingsFilePath); // load data settings from DataLogger file 
             model.data.LoadFileToListCols(dataFilePath);    // load data from corresponding data file
             model.mapper = MapperBasicUsage();  // set up mapping
             model.model = new AccordLDAModel(); // create predictor
@@ -424,9 +430,5 @@ namespace RealTimePatternRec
             file.Close();
         }
 
-        private static void nothing()
-        {
-            DataLogger dl = new DataLogger();
-        }
     }
 }

@@ -186,7 +186,7 @@ namespace RealTimePatternRec.DataLogging
         /// <summary>
         /// main loop for logging thread.  waits till sample frequency specified delay before grabbing data and writing to file
         /// </summary>
-        public void thread_loop()
+        public virtual void thread_loop()
         {
             while (true)
             {

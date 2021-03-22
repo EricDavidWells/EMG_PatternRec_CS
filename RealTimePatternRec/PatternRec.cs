@@ -25,7 +25,7 @@ namespace RealTimePatternRec.PatternRec
     /// <summary>
     /// class to hold all information from a data recording session
     /// </summary>
-    public class Data
+    public class DataManager
     {
         /// <summary>timestamp data</summary>
         public List<double> timestamps = new List<double>();
@@ -591,38 +591,85 @@ namespace RealTimePatternRec.PatternRec
 
             return filtered_values;
         }
+
+        // centers all inputs to have a mean value of 0 and a standard deviation of 1
+        static public List<double> Standardize(List<double> raw_values, List<double> mean_values, List<double> stdev_values, int channel_num)
+        {
+            List<double> filtered_values = new List<double>();
+
+            for (int i = 0; i < raw_values.Count; i++)
+            {
+                double new_value = (raw_values[i] - mean_values[channel_num])/stdev_values[channel_num];
+                filtered_values.Add(new_value);
+            }
+
+            return filtered_values;
+        }
     }
 
     /// <summary>
     /// static class of various filter techniques using the NWaves library for preprocessing signals.
     /// </summary>
+    /// <para>
+    /// note that signals cannot share a single filter, as digital filters depend on previous inputs and outputs on a per-signal basis
+    /// </para>
     public static class Filters
     {
-
+        /// <summary>
+        /// create a notch filter
+        /// </summary>
+        /// <param name="f_notch"> notch frequency </param>
+        /// <param name="fs"> sampel frequency </param>
+        /// <returns></returns>
         public static NWaves.Filters.BiQuad.NotchFilter create_notch_filter(double f_notch, double fs)
         {
             var notchFilter = new NWaves.Filters.BiQuad.NotchFilter(f_notch / fs);
             return notchFilter;
         }
 
+        /// <summary>
+        /// create a low pass butterworth filter
+        /// </summary>
+        /// <param name="fc"> cutoff frequency </param>
+        /// <param name="fs"> sample frequency </param>
+        /// <param name="order"> filter order </param>
+        /// <returns></returns>
         public static NWaves.Filters.Butterworth.LowPassFilter create_lowpass_butterworth_filter(double fc, double fs, int order)
         {
             var butterLPfilter = new NWaves.Filters.Butterworth.LowPassFilter(fc / fs, order);
             return butterLPfilter;
         }
 
+        /// <summary>
+        /// create a a high pass butterworth filter
+        /// </summary>
+        /// <param name="fc"> cutoff frequency </param>
+        /// <param name="fs"> sample frequency </param>
+        /// <param name="order"> filter order</param>
+        /// <returns></returns>
         public static NWaves.Filters.Butterworth.HighPassFilter create_highpass_butterworth_filter(double fc, double fs, int order)
         {
             var butterHPfilter = new NWaves.Filters.Butterworth.HighPassFilter(fc / fs, order);
             return butterHPfilter;
         }
 
+        /// <summary>
+        /// create a moving average filter
+        /// </summary>
+        /// <param name="order">filter order number</param>
+        /// <returns></returns>
         public static NWaves.Filters.MovingAverageFilter create_movingaverage_filter(int order)
         {
             var maFilter = new MovingAverageFilter(order);
             return maFilter;
         }
 
+        /// <summary>
+        /// applies a filter to all samples in the signal
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="raw_values"></param>
+        /// <returns></returns>
         public static List<double> apply_filter(NWaves.Filters.Base.IOnlineFilter filter, List<double> raw_values) 
         {
             List<double> filtered_values = new List<double>();
@@ -632,6 +679,22 @@ namespace RealTimePatternRec.PatternRec
             }
 
             return filtered_values;
+        }
+
+        /// <summary>
+        /// selects the filter from a list of filters and applies it to all samples in the signal
+        /// </summary>
+        /// <para>
+        /// This overloaded function allows a single delegate function to apply a filter type to all signals in the Mapping class.
+        /// The delegate created will have the list of filters specified, and which filter is used is specified by the channel_num parameter.
+        /// </para>
+        /// <param name="filters"></param>
+        /// <param name="raw_values"></param>
+        /// <param name="channel_num"></param>
+        /// <returns></returns>
+        public static List<double> apply_filter(List<NWaves.Filters.Base.IOnlineFilter> filters, List<double> raw_values, int channel_num)
+        {
+            return apply_filter(filters[channel_num], raw_values);
         }
     }
     
@@ -684,6 +747,7 @@ namespace RealTimePatternRec.PatternRec
         public List<double> max_values;
         public List<double> min_values;
         public List<double> mean_values;
+        public List<double> stdev_values;
 
         /// <summary>
         /// delegate for Filter functions
@@ -692,7 +756,7 @@ namespace RealTimePatternRec.PatternRec
         /// <param name="filter"></param>
         /// <param name="raw_values"></param>
         /// <returns></returns>
-        public delegate List<double> filter_pipeline_func(List<double> raw_values);
+        public delegate List<double> filter_pipeline_func(List<double> raw_values, int channel_num_);
 
         /// <summary>list of filter functions pipeline will iterate through for generic signals</summary>
         public List<filter_pipeline_func> generic_filter_pipeline = new List<filter_pipeline_func>();
@@ -744,9 +808,9 @@ namespace RealTimePatternRec.PatternRec
         }
 
         /// <summary>
-        /// Apply all Scaler functions in scaler pipelines to both generic and emg signals
+        /// Apply all Filter functions in filter pipelines to both generic and emg signals
         /// </summary>
-        /// <param name="raw_inputs">raw signals</param>
+        /// <param name="raw_inputs">raw signals of size timestepnum X inputnum</param>
         /// <param name="input_types">signal types (0 for generic, 1 for emg)</param>
         /// <param name="input_active_flags">indicates whether each signal is being used (true/false)</param>
         /// <returns></returns>
@@ -760,14 +824,14 @@ namespace RealTimePatternRec.PatternRec
                 {
                     foreach (filter_pipeline_func f in generic_filter_pipeline)
                     {
-                        filtered_values[i] = (f(filtered_values[i]));
+                        filtered_values[i] = (f(filtered_values[i], i));
                     }
                 }
                 else if (input_types[i] == 1 && input_active_flags[i] == true)
                 {
                     foreach (filter_pipeline_func f in emg_filter_pipeline)
                     {
-                        filtered_values[i] = (f(filtered_values[i]));
+                        filtered_values[i] = (f(filtered_values[i], i));
                     }
                 }
             }
@@ -805,15 +869,6 @@ namespace RealTimePatternRec.PatternRec
             }
 
             return temp_features;
-        }
-
-        public List<List<double>> map_all(List<List<double>> raw_inputs, List<int> input_types, List<bool> input_active_flags)
-        {
-            List<List<double>> filtered_inputs = filter_signals(raw_inputs, input_types, input_active_flags);
-            List<List<double>> scaled_inputs = scale_signals(filtered_inputs, input_types, input_active_flags);
-            List<List<double>> features = map_features(scaled_inputs, input_types, input_active_flags);
-
-            return features;
         }
     }
 
@@ -897,7 +952,7 @@ namespace RealTimePatternRec.PatternRec
         /// <returns></returns>
         public double[] predict(double[] input)
         {
-            double[] results = learner.Scores(input);
+            double[] results = learner.Probabilities(input);
             return results;
         }
 
@@ -989,7 +1044,8 @@ namespace RealTimePatternRec.PatternRec
         /// <returns></returns>
         public double[] predict(double[] input)
         {
-            double[] results = learner.Scores(input);
+            double[] results = learner.Probabilities(input);
+            
             return results;
         }
 
@@ -1056,6 +1112,12 @@ namespace RealTimePatternRec.PatternRec
         public double[] predict(double[] input)
         {
             double[] results = learner.Scores(input);
+            double min_value = results.Min();
+            double max_value = results.Max();
+            for (int i = 0; i < results.Length; i++)
+            {
+                results[i] = (results[i] - min_value) / (max_value -min_value);
+            }
             return results;
         }
 
@@ -1301,8 +1363,7 @@ namespace RealTimePatternRec.PatternRec
     /// </summary>
     public class Model
     {
-        public Data data;
-        public DataLogger logger;
+        public DataManager data;
         public Mapper mapper;
         public IPredictor model;
         public PostProcessor postprocessor;
@@ -1312,13 +1373,12 @@ namespace RealTimePatternRec.PatternRec
         /// <summary>accuracy of trained model</summary>
         public double accuracy;
         /// <summary>flag to indicate whether real-time is enabled</summary>
-        public bool realtimeFlag = false;
 
         public Model()
         {
-            data = new Data();
+            data = new DataManager();
             mapper = new Mapper();
-            logger = new DataLogger();
+            //logger = new DataLogger();
             postprocessor = new PostProcessor();
         }
 
@@ -1353,10 +1413,11 @@ namespace RealTimePatternRec.PatternRec
                 int output_value = data.outputs[output_change_indices[i - 1]];
                 int end_ind = output_change_indices[i];
 
-                List<List<double>> temp_input = Data.transpose_list_list(Data.transpose_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
-                //List<List<double>> temp_input_scaled = mapper.scale_signals(temp_input, data.input_types, data.input_active_flags);
-                //List<List<double>> temp_features = mapper.map_features(temp_input_scaled, data.input_types, data.input_active_flags);
-                List<List<double>> temp_features = mapper.map_all(temp_input, data.input_types, data.input_active_flags);
+                List<List<double>> temp_input = DataManager.transpose_list_list(DataManager.transpose_list_list(data.inputs).GetRange(start_ind, end_ind - start_ind));
+                List<List<double>> temp_input_filtered = mapper.filter_signals(temp_input, data.input_types, data.input_active_flags);
+                List<List<double>> temp_input_scaled = mapper.scale_signals(temp_input_filtered, data.input_types, data.input_active_flags);
+                List<List<double>> temp_features = mapper.map_features(temp_input_scaled, data.input_types, data.input_active_flags);
+                //List<List<double>> temp_features = mapper.map_all(temp_input, data.input_types, data.input_active_flags);
 
                 // initialize features to size fitting the number of computed features
                 if (data.features.Count == 0)
@@ -1386,10 +1447,10 @@ namespace RealTimePatternRec.PatternRec
         {
             // map inputs to features and shuffle
             map_trainingdata_to_features();
-            Data.shuffle_training_data(data.features, data.feature_outputs);
+            DataManager.shuffle_training_data(data.features, data.feature_outputs);
 
             // split to test/train set
-            List<List<double>> features_rows = Data.transpose_list_list(data.features);
+            List<List<double>> features_rows = DataManager.transpose_list_list(data.features);
             int N_train = (int)(features_rows.Count * (1 - train_test_split));
 
             List<List<double>> training_features = features_rows.GetRange(0, N_train);
@@ -1413,30 +1474,121 @@ namespace RealTimePatternRec.PatternRec
         }
 
         /// <summary>
-        /// predicts scores for a single input
+        /// predicts scores for a single input of filtered data
         /// </summary>
-        /// <param name="inputs_"></param>
+        /// <param name="inputs_">already filtered data</param>
         /// <returns></returns>
         public double[] get_scores(List<List<double>> input)
         {
-            List<List<double>> features_ = mapper.map_all(input, data.input_types, data.input_active_flags);
-            double[] features_flattenned = Data.transpose_list_list(features_).SelectMany(i => i).ToArray();
+            List<List<double>> scaled_signals = mapper.scale_signals(input, data.input_types, data.input_active_flags);
+            List<List<double>> features_ = mapper.map_features(scaled_signals, data.input_types, data.input_active_flags);
+
+            double[] features_flattenned = DataManager.transpose_list_list(features_).SelectMany(i => i).ToArray();
             double[] scores = model.predict(features_flattenned);
             double[] post_processed_scores = postprocessor.process(scores);
             return post_processed_scores;
         }
+
     }
 
+    /// <summary>
+    /// class to enable consistent real-time prediction from a Model object at the specified frequency it was trained on
+    /// </summary>
+    /// <para>
+    /// A seperate digital filter must be used for each signal due to digital filters reliance on previous inputs.
+    /// These digital filters rely on signals at the specified sampling frequency, and must be updated consistently, not just each time a prediction is made.
+    /// Similarly, the post-processing algorithms are dependent on sampling rate, and must be done consistently.
+    /// </para>
+    public class RealTimeModel : DataLogger
+    {
+        public Model model;
+
+        /// <summary> if true, data will be filtered using model.mapper each time data is collected</summary>
+        public bool realtimeFilterFlag;
+        /// <summary> if true, prediction will be updated each time data is collected</summary>
+        public bool realtimePredictFlag;
+        /// <summary> gets current realtime prediction scores</summary>
+        public double[] RealTimeScores
+        {
+            get
+            {
+                lock (lockObj)
+                {
+                    return _realtimeScores;
+                }
+            }
+        }
+        private double[] _realtimeScores;
+
+
+        public RealTimeModel(Model model_)
+        {
+            model = model_;
+            historyflag = true;
+            history_num = model.mapper.window_size_n + (model.mapper.window_size_n - model.mapper.window_overlap_n) * (model.mapper.window_n - 1);
+            freq = model.data.freq;
+            signal_num = model.data.input_num;
+            _realtimeScores = new double[model.data.output_num];
+            return;
+        }
+
+
+        /// <summary>
+        /// override DataLoggers thread to filter all inputs and make a prediction on each successive data grab
+        /// </summary>
+        public override void thread_loop()
+        {
+            while (true)
+            {
+                tick();
+                lock (lockObj)  // lock safe data writing
+                {
+                    // get data and filter if desired
+                    if (realtimeFilterFlag)
+                    {
+                        List<List<double>> raw_data = new List<List<double>>();
+                        raw_data.Add(get_data_f()); // get current data into a list of lists that mapper.filter_signals is expecting
+                        // filter raw data
+                        List<List<double>> filtered_data = model.mapper.filter_signals(DataManager.transpose_list_list(raw_data), model.data.input_types, model.data.input_active_flags);
+                        _data = filtered_data.SelectMany(i => i).ToList();  // flatten list of lists back to single list
+                    }
+                    else
+                    {
+                        _data = get_data_f();
+                    }
+
+                    if (historyflag)
+                    {
+                        for (int i = 0; i < signal_num; i++)
+                        {
+                            _data_history[i].Add(_data[i]);
+                            _data_history[i].RemoveAt(0);
+                        }
+                    }
+
+                    if (realtimePredictFlag)
+                    {
+                        // make prediction
+                        _realtimeScores = model.get_scores(Data_history);
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// class to hold all post processing techniques
+    /// </summary>
     public class PostProcessor
     {
         int num_outputs;
 
         Queue<int> majorityVotingQueue;
-        int majorityVotingLength;
+        public int majorityVotingLength;
         public bool majorityVoteFlag = false;
 
         List<double> velocityRampScore;
-        double velocityRampIncrement;
+        public double velocityRampIncrement;
         public bool velocityRampFlag = false;
 
         public PostProcessor()

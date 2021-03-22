@@ -16,17 +16,17 @@ RTPR_Csharp is a class library to easily facilitate real-time electromyography b
 * Mean Value
 * Raw Value
 
-# Filter
+# Filter Implementations
 * Notch Filter
 * High-pass Butterworth Filter
 * Low-pass Butterworth Filter
 * Moving Average Filter
 
-Pre-processing Techniques
+# Pre-processing Techniques
 * Min-Max Scaling
 * Zero-Shifting
 
-Post-processing Techniques
+# Post-processing Techniques
 * Majority Voting
 * Velocity Ramping
 

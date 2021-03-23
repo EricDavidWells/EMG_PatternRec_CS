@@ -284,6 +284,7 @@ namespace RealTimePatternRec
 
             string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
+            //string onnxfilepath = Path.Combine(solutionFilePath, @"data\output.onnx");
 
             ONNXModel onnxmodel = new ONNXModel();
             onnxmodel.primitive_type = "float";
@@ -328,6 +329,7 @@ namespace RealTimePatternRec
             string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string modelSettingsFilePath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.json");
             string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
+            //string onnxfilepath = Path.Combine(solutionFilePath, @"data\output.onnx");
 
             Model model = ObjLogger.loadObjJson<Model>(modelSettingsFilePath);
             model.model.load(onnxfilepath);

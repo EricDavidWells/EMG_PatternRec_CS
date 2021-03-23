@@ -1237,7 +1237,7 @@ namespace RealTimePatternRec.PatternRec
             IDataView dummydv = convert_input_to_dataview<Tinput>(dummydata);
 
             // create transformer
-            var pipeline = mlContext.Transforms.ApplyOnnxModel(filepath);
+            var pipeline = mlContext.Transforms.ApplyOnnxModel(filepath, fallbackToCpu: true);
             transformer = pipeline.Fit(dummydv);
 
             is_trained = true;

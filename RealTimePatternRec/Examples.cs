@@ -9,6 +9,7 @@ using System.Threading;
 
 using RealTimePatternRec.PatternRec;
 using RealTimePatternRec.DataLogging;
+using RealTimePatternRec.Mapping;
 
 using Accord.IO;
 using Accord.Math;
@@ -16,24 +17,23 @@ using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.MachineLearning.VectorMachines;
 using Accord.Statistics.Kernels;
 using Accord.Statistics.Analysis;
-
 using NWaves.Filters;
-
 using Microsoft.ML;
 using Microsoft.ML.Data;
 
-namespace RealTimePatternRec
+namespace RealTimePatternRec.Examples
 {
     /// <summary>
-    /// class used to hold random tests I ran during development, will delete after
+    /// Here are example code snippets for each main item in the RealTimePatternRec library
     /// </summary>
-    public static class Tests
+    public static class Examples
     {
+
         public static DataLogger DataLoggerBasicUsage()
         {
 
             DataLogger logger = new DataLogger();   // create logger
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string dataFilePath = Path.Combine(solutionFilePath, @"data\dataloggerdemo.csv");
 
             logger.init_file(dataFilePath); // create filewriter
@@ -56,7 +56,7 @@ namespace RealTimePatternRec
         {
 
             PR_Logger PR_logger = new PR_Logger();
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
             string jsonfilepath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
 
@@ -94,7 +94,7 @@ namespace RealTimePatternRec
 
         public static Mapper MapperBasicUsage()
         {
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string dataSettingsFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
             string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
 
@@ -122,22 +122,28 @@ namespace RealTimePatternRec
 
             mapper.emg_scaler_pipeline.Add((x, i) => Scalers.MinMaxZeroCenter(x, mapper.min_values, mapper.max_values, mapper.mean_values, i));
 
-            // add filters to pipeline for emg inputs
+            // add notch filter to pipeline for emg inputs
             double notch_fc = 60;
             double fs = data.freq;
             var NotchFilter = Filters.create_notch_filter(notch_fc, fs);
 
+            // create notch filter for each input signal
             List<NWaves.Filters.Base.IOnlineFilter> notchfilters50Hz = new List<NWaves.Filters.Base.IOnlineFilter>();
             for (int i = 0; i < data.input_num; i++)
             {
                 notchfilters50Hz.Add(NotchFilter);
             }
+            // add function to filter pipeline that accepts raw data and channel number as inputs
             mapper.emg_filter_pipeline.Add((x, i) => Filters.apply_filter(notchfilters50Hz, x, i));
 
+            Mapper.feature_pipeline_func fdummy = (x) => Features.dummy_feature_example(x, mapper.window_size_n, mapper.window_overlap_n, 3);
 
-            // add features to pipeling for emg inputs
-            mapper.emg_feature_pipeline.Add(x => Features.RAW(x, mapper.window_size_n, mapper.window_overlap_n));
+            // add raw value feature to feature pipeline that accepts raw data as input
+            Mapper.feature_pipeline_func f = (x) => Features.RAW(x, mapper.window_size_n, mapper.window_overlap_n);
+            mapper.emg_feature_pipeline.Add(f);
+            // add mean absolute value feature to feature pipeline that accepts raw data as input
             mapper.emg_feature_pipeline.Add(x => Features.MAV(x, mapper.window_size_n, mapper.window_overlap_n));
+            // add variance feature to feature pipeline that accepts raw data as input
             mapper.emg_feature_pipeline.Add(x => Features.VAR(x, mapper.window_size_n, mapper.window_overlap_n));
 
             // get raw values
@@ -157,9 +163,15 @@ namespace RealTimePatternRec
             return mapper;
         }
 
+        public static PostProcessor PostProcessorBasicUsage()
+        {
+            PostProcessor postprocessor = new PostProcessor();
+            return postprocessor;
+        }
+
         public static Model ModelBasicUsage()
         {
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string dataSettingsFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.json");
             string dataFilePath = Path.Combine(solutionFilePath, @"data\PR_dataloggerdemo.csv");
             string mapperSettingsFilePath = Path.Combine(solutionFilePath, @"data\mappingdemo.json");
@@ -177,12 +189,7 @@ namespace RealTimePatternRec
             List<List<double>> random_input = new List<List<double>>();
             for (int i = 0; i < model.data.input_num; i++)
             {
-                List<double> temp_input = new List<double>();
-                for (int j = 0; j < model.mapper.window_size_n; j++)
-                {
-                    temp_input.Add(0.1);
-                }
-                random_input.Add(temp_input);
+                random_input.Add(random_data_grabber(model.mapper.window_size_n));
             }
 
             double[] scores = model.get_scores(random_input);   // predict score
@@ -190,99 +197,37 @@ namespace RealTimePatternRec
             return model;
         }
 
-        public static Model RealTimeBasicUsage()
+        public static RealTimeModel RealTimeBasicUsage()
         {
             Model model = ModelBasicUsage();
-            return model;
-        }
+            RealTimeModel RTmodel = new RealTimeModel(model);   // create realtime model
 
-        public static void FilterTesting()
-        {
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string dataSaveFilePath = Path.Combine(solutionFilePath, @"data\filterdemo.csv");
+            // specify parameters for inherited DataLogger class to grab data in realtime
+            get_data_f_func<double> f = () => random_data_grabber(RTmodel.model.data.input_num);   // create data grabbing function
+            RTmodel.get_data_f = f;
+            RTmodel.start();
+            RTmodel.realtimeFilterFlag = true;
+            RTmodel.realtimePredictFlag = true;
 
-            int n_points = 200; // number of data points
-            double fs = 200;    // sample rate (Hz)
-            
-            // raw data
-            List<double> data = sinusoid_data_grabber(n_points, fs, new double[] { 5, 10, 60 });
-            List<double> time = time_data_grabber(n_points, fs);
+            // RTmodel will now be updating it's prediction at the same frequency it was trained on
 
-            // notch filter
-            double notch_fc = 60;   // cutoff frequency (Hz)
-            var NotchFilter = Filters.create_notch_filter(notch_fc, fs);
-            List<double> notch_filtered_data = Filters.apply_filter(NotchFilter, data);
-
-            // low pass filter
-            double LP_fc = 20;  // cutoff frequency (Hz)
-            int LP_order = 5;   // filter order (number of terms)
-            var LPfilter = Filters.create_lowpass_butterworth_filter(LP_fc, fs, LP_order);
-            List<double> LP_filtered_data = Filters.apply_filter(LPfilter, data);
-
-            // high pass filter
-            double HP_fc = 50;
-            int HP_order = 5;
-            var HPfilter = Filters.create_highpass_butterworth_filter(HP_fc, fs, HP_order);
-            List<double> HP_filtered_data = Filters.apply_filter(HPfilter, data);
-
-            // moving average filter
-            int MA_order = 10;
-            var MAfilter = Filters.create_movingaverage_filter(MA_order);
-            List<double> MA_filtered_data = Filters.apply_filter(MAfilter, data);
-
-            StreamWriter file = new StreamWriter(dataSaveFilePath);
-            for (int i = 0; i < data.Count; i++)
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            TimeSpan duration = new TimeSpan(0, 0, 2);
+            while (sw.Elapsed < duration)
             {
-                file.WriteLine(time[i].ToString("F3") + "," + 
-                                data[i].ToString("F3") + "," + 
-                                notch_filtered_data[i].ToString("F3") + "," +
-                                LP_filtered_data[i].ToString("F3") + "," + 
-                                HP_filtered_data[i].ToString("F3") + "," + 
-                                MA_filtered_data[i].ToString("F3"));
+                // get current score from RTmodel
+                double[] scores = RTmodel.RealTimeScores;
+                Thread.Sleep(50);   // do other stuff for approximately 50 ms
             }
 
-            file.Flush();
+            return RTmodel;
         }
 
-        private static List<double> random_data_grabber(int datanum)
-        {
-            List<double> data = new List<double>();
-            for (int i = 0; i < datanum; i++)
-            {
-                Random rng = new Random(1);
-                data.Add(rng.Next());
-            }
-            return data;
-        }
-
-        private static List<double> sinusoid_data_grabber(int datanum, double fs, double[] freqs)
-        {
-            List<double> data = new List<double>(datanum);
-            for (int i = 0; i < datanum; i++)
-            {
-                data.Add(0);
-                foreach(double freq in freqs)
-                {
-                    data[i] += (Math.Sin(2 * Math.PI * freq * (i / fs)));
-                }
-            }
-            return data;
-        }
-
-        private static List<double> time_data_grabber(int datanum, double fs)
-        {
-            List<double> data = new List<double>();
-            for (int i = 0; i < datanum; i++)
-            {
-                data.Add(i / fs);
-            }
-            return data;
-        }
-
-        public static void ONNXTest()
+        public static IPredictor ONNXBasicUsage()
         {
 
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
             //string onnxfilepath = Path.Combine(solutionFilePath, @"data\output.onnx");
 
@@ -320,13 +265,13 @@ namespace RealTimePatternRec
                 Console.WriteLine(output);
             }
 
-
+            return onnxmodel;
         }
 
-        public static void ONNXSettingsTest()
+        public static void ONNXFromSettingsBasicUsage()
         {
 
-            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
             string modelSettingsFilePath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.json");
             string onnxfilepath = Path.Combine(solutionFilePath, @"data\generalized_classifier_v3.onnx");
             //string onnxfilepath = Path.Combine(solutionFilePath, @"data\output.onnx");
@@ -350,6 +295,89 @@ namespace RealTimePatternRec
                 Console.WriteLine(output);
             }
         }
+
+        static Random rng = new Random(1);
+        private static List<double> random_data_grabber(int datanum)
+        {
+            List<double> data = new List<double>();
+            for (int i = 0; i < datanum; i++)
+            {
+                data.Add(rng.Next());
+            }
+            return data;
+        }
+
+        private static List<double> sinusoid_data_grabber(int datanum, double fs, double[] freqs)
+        {
+            List<double> data = new List<double>(datanum);
+            for (int i = 0; i < datanum; i++)
+            {
+                data.Add(0);
+                foreach(double freq in freqs)
+                {
+                    data[i] += (Math.Sin(2 * Math.PI * freq * (i / fs)));
+                }
+            }
+            return data;
+        }
+
+        private static List<double> time_data_grabber(int datanum, double fs)
+        {
+            List<double> data = new List<double>();
+            for (int i = 0; i < datanum; i++)
+            {
+                data.Add(i / fs);
+            }
+            return data;
+        }
+
+        public static void FilterTesting()
+        {
+            string solutionFilePath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string dataSaveFilePath = Path.Combine(solutionFilePath, @"data\filterdemo.csv");
+
+            int n_points = 200; // number of data points
+            double fs = 200;    // sample rate (Hz)
+
+            // raw data
+            List<double> data = sinusoid_data_grabber(n_points, fs, new double[] { 5, 10, 60 });
+            List<double> time = time_data_grabber(n_points, fs);
+
+            // notch filter
+            double notch_fc = 60;   // cutoff frequency (Hz)
+            var NotchFilter = Filters.create_notch_filter(notch_fc, fs);
+            List<double> notch_filtered_data = Filters.apply_filter(NotchFilter, data);
+
+            // low pass filter
+            double LP_fc = 20;  // cutoff frequency (Hz)
+            int LP_order = 5;   // filter order (number of terms)
+            var LPfilter = Filters.create_lowpass_butterworth_filter(LP_fc, fs, LP_order);
+            List<double> LP_filtered_data = Filters.apply_filter(LPfilter, data);
+
+            // high pass filter
+            double HP_fc = 50;
+            int HP_order = 5;
+            var HPfilter = Filters.create_highpass_butterworth_filter(HP_fc, fs, HP_order);
+            List<double> HP_filtered_data = Filters.apply_filter(HPfilter, data);
+
+            // moving average filter
+            int MA_order = 10;
+            var MAfilter = Filters.create_movingaverage_filter(MA_order);
+            List<double> MA_filtered_data = Filters.apply_filter(MAfilter, data);
+
+            StreamWriter file = new StreamWriter(dataSaveFilePath);
+            for (int i = 0; i < data.Count; i++)
+            {
+                file.WriteLine(time[i].ToString("F3") + "," +
+                                data[i].ToString("F3") + "," +
+                                notch_filtered_data[i].ToString("F3") + "," +
+                                LP_filtered_data[i].ToString("F3") + "," +
+                                HP_filtered_data[i].ToString("F3") + "," +
+                                MA_filtered_data[i].ToString("F3"));
+            }
+
+            file.Flush();
+        }    
 
         public static void AccordSVMTest()
         {

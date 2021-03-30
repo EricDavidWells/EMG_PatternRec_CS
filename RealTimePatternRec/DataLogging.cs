@@ -118,7 +118,8 @@ namespace RealTimePatternRec.DataLogging
         /// </summary>
         public void start()
         {
-            sw.Start();
+            //sw.Start();
+            sw.Restart();
             prevtime = sw.ElapsedMilliseconds;
             curtime = prevtime;
             next_tick_time = curtime + 1000f / freq;
@@ -262,6 +263,8 @@ namespace RealTimePatternRec.DataLogging
         public int timetonext;
         /// <summary>flag indicating training is happening</summary>
         public bool trainFlag = false;
+        /// <summary>flag indicating training is completed</summary>
+        public bool trainingCompleteFlag = false;
         /// <summary>flag indicating that participant should be contracting</summary>
         public bool contractFlag = false;
         /// <summary>list of output labels</summary>
@@ -330,6 +333,7 @@ namespace RealTimePatternRec.DataLogging
             current_output = 0;
             current_cycle = 0;
             trainFlag = true;
+            trainingCompleteFlag = false;
             PR_sw.Restart();
             start_time = PR_sw.ElapsedMilliseconds;
             start();
@@ -344,6 +348,7 @@ namespace RealTimePatternRec.DataLogging
             close_file();
             recordflag = false;
             trainFlag = false;
+            trainingCompleteFlag = true;
         }
     }
 

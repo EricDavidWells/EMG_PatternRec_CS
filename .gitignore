@@ -1,6 +1,7 @@
 # Rico's specifics
 #*.txt
 *.onnx
+/data
 
 # Compiled Object files
 *.slo

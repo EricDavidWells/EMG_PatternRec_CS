@@ -827,7 +827,8 @@ namespace RealTimePatternRec.PatternRec
             List<List<double>> scaled_signals = mapper.scale_signals(input, data.input_types, data.input_active_flags);
             List<List<double>> features_ = mapper.map_features(scaled_signals, data.input_types, data.input_active_flags);
 
-            double[] features_flattenned = DataManager.transpose_list_list(features_).SelectMany(i => i).ToArray();
+            //double[] features_flattenned = DataManager.transpose_list_list(features_).SelectMany(i => i).ToArray();
+            double[] features_flattenned = features_.SelectMany(i => i).ToArray();
             double[] scores = model.predict(features_flattenned);
             double[] post_processed_scores = postprocessor.process(scores);
             return post_processed_scores;

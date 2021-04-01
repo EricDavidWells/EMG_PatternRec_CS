@@ -1,0 +1,52 @@
+{
+  "timestamps": [],
+  "inputs": [],
+  "outputs": [],
+  "input_types": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "features": [],
+  "feature_outputs": [],
+  "input_active_flags": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "output_labels": [
+    "Rest",
+    "Flexion",
+    "Extension",
+    "Adduction",
+    "Abduction"
+  ],
+  "input_labels": [
+    "Ch1",
+    "Ch2",
+    "Ch3",
+    "Ch4",
+    "Ch5",
+    "Ch6",
+    "Ch7",
+    "Ch8"
+  ],
+  "input_num": 8,
+  "output_num": 5,
+  "freq": 200,
+  "collection_cycles": 1,
+  "contraction_time": 3000,
+  "relaxation_time": 3000,
+  "json_filepath": "C:\\Users\\Rico\\Desktop\\garbage data\\myo_5class_emg_rico.json",
+  "csv_filepath": "C:\\Users\\Rico\\Desktop\\garbage data\\myo_5class_emg_rico.csv"
+}

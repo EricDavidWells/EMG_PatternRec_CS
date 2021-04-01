@@ -1,0 +1,67 @@
+{
+  "data": {
+    "input_num": 8,
+    "sample_freq": 200,
+    "input_types": [1,1,1,1,1,1,1,1],
+    "input_active_flags": [true, true, true, true, true, true, true, true],
+    "input_labels": ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8"],
+    "output_num": 5,
+    "output_labels": ["extension", "flexion", "pronation", "rest", "supination"],
+    "freq": 200
+  },
+  
+  "mapper": {
+    "window_size_n": 1,
+    "window_overlap_n": 0,
+    "window_n": 32,
+    "generic_feature_pipeline": [],
+    "emg_feature_pipeline": [],
+    "generic_feature_pipeline_titles": [],
+    "emg_feature_pipeline_titles": ["Raw Value"],
+    "generic_scaler_pipeline": [],
+    "emg_scaler_pipeline": [],
+    "generic_scaler_pipeline_titles": [],
+    "emg_scaler_pipeline_titles": [],
+
+    "max_values": [
+      106.0,
+      127.0,
+      31.0,
+      67.0,
+      127.0,
+      110.0,
+      46.0,
+      115.0
+    ],
+    "min_values": [
+      -85.0,
+      -110.0,
+      -40.0,
+      -115.0,
+      -128.0,
+      -113.0,
+      -57.0,
+      -121.0
+    ],
+    "mean_values": [
+      -0.6331327027801662,
+      -0.72871883061049014,
+      -0.76411579249068506,
+      -0.674835196331327,
+      -0.00702206936084838,
+      -0.5577529378045285,
+      -0.64244769274863855,
+      -0.55259386643737463
+    ]
+  },
+
+  "model":{
+    "$type": "RealTimePatternRec.PatternRec.ONNXModel, RealTimePatternRec",
+    "input_layer_name": "input",
+    "output_layer_name": "softmax",
+    "primitive_type": "float",
+    "input_num": 256,
+    "output_num": 5
+  }
+
+}

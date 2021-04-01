@@ -1,7 +1,8 @@
 # Rico's specifics
 #*.txt
-*.onnx
-/data
+/data/dataloggerdemo.csv
+/data/filterdemo.csv
+/data/PR_dataloggerdemo.csv
 
 # Compiled Object files
 *.slo

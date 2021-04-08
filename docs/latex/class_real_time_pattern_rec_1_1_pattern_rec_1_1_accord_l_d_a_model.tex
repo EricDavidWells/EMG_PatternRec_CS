@@ -1,0 +1,177 @@
+\hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel Class Reference}
+\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model}\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+
+
+LDA predictor using model from ACCORD.\+NET library  
+
+
+Inheritance diagram for Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a8171a1f5de4ca18fe45cac948dd3c0e6}{Accord\+LDAModel}} ()
+\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a30b6ce835647cd53359f18ba4a8ed1c9}{train}} (double\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} inputs, int\mbox{[}$\,$\mbox{]} outputs)
+\begin{DoxyCompactList}\small\item\em trains model \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a12c275b5b834e7cb53cb446e6341f0c1}{predict}} (double\mbox{[}$\,$\mbox{]} input)
+\begin{DoxyCompactList}\small\item\em predicts output \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a32f888be0ed938af6365dacd66a5d3ec}{save}} (string filepath)
+\begin{DoxyCompactList}\small\item\em serializes model to a .bin file and deletes model \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a65d5079f6b7cfb039bbdb0e06b090cab}{load}} (string filepath)
+\begin{DoxyCompactList}\small\item\em deserializes .bin file into model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Linear\+Discriminant\+Analysis.\+Pipeline \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a916f103b4f9b249941bc594dd88b8510}{learner}}
+\begin{DoxyCompactList}\small\item\em ACCORD.\+NET model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_ada5784f18d301dd739f2fc7356600abc}{model\+\_\+type}} = \char`\"{}lda\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em type of model \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a6d74ade8c4ad5b56ac8045dc345d3ef8}{is\+\_\+trained}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em indicates model has been trained \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+LDA predictor using model from ACCORD.\+NET library 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a8171a1f5de4ca18fe45cac948dd3c0e6}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a8171a1f5de4ca18fe45cac948dd3c0e6}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!AccordLDAModel@{AccordLDAModel}}
+\index{AccordLDAModel@{AccordLDAModel}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{AccordLDAModel()}{AccordLDAModel()}}
+{\footnotesize\ttfamily Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+Accord\+LDAModel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a65d5079f6b7cfb039bbdb0e06b090cab}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a65d5079f6b7cfb039bbdb0e06b090cab}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!load@{load}}
+\index{load@{load}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+load (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+deserializes .bin file into model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_ab59fd7785fbcf9fcd24b8ba46139d1d2}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a12c275b5b834e7cb53cb446e6341f0c1}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a12c275b5b834e7cb53cb446e6341f0c1}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!predict@{predict}}
+\index{predict@{predict}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+predict (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{input }\end{DoxyParamCaption})}
+
+
+
+predicts output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_aeb04304e19542536c12b156443c4854c}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a32f888be0ed938af6365dacd66a5d3ec}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a32f888be0ed938af6365dacd66a5d3ec}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!save@{save}}
+\index{save@{save}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+save (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+serializes model to a .bin file and deletes model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_afa9cce72bf784282cc3a0de37fa9174a}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a30b6ce835647cd53359f18ba4a8ed1c9}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a30b6ce835647cd53359f18ba4a8ed1c9}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!train@{train}}
+\index{train@{train}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+train (\begin{DoxyParamCaption}\item[{double}]{inputs\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int\mbox{[}$\,$\mbox{]}}]{outputs }\end{DoxyParamCaption})}
+
+
+
+trains model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & input features\\
+\hline
+{\em outputs} & ground truth classes\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_a8a0fccf4ba65222797052d93355f198d}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a916f103b4f9b249941bc594dd88b8510}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a916f103b4f9b249941bc594dd88b8510}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!learner@{learner}}
+\index{learner@{learner}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{learner}{learner}}
+{\footnotesize\ttfamily Linear\+Discriminant\+Analysis.\+Pipeline Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+learner}
+
+
+
+ACCORD.\+NET model 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a6d74ade8c4ad5b56ac8045dc345d3ef8}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_a6d74ade8c4ad5b56ac8045dc345d3ef8}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!is\_trained@{is\_trained}}
+\index{is\_trained@{is\_trained}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{is\_trained}{is\_trained}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+is\+\_\+trained = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+indicates model has been trained 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_ada5784f18d301dd739f2fc7356600abc}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model_ada5784f18d301dd739f2fc7356600abc}} 
+\index{RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}!model\_type@{model\_type}}
+\index{model\_type@{model\_type}!RealTimePatternRec.PatternRec.AccordLDAModel@{RealTimePatternRec.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{model\_type}{model\_type}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+LDAModel.\+model\+\_\+type = \char`\"{}lda\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+type of model 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

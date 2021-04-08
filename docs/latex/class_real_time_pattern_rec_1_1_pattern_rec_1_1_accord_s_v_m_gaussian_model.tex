@@ -1,0 +1,213 @@
+\hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model Class Reference}
+\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model}\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+
+
+SVM predictor with gaussian kernel using model from ACCORD.\+NET library  
+
+
+Inheritance diagram for Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a03e7b4e378527438a7cc85429ae5d2c0}{Accord\+SVMGaussian\+Model}} ()
+\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ad1e42489add6e3d97c9eaddfed185407}{train}} (double\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} inputs, int\mbox{[}$\,$\mbox{]} outputs)
+\begin{DoxyCompactList}\small\item\em trains model \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ac70d3d43b30af0b14114fda38c3274c8}{predict}} (double\mbox{[}$\,$\mbox{]} input)
+\begin{DoxyCompactList}\small\item\em predicts output \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a07086922126f8117f6402fece7c5347f}{save}} (string filepath)
+\begin{DoxyCompactList}\small\item\em serializes model to a .bin file and deletes model \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab0ae66caadb783670a54a7237e2c3974}{load}} (string filepath)
+\begin{DoxyCompactList}\small\item\em deserializes .bin file into model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Multiclass\+Support\+Vector\+Machine$<$ Gaussian $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aae3b3321965ea661c9216df267f9dd87}{learner}}
+\begin{DoxyCompactList}\small\item\em ACCORD.\+NET model \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab600b9c82afe85c4249001646a636767}{gamma}}
+\begin{DoxyCompactList}\small\item\em SVM hyperparameter \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ae9f68de1372c724590a637f858e97692}{complexity}}
+\begin{DoxyCompactList}\small\item\em SVM hyperparameter \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aac211d4d2a63e11d482a3c3e0120c9a4}{autoestimate}} = true
+\begin{DoxyCompactList}\small\item\em if true ACCORD.\+NET will autoestimate gamma and complexity \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aeef622f93b9cd733930a5044d852eca0}{model\+\_\+type}} = \char`\"{}svmgaussian\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em type of model \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a883ae7ad5dcca44d605f2445ea07a23a}{is\+\_\+trained}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em indicates model has been trained \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+SVM predictor with gaussian kernel using model from ACCORD.\+NET library 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a03e7b4e378527438a7cc85429ae5d2c0}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a03e7b4e378527438a7cc85429ae5d2c0}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!AccordSVMGaussianModel@{AccordSVMGaussianModel}}
+\index{AccordSVMGaussianModel@{AccordSVMGaussianModel}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{AccordSVMGaussianModel()}{AccordSVMGaussianModel()}}
+{\footnotesize\ttfamily Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+Accord\+SVMGaussian\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab0ae66caadb783670a54a7237e2c3974}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab0ae66caadb783670a54a7237e2c3974}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!load@{load}}
+\index{load@{load}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+load (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+deserializes .bin file into model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_ab59fd7785fbcf9fcd24b8ba46139d1d2}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ac70d3d43b30af0b14114fda38c3274c8}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ac70d3d43b30af0b14114fda38c3274c8}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!predict@{predict}}
+\index{predict@{predict}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+predict (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{input }\end{DoxyParamCaption})}
+
+
+
+predicts output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_aeb04304e19542536c12b156443c4854c}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a07086922126f8117f6402fece7c5347f}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a07086922126f8117f6402fece7c5347f}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!save@{save}}
+\index{save@{save}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+save (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+serializes model to a .bin file and deletes model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_afa9cce72bf784282cc3a0de37fa9174a}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ad1e42489add6e3d97c9eaddfed185407}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ad1e42489add6e3d97c9eaddfed185407}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!train@{train}}
+\index{train@{train}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+train (\begin{DoxyParamCaption}\item[{double}]{inputs\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int\mbox{[}$\,$\mbox{]}}]{outputs }\end{DoxyParamCaption})}
+
+
+
+trains model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & input features\\
+\hline
+{\em outputs} & ground truth classes\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_a8a0fccf4ba65222797052d93355f198d}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aac211d4d2a63e11d482a3c3e0120c9a4}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aac211d4d2a63e11d482a3c3e0120c9a4}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!autoestimate@{autoestimate}}
+\index{autoestimate@{autoestimate}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{autoestimate}{autoestimate}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+autoestimate = true}
+
+
+
+if true ACCORD.\+NET will autoestimate gamma and complexity 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ae9f68de1372c724590a637f858e97692}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ae9f68de1372c724590a637f858e97692}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!complexity@{complexity}}
+\index{complexity@{complexity}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{complexity}{complexity}}
+{\footnotesize\ttfamily double Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+complexity}
+
+
+
+SVM hyperparameter 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab600b9c82afe85c4249001646a636767}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_ab600b9c82afe85c4249001646a636767}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!gamma@{gamma}}
+\index{gamma@{gamma}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{gamma}{gamma}}
+{\footnotesize\ttfamily double Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+gamma}
+
+
+
+SVM hyperparameter 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aae3b3321965ea661c9216df267f9dd87}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aae3b3321965ea661c9216df267f9dd87}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!learner@{learner}}
+\index{learner@{learner}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{learner}{learner}}
+{\footnotesize\ttfamily Multiclass\+Support\+Vector\+Machine$<$Gaussian$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+learner}
+
+
+
+ACCORD.\+NET model 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a883ae7ad5dcca44d605f2445ea07a23a}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_a883ae7ad5dcca44d605f2445ea07a23a}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!is\_trained@{is\_trained}}
+\index{is\_trained@{is\_trained}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{is\_trained}{is\_trained}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+is\+\_\+trained = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+indicates model has been trained 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aeef622f93b9cd733930a5044d852eca0}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model_aeef622f93b9cd733930a5044d852eca0}} 
+\index{RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}!model\_type@{model\_type}}
+\index{model\_type@{model\_type}!RealTimePatternRec.PatternRec.AccordSVMGaussianModel@{RealTimePatternRec.PatternRec.AccordSVMGaussianModel}}
+\doxysubsubsection{\texorpdfstring{model\_type}{model\_type}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Accord\+SVMGaussian\+Model.\+model\+\_\+type = \char`\"{}svmgaussian\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+type of model 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

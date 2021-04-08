@@ -1,0 +1,323 @@
+\hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager Class Reference}
+\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager}\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+
+
+class to hold all information from a data recording session  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a16a99eaf8895986b15396f311b2d9c5a}{Clear}} ()
+\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a704bddb21b9d55d9cb35171e5e8f19fb}{Set\+Input\+Types}} (List$<$ Tuple$<$ string, int $>$$>$ map)
+\begin{DoxyCompactList}\small\item\em sets the input types based on specified list of tuples \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a87f1b19fbb30f1018a367671e9061bc0}{Set\+All\+Input\+Active\+Flags}} (bool flag)
+\begin{DoxyCompactList}\small\item\em sets all input active flags \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad521cd0967bad3546842deb76a3f6765}{Load\+File\+To\+List\+Cols}} (string filepath)
+\begin{DoxyCompactList}\small\item\em loads data file into inputs and outputs fields \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ae50cd9eb960a78061956cfd75dbd820a}{shuffle\+\_\+training\+\_\+data$<$ T $>$}} (List$<$ List$<$ T $>$$>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad21af1e02e9e0f7e9f94dbab3a1a80ce}{inputs}}, List$<$ int $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a082f973cfc005f64a22d6306221e8940}{outputs}})
+\begin{DoxyCompactList}\small\item\em shuffles training data features and outputs (i.\+e. inputs/outputs passed by reference) \end{DoxyCompactList}\item 
+static List$<$ List$<$ T $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a41a913f47cdbeb622e19a2251451f38b}{transpose\+\_\+list\+\_\+list$<$ T $>$}} (List$<$ List$<$ T $>$$>$ list)
+\begin{DoxyCompactList}\small\item\em Transposes a list of lists (i.\+e. switches rows/columns) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aaf1e8bc6354d3937b5a9df68d257cc30}{timestamps}} = new List$<$double$>$()
+\begin{DoxyCompactList}\small\item\em timestamp data \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad21af1e02e9e0f7e9f94dbab3a1a80ce}{inputs}} = new List$<$List$<$double$>$$>$()
+\begin{DoxyCompactList}\small\item\em raw input values \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a082f973cfc005f64a22d6306221e8940}{outputs}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em raw output values \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad8743a6086c8d12992d2b599b4bebd1d}{input\+\_\+types}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em types of input signals (0 = generic, 1 = emg) \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a420a2f70a1f0108e4eac3191a818f92c}{features}} = new List$<$List$<$double$>$$>$()
+\begin{DoxyCompactList}\small\item\em inputs after mapping to features \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a291d8e72e2d8ef1428e9573843754dab}{feature\+\_\+outputs}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em outputs trimmed to account for windowing \end{DoxyCompactList}\item 
+List$<$ bool $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a744b2f1bfe5b150e35f82c301ae045f2}{input\+\_\+active\+\_\+flags}} = new List$<$bool$>$()
+\begin{DoxyCompactList}\small\item\em indicating which inputs are active in model \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_adab41f8fb376905751716c99116ebd04}{output\+\_\+labels}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em output label names \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5cea6c87d693afe0d2fac2bc3f22645a}{input\+\_\+labels}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of input label names \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a7fb1afce39c9d9db6dba801f905c6220}{input\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of inputs in data \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a1d3f361f55f129b78b94dfa1e7281a4d}{output\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of outputs in data \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aa7f1f28287c1320de619ac9deb81cb31}{freq}}
+\begin{DoxyCompactList}\small\item\em frequency data was recorded at \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5aff3d34bf19eec4935cb96d90f88a93}{collection\+\_\+cycles}}
+\begin{DoxyCompactList}\small\item\em number of times outputs were iterated over during data collection \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aed4ff38d449d369ed1442427e954482e}{contraction\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em number of seconds per contraction during data collection \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a3ff971e93293ec58b7a8742b9f8677d1}{relaxation\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em number of seconds for relaxation during data collection \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to hold all information from a data recording session 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a16a99eaf8895986b15396f311b2d9c5a}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a16a99eaf8895986b15396f311b2d9c5a}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!Clear@{Clear}}
+\index{Clear@{Clear}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad521cd0967bad3546842deb76a3f6765}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad521cd0967bad3546842deb76a3f6765}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!LoadFileToListCols@{LoadFileToListCols}}
+\index{LoadFileToListCols@{LoadFileToListCols}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{LoadFileToListCols()}{LoadFileToListCols()}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+Load\+File\+To\+List\+Cols (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+loads data file into inputs and outputs fields 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, 1 if not successful
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a87f1b19fbb30f1018a367671e9061bc0}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a87f1b19fbb30f1018a367671e9061bc0}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!SetAllInputActiveFlags@{SetAllInputActiveFlags}}
+\index{SetAllInputActiveFlags@{SetAllInputActiveFlags}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{SetAllInputActiveFlags()}{SetAllInputActiveFlags()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+Set\+All\+Input\+Active\+Flags (\begin{DoxyParamCaption}\item[{bool}]{flag }\end{DoxyParamCaption})}
+
+
+
+sets all input active flags 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flag} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a704bddb21b9d55d9cb35171e5e8f19fb}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a704bddb21b9d55d9cb35171e5e8f19fb}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!SetInputTypes@{SetInputTypes}}
+\index{SetInputTypes@{SetInputTypes}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{SetInputTypes()}{SetInputTypes()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+Set\+Input\+Types (\begin{DoxyParamCaption}\item[{List$<$ Tuple$<$ string, int $>$$>$}]{map }\end{DoxyParamCaption})}
+
+
+
+sets the input types based on specified list of tuples 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & A list of tuples that map input titles to values\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ae50cd9eb960a78061956cfd75dbd820a}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ae50cd9eb960a78061956cfd75dbd820a}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!shuffle\_training\_data$<$ T $>$@{shuffle\_training\_data$<$ T $>$}}
+\index{shuffle\_training\_data$<$ T $>$@{shuffle\_training\_data$<$ T $>$}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{shuffle\_training\_data$<$ T $>$()}{shuffle\_training\_data< T >()}}
+{\footnotesize\ttfamily static void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+shuffle\+\_\+training\+\_\+data$<$ T $>$ (\begin{DoxyParamCaption}\item[{List$<$ List$<$ T $>$$>$}]{inputs,  }\item[{List$<$ int $>$}]{outputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+shuffles training data features and outputs (i.\+e. inputs/outputs passed by reference) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & \\
+\hline
+{\em outputs} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a41a913f47cdbeb622e19a2251451f38b}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a41a913f47cdbeb622e19a2251451f38b}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!transpose\_list\_list$<$ T $>$@{transpose\_list\_list$<$ T $>$}}
+\index{transpose\_list\_list$<$ T $>$@{transpose\_list\_list$<$ T $>$}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{transpose\_list\_list$<$ T $>$()}{transpose\_list\_list< T >()}}
+{\footnotesize\ttfamily static List$<$List$<$T$>$ $>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+transpose\+\_\+list\+\_\+list$<$ T $>$ (\begin{DoxyParamCaption}\item[{List$<$ List$<$ T $>$$>$}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Transposes a list of lists (i.\+e. switches rows/columns) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & any primitive data type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & list of lists to transpose\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5aff3d34bf19eec4935cb96d90f88a93}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5aff3d34bf19eec4935cb96d90f88a93}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!collection\_cycles@{collection\_cycles}}
+\index{collection\_cycles@{collection\_cycles}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{collection\_cycles}{collection\_cycles}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+collection\+\_\+cycles}
+
+
+
+number of times outputs were iterated over during data collection 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aed4ff38d449d369ed1442427e954482e}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aed4ff38d449d369ed1442427e954482e}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!contraction\_time@{contraction\_time}}
+\index{contraction\_time@{contraction\_time}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{contraction\_time}{contraction\_time}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+contraction\+\_\+time}
+
+
+
+number of seconds per contraction during data collection 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a291d8e72e2d8ef1428e9573843754dab}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a291d8e72e2d8ef1428e9573843754dab}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!feature\_outputs@{feature\_outputs}}
+\index{feature\_outputs@{feature\_outputs}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{feature\_outputs}{feature\_outputs}}
+{\footnotesize\ttfamily List$<$int$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+feature\+\_\+outputs = new List$<$int$>$()}
+
+
+
+outputs trimmed to account for windowing 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a420a2f70a1f0108e4eac3191a818f92c}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a420a2f70a1f0108e4eac3191a818f92c}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!features@{features}}
+\index{features@{features}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{features}{features}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+features = new List$<$List$<$double$>$$>$()}
+
+
+
+inputs after mapping to features 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aa7f1f28287c1320de619ac9deb81cb31}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aa7f1f28287c1320de619ac9deb81cb31}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!freq@{freq}}
+\index{freq@{freq}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+freq}
+
+
+
+frequency data was recorded at 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a744b2f1bfe5b150e35f82c301ae045f2}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a744b2f1bfe5b150e35f82c301ae045f2}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!input\_active\_flags@{input\_active\_flags}}
+\index{input\_active\_flags@{input\_active\_flags}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_active\_flags}{input\_active\_flags}}
+{\footnotesize\ttfamily List$<$bool$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+active\+\_\+flags = new List$<$bool$>$()}
+
+
+
+indicating which inputs are active in model 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5cea6c87d693afe0d2fac2bc3f22645a}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a5cea6c87d693afe0d2fac2bc3f22645a}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!input\_labels@{input\_labels}}
+\index{input\_labels@{input\_labels}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_labels}{input\_labels}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+labels = new List$<$string$>$()}
+
+
+
+list of input label names 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a7fb1afce39c9d9db6dba801f905c6220}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a7fb1afce39c9d9db6dba801f905c6220}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!input\_num@{input\_num}}
+\index{input\_num@{input\_num}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_num}{input\_num}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+num}
+
+
+
+number of inputs in data 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad8743a6086c8d12992d2b599b4bebd1d}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad8743a6086c8d12992d2b599b4bebd1d}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!input\_types@{input\_types}}
+\index{input\_types@{input\_types}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_types}{input\_types}}
+{\footnotesize\ttfamily List$<$int$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+types = new List$<$int$>$()}
+
+
+
+types of input signals (0 = generic, 1 = emg) 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad21af1e02e9e0f7e9f94dbab3a1a80ce}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_ad21af1e02e9e0f7e9f94dbab3a1a80ce}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!inputs@{inputs}}
+\index{inputs@{inputs}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+inputs = new List$<$List$<$double$>$$>$()}
+
+
+
+raw input values 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_adab41f8fb376905751716c99116ebd04}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_adab41f8fb376905751716c99116ebd04}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!output\_labels@{output\_labels}}
+\index{output\_labels@{output\_labels}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{output\_labels}{output\_labels}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+output\+\_\+labels = new List$<$string$>$()}
+
+
+
+output label names 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a1d3f361f55f129b78b94dfa1e7281a4d}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a1d3f361f55f129b78b94dfa1e7281a4d}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!output\_num@{output\_num}}
+\index{output\_num@{output\_num}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{output\_num}{output\_num}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+output\+\_\+num}
+
+
+
+number of outputs in data 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a082f973cfc005f64a22d6306221e8940}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a082f973cfc005f64a22d6306221e8940}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!outputs@{outputs}}
+\index{outputs@{outputs}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{outputs}{outputs}}
+{\footnotesize\ttfamily List$<$int$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+outputs = new List$<$int$>$()}
+
+
+
+raw output values 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a3ff971e93293ec58b7a8742b9f8677d1}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_a3ff971e93293ec58b7a8742b9f8677d1}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!relaxation\_time@{relaxation\_time}}
+\index{relaxation\_time@{relaxation\_time}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{relaxation\_time}{relaxation\_time}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+relaxation\+\_\+time}
+
+
+
+number of seconds for relaxation during data collection 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aaf1e8bc6354d3937b5a9df68d257cc30}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager_aaf1e8bc6354d3937b5a9df68d257cc30}} 
+\index{RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}!timestamps@{timestamps}}
+\index{timestamps@{timestamps}!RealTimePatternRec.PatternRec.DataManager@{RealTimePatternRec.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{timestamps}{timestamps}}
+{\footnotesize\ttfamily List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Data\+Manager.\+timestamps = new List$<$double$>$()}
+
+
+
+timestamp data 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

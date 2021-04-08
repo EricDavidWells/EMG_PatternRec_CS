@@ -1,0 +1,12 @@
+digraph "RealTimePatternRec.DataLogging.PR_Logger.end_data_collection"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RealTimePatternRec.DataLogging.\lPR_Logger.end_data_collection",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="ends data collection sequence"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="RealTimePatternRec.DataLogging.\lDataLogger.close_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a96e88d0bf55bb6c140deb4a4567fd57f",tooltip="closes file stream writer"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="RealTimePatternRec.DataLogging.\lDataLogger.stop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a1cdc5675a0abe46ef2174985374a7d5a",tooltip="kills thread if thread is currently running"];
+}

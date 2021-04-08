@@ -374,10 +374,41 @@ namespace RealTimePatternRec.Examples
                                 LP_filtered_data[i].ToString("F3") + "," +
                                 HP_filtered_data[i].ToString("F3") + "," +
                                 MA_filtered_data[i].ToString("F3"));
-            }
+            }  
 
             file.Flush();
-        }    
+
+        }
+
+        public static void MultidimensionalFilterTest()
+        {
+            int fs = 2000;
+            int HP_fc = 50;
+            int HP_order = 5;
+            int num_points = 1000;
+            int num_inputs = 5;
+
+            // create multi-dimensional data of size num_inputs x num_points (i.e. each sub-list is an input signal)
+            List<List<double>> multi_dimensional_data = new List<List<double>>();
+            for (int i = 0; i < num_inputs; i++)
+            {
+                multi_dimensional_data.Add(sinusoid_data_grabber(num_points, fs, new double[] { 5, 10, 60 }));
+            }
+
+            // create list of high pass filters, one for each signal
+            List<NWaves.Filters.Base.IOnlineFilter> HP_filters = new List<NWaves.Filters.Base.IOnlineFilter>();
+            for (int i = 0; i < num_inputs; i++)
+            {
+                HP_filters.Add(Filters.create_highpass_butterworth_filter(HP_fc, fs, HP_order));
+            }
+
+            // apply each filter to each input signal seperately
+            List<List<double>> filtered_multi_dimensional_data = new List<List<double>>();
+            for (int i = 0; i < num_inputs; i++)
+            {
+                filtered_multi_dimensional_data.Add(Filters.apply_filter(HP_filters, multi_dimensional_data[i], i));
+            }
+        }
 
         public static void AccordSVMTest()
         {

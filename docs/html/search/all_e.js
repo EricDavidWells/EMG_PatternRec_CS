@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['datalogging_144',['DataLogging',['../namespace_real_time_pattern_rec_1_1_data_logging.html',1,'RealTimePatternRec']]],
+  ['examples_145',['Examples',['../namespace_real_time_pattern_rec_1_1_examples.html',1,'RealTimePatternRec']]],
+  ['mapping_146',['Mapping',['../namespace_real_time_pattern_rec_1_1_mapping.html',1,'RealTimePatternRec']]],
+  ['patternrec_147',['PatternRec',['../namespace_real_time_pattern_rec_1_1_pattern_rec.html',1,'RealTimePatternRec']]],
+  ['random_5fdata_5fgrabber_148',['random_data_grabber',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ae82e38363195d86038444a808280e68d',1,'RealTimePatternRec::Examples::Examples']]],
+  ['raw_149',['RAW',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a4bd0cbb9ab38385234c5ed745f508445',1,'RealTimePatternRec::Mapping::Features']]],
+  ['realtimebasicusage_150',['RealTimeBasicUsage',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ab943be10309862940903952cad6ee12e',1,'RealTimePatternRec::Examples::Examples']]],
+  ['realtimefilterflag_151',['realtimeFilterFlag',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a0099c3522754b669b97fb2cd5457ad03',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
+  ['realtimemodel_152',['RealTimeModel',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a078fddfe1cf96f05efd80652d0f6b1dc',1,'RealTimePatternRec.PatternRec.RealTimeModel.RealTimeModel()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html',1,'RealTimePatternRec.PatternRec.RealTimeModel']]],
+  ['realtimepatternrec_153',['RealTimePatternRec',['../namespace_real_time_pattern_rec.html',1,'']]],
+  ['realtimepredictflag_154',['realtimePredictFlag',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a183e5305e72cf4e5a18df852724ddcca',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
+  ['realtimescores_155',['RealTimeScores',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a8f922962376d15d3f67b7ccd4ec21bb0',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
+  ['recordflag_156',['recordflag',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ab96c1a140f7323f61878cd3e0fe4c0d7',1,'RealTimePatternRec::DataLogging::DataLogger']]],
+  ['relax_5ftime_157',['relax_time',['../class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#ab05402a28d93a35d8e1804a19de01648',1,'RealTimePatternRec::DataLogging::PR_Logger']]],
+  ['relaxation_5ftime_158',['relaxation_time',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager.html#a3ff971e93293ec58b7a8742b9f8677d1',1,'RealTimePatternRec::PatternRec::DataManager']]],
+  ['rng_159',['rng',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#af6098160348eb106a356c6a5d26b2aab',1,'RealTimePatternRec::Examples::Examples']]]
+];

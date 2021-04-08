@@ -1,0 +1,14 @@
+digraph "RealTimePatternRec.Mapping.Features.dummy_feature_example"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="RealTimePatternRec.Mapping.\lFeatures.dummy_feature_example",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Returns the windowed raw value (downsamples to match other windowed features)"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RealTimePatternRec.Examples.\lExamples.MapperBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a34aacf2f7e8d519d87f65c13ef97e083",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RealTimePatternRec.Examples.\lExamples.ModelBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ae7c8bd3a27b88f51f5dfe2d80fd44055",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RealTimePatternRec.Examples.\lExamples.RealTimeBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ab943be10309862940903952cad6ee12e",tooltip=" "];
+}

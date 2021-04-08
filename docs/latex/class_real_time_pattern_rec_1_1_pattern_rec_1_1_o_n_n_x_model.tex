@@ -1,0 +1,360 @@
+\hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel Class Reference}
+\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model}\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+
+
+holds a pre-\/trained Open Neural Network e\+Xchange model and provides some simple functionality to manipulate input and output data  
+
+
+Inheritance diagram for Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_input_type}{Dynamic\+Input\+Type}}
+\begin{DoxyCompactList}\small\item\em ML.\+Net requires a user defined class for input data \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_output_type}{Dynamic\+Output\+Type}}
+\begin{DoxyCompactList}\small\item\em ML.\+net requires a user defined class for output data"{} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_afd030d94fefc898bd6ae2b51c2d9a6de}{ONNXModel}} ()
+\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae22cf728c0c2cba4ccc7ea595184a944}{load\+\_\+onnx$<$ Tinput, Toutput $>$}} (string filepath\+\_\+, int input\+\_\+num\+\_\+, int output\+\_\+num\+\_\+, string input\+\_\+layer\+\_\+name\+\_\+, string output\+\_\+layer\+\_\+name\+\_\+)
+\begin{DoxyCompactList}\small\item\em Load the ONNX model \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a277459a59bd5f1ec92d587fb2f9b505f}{predict}} (double\mbox{[}$\,$\mbox{]} input)
+\begin{DoxyCompactList}\small\item\em transforms double type input array to double type output array scores \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4743d95f615b6868e687fcbe5994d0e7}{train}} (double\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} inputs, int\mbox{[}$\,$\mbox{]} outputs)
+\begin{DoxyCompactList}\small\item\em onnx models are preloaded, and don\textquotesingle{}t need to be trained. This function exists to satisfy interface requirements \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ada3876bf615855a2235b6ff5cc37eaf8}{save}} (string new\+\_\+filepath)
+\begin{DoxyCompactList}\small\item\em required by predictor interface, copies .onnx file to new location \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5ad015835bc3e8decbf6a4268367932f}{load}} (string load\+\_\+filepath)
+\begin{DoxyCompactList}\small\item\em required by predictor interface, loads onnx file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a0d254b61c5bdda759e76d7f827d63f3f}{filepath}}
+\begin{DoxyCompactList}\small\item\em path to onnx file \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a228d16aad67f1c0d5f094cba18716547}{input\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of inputs into onnx model \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a650cf90c501a61cf3736ff73879fa28e}{output\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of outputs from onnx model \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a3cef72c41d98d9a48b1b7763264fe983}{input\+\_\+layer\+\_\+name}}
+\begin{DoxyCompactList}\small\item\em name of input layer name, see netron.\+app to find out \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ad553a1b196e76634c358757042fcb286}{output\+\_\+layer\+\_\+name}}
+\begin{DoxyCompactList}\small\item\em name of output layer name, see netron.\+app to find out \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae3c966ac3fd9d52985acd2ad6467470d}{primitive\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em name of input/output primitive type, see netron.\+app to find out \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a8b357861697c66de068699a9a2407d37}{model\+\_\+type}} = \char`\"{}onnx\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em type of model \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4ba30045f915eb7484ee5a3649cafb94}{is\+\_\+trained}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em indicates model has been trained \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IData\+View \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4d80dcd0e7a7172356614698d2495951}{convert\+\_\+input\+\_\+to\+\_\+dataview$<$ Tinput $>$}} (Tinput\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Transforms primitive type input array to dataview matching the required input schema definition \end{DoxyCompactList}\item 
+T\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a16677503a58eadf843257ed0ba055354}{convert\+\_\+dataview\+\_\+to\+\_\+output$<$ T $>$}} (IData\+View dv)
+\begin{DoxyCompactList}\small\item\em Transforms output dataview matching the required output schema definition to primitive type output array \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Schema\+Definition \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5c4ed560e65f3bad22ae356c3e344777}{input\+\_\+schemadef}}
+\item 
+Schema\+Definition \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ac021e49d45643e816a8ab9c9cb4210c0}{output\+\_\+schemadef}}
+\item 
+Microsoft.\+ML.\+Transforms.\+Onnx.\+Onnx\+Transformer \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a06160897ee4a121211307d6a20477259}{transformer}}
+\item 
+MLContext \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a01dbd329bcf70e70074d455180baf2d5}{ml\+Context}} = new MLContext()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+holds a pre-\/trained Open Neural Network e\+Xchange model and provides some simple functionality to manipulate input and output data 
+
+ML.\+NET complicates this process by requiring all data entering ML.\+NET to have \char`\"{}\+IData\+View\char`\"{} interface implemented within it\textquotesingle{}s own user defined data class. This makes it quite difficult to have a flexible data class which can handle arbitrary input size depending on the model fed to it. Right now, the primitive\+\_\+type variable must match both the input and output layer primitive data type. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_afd030d94fefc898bd6ae2b51c2d9a6de}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_afd030d94fefc898bd6ae2b51c2d9a6de}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!ONNXModel@{ONNXModel}}
+\index{ONNXModel@{ONNXModel}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{ONNXModel()}{ONNXModel()}}
+{\footnotesize\ttfamily Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+ONNXModel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a16677503a58eadf843257ed0ba055354}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a16677503a58eadf843257ed0ba055354}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!convert\_dataview\_to\_output$<$ T $>$@{convert\_dataview\_to\_output$<$ T $>$}}
+\index{convert\_dataview\_to\_output$<$ T $>$@{convert\_dataview\_to\_output$<$ T $>$}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{convert\_dataview\_to\_output$<$ T $>$()}{convert\_dataview\_to\_output< T >()}}
+{\footnotesize\ttfamily T \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+convert\+\_\+dataview\+\_\+to\+\_\+output$<$ T $>$ (\begin{DoxyParamCaption}\item[{IData\+View}]{dv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Transforms output dataview matching the required output schema definition to primitive type output array 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4d80dcd0e7a7172356614698d2495951}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4d80dcd0e7a7172356614698d2495951}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!convert\_input\_to\_dataview$<$ Tinput $>$@{convert\_input\_to\_dataview$<$ Tinput $>$}}
+\index{convert\_input\_to\_dataview$<$ Tinput $>$@{convert\_input\_to\_dataview$<$ Tinput $>$}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{convert\_input\_to\_dataview$<$ Tinput $>$()}{convert\_input\_to\_dataview< Tinput >()}}
+{\footnotesize\ttfamily IData\+View Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+convert\+\_\+input\+\_\+to\+\_\+dataview$<$ Tinput $>$ (\begin{DoxyParamCaption}\item[{Tinput\mbox{[}$\,$\mbox{]}}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Transforms primitive type input array to dataview matching the required input schema definition 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Tinput} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5ad015835bc3e8decbf6a4268367932f}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5ad015835bc3e8decbf6a4268367932f}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!load@{load}}
+\index{load@{load}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+load (\begin{DoxyParamCaption}\item[{string}]{load\+\_\+filepath }\end{DoxyParamCaption})}
+
+
+
+required by predictor interface, loads onnx file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em load\+\_\+filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_ab59fd7785fbcf9fcd24b8ba46139d1d2}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae22cf728c0c2cba4ccc7ea595184a944}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae22cf728c0c2cba4ccc7ea595184a944}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!load\_onnx$<$ Tinput, Toutput $>$@{load\_onnx$<$ Tinput, Toutput $>$}}
+\index{load\_onnx$<$ Tinput, Toutput $>$@{load\_onnx$<$ Tinput, Toutput $>$}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{load\_onnx$<$ Tinput, Toutput $>$()}{load\_onnx< Tinput, Toutput >()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+load\+\_\+onnx$<$ Tinput, Toutput $>$ (\begin{DoxyParamCaption}\item[{string}]{filepath\+\_\+,  }\item[{int}]{input\+\_\+num\+\_\+,  }\item[{int}]{output\+\_\+num\+\_\+,  }\item[{string}]{input\+\_\+layer\+\_\+name\+\_\+,  }\item[{string}]{output\+\_\+layer\+\_\+name\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Load the ONNX model 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Tinput} & primitive data type (e.\+g. float) of the expected input layer\\
+\hline
+{\em Toutput} & primitive data type (e.\+g. float) of the expected output layer\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em filepath\+\_\+} & \char`\"{}absolute path to the .\+onnx model\char`\"{}\\
+\hline
+{\em input\+\_\+num\+\_\+} & \char`\"{}number of inputs in flattenned input layer\char`\"{}\\
+\hline
+{\em output\+\_\+num\+\_\+} & \char`\"{}number of outputs in output layer$<$/param$>$ $<$param name=\char`\"{}input\+\_\+layer\+\_\+name\+\_\+\char`\"{}$>$\char`\"{}name of input layer expected by .onnx model\char`\"{}$<$/param$>$ $<$param name=\char`\"{}output\+\_\+layer\+\_\+name\+\_\+\char`\"{}$>$\char`\"{}name of output layer expected by .onnx model\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a277459a59bd5f1ec92d587fb2f9b505f}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a277459a59bd5f1ec92d587fb2f9b505f}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!predict@{predict}}
+\index{predict@{predict}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+predict (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{input }\end{DoxyParamCaption})}
+
+
+
+transforms double type input array to double type output array scores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & flattened input array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_aeb04304e19542536c12b156443c4854c}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ada3876bf615855a2235b6ff5cc37eaf8}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ada3876bf615855a2235b6ff5cc37eaf8}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!save@{save}}
+\index{save@{save}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+save (\begin{DoxyParamCaption}\item[{string}]{new\+\_\+filepath }\end{DoxyParamCaption})}
+
+
+
+required by predictor interface, copies .onnx file to new location 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_afa9cce72bf784282cc3a0de37fa9174a}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4743d95f615b6868e687fcbe5994d0e7}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4743d95f615b6868e687fcbe5994d0e7}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!train@{train}}
+\index{train@{train}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+train (\begin{DoxyParamCaption}\item[{double}]{inputs\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int\mbox{[}$\,$\mbox{]}}]{outputs }\end{DoxyParamCaption})}
+
+
+
+onnx models are preloaded, and don\textquotesingle{}t need to be trained. This function exists to satisfy interface requirements 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & \\
+\hline
+{\em outputs} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor_a8a0fccf4ba65222797052d93355f198d}{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+IPredictor}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a0d254b61c5bdda759e76d7f827d63f3f}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a0d254b61c5bdda759e76d7f827d63f3f}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!filepath@{filepath}}
+\index{filepath@{filepath}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{filepath}{filepath}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+filepath}
+
+
+
+path to onnx file 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a3cef72c41d98d9a48b1b7763264fe983}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a3cef72c41d98d9a48b1b7763264fe983}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!input\_layer\_name@{input\_layer\_name}}
+\index{input\_layer\_name@{input\_layer\_name}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{input\_layer\_name}{input\_layer\_name}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+input\+\_\+layer\+\_\+name}
+
+
+
+name of input layer name, see netron.\+app to find out 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a228d16aad67f1c0d5f094cba18716547}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a228d16aad67f1c0d5f094cba18716547}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!input\_num@{input\_num}}
+\index{input\_num@{input\_num}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{input\_num}{input\_num}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+input\+\_\+num}
+
+
+
+number of inputs into onnx model 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5c4ed560e65f3bad22ae356c3e344777}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a5c4ed560e65f3bad22ae356c3e344777}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!input\_schemadef@{input\_schemadef}}
+\index{input\_schemadef@{input\_schemadef}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{input\_schemadef}{input\_schemadef}}
+{\footnotesize\ttfamily Schema\+Definition Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+input\+\_\+schemadef\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a01dbd329bcf70e70074d455180baf2d5}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a01dbd329bcf70e70074d455180baf2d5}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!mlContext@{mlContext}}
+\index{mlContext@{mlContext}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{mlContext}{mlContext}}
+{\footnotesize\ttfamily MLContext Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+ml\+Context = new MLContext()\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ad553a1b196e76634c358757042fcb286}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ad553a1b196e76634c358757042fcb286}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!output\_layer\_name@{output\_layer\_name}}
+\index{output\_layer\_name@{output\_layer\_name}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{output\_layer\_name}{output\_layer\_name}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+output\+\_\+layer\+\_\+name}
+
+
+
+name of output layer name, see netron.\+app to find out 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a650cf90c501a61cf3736ff73879fa28e}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a650cf90c501a61cf3736ff73879fa28e}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!output\_num@{output\_num}}
+\index{output\_num@{output\_num}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{output\_num}{output\_num}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+output\+\_\+num}
+
+
+
+number of outputs from onnx model 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ac021e49d45643e816a8ab9c9cb4210c0}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ac021e49d45643e816a8ab9c9cb4210c0}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!output\_schemadef@{output\_schemadef}}
+\index{output\_schemadef@{output\_schemadef}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{output\_schemadef}{output\_schemadef}}
+{\footnotesize\ttfamily Schema\+Definition Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+output\+\_\+schemadef\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae3c966ac3fd9d52985acd2ad6467470d}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_ae3c966ac3fd9d52985acd2ad6467470d}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!primitive\_type@{primitive\_type}}
+\index{primitive\_type@{primitive\_type}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{primitive\_type}{primitive\_type}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+primitive\+\_\+type}
+
+
+
+name of input/output primitive type, see netron.\+app to find out 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a06160897ee4a121211307d6a20477259}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a06160897ee4a121211307d6a20477259}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!transformer@{transformer}}
+\index{transformer@{transformer}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{transformer}{transformer}}
+{\footnotesize\ttfamily Microsoft.\+ML.\+Transforms.\+Onnx.\+Onnx\+Transformer Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+transformer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4ba30045f915eb7484ee5a3649cafb94}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a4ba30045f915eb7484ee5a3649cafb94}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!is\_trained@{is\_trained}}
+\index{is\_trained@{is\_trained}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{is\_trained}{is\_trained}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+is\+\_\+trained = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+indicates model has been trained 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a8b357861697c66de068699a9a2407d37}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_a8b357861697c66de068699a9a2407d37}} 
+\index{RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}!model\_type@{model\_type}}
+\index{model\_type@{model\_type}!RealTimePatternRec.PatternRec.ONNXModel@{RealTimePatternRec.PatternRec.ONNXModel}}
+\doxysubsubsection{\texorpdfstring{model\_type}{model\_type}}
+{\footnotesize\ttfamily string Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+ONNXModel.\+model\+\_\+type = \char`\"{}onnx\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+type of model 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

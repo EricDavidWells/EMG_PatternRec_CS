@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['model_5ftype_426',['model_type',['../interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor.html#a734b6295e90d0baf15c4d477e5dd29c0',1,'RealTimePatternRec.PatternRec.IPredictor.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#aeef622f93b9cd733930a5044d852eca0',1,'RealTimePatternRec.PatternRec.AccordSVMGaussianModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_linear_model.html#a8b8671bd8443ca42dbf0760c3874f3af',1,'RealTimePatternRec.PatternRec.AccordSVMLinearModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model.html#ada5784f18d301dd739f2fc7356600abc',1,'RealTimePatternRec.PatternRec.AccordLDAModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a8b357861697c66de068699a9a2407d37',1,'RealTimePatternRec.PatternRec.ONNXModel.model_type()']]]
+];

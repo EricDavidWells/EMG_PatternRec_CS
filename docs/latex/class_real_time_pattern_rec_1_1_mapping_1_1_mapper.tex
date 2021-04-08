@@ -1,0 +1,409 @@
+\hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper Class Reference}
+\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper}\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+
+
+utilizes \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_scalers}{Scalers}}, \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_features}{Features}}, and \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_filters}{Filters}} functions to create a pipeline mapping raw input signals to features  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ data\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Feature functions \end{DoxyCompactList}\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ data\+\_\+, int channel\+\_\+num\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Scaler functions \end{DoxyCompactList}\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ raw\+\_\+values, int channel\+\_\+num\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Filter functions \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1894fab4fb2bb77bbc9321ae517f5bc9}{Mapper}} ()
+\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab3bec69ea2e67ecfc641123f65be2afd}{scale\+\_\+signals}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Scaler functions in scaler pipelines to both generic and emg signals \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac029d2edf050c14e08bbfdb34cd030a8}{filter\+\_\+signals}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Filter functions in filter pipelines to both generic and emg signals \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a373a27595e9b6eacba194c99aa910200}{map\+\_\+features}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Feature functions in feature pipelines to both generic and emg signals \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1ac0343ae21ff81682d0069d968d5f1a}{window\+\_\+size\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of timesteps per window \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aa66bb4b5fa9e242d156d0a7ec050ee8e}{window\+\_\+overlap\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of timesteps to overlap \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a0275c68655a865bbb31ea3df855c5218}{window\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of windows to use per model input \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4091e03399e2ae85df3a834d65dba72e}{generic\+\_\+feature\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8a4695caf7db4b89b887a59253c16ffd}{emg\+\_\+feature\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a19fad1ce97eac4d2c1be3dfc9f56cc97}{generic\+\_\+feature\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a163a3dc89fae8004ceaf79a3306b6c49}{emg\+\_\+feature\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature function keywords for emg signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_adf3f5abd499e0b9a032c3ca2b12c473a}{generic\+\_\+scaler\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of scaler functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_add62d2396ae93a0933142310756f1ba1}{emg\+\_\+scaler\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of scaler functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac03a1914a42f6898374618fba133c93c}{generic\+\_\+scaler\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Scaler function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab2ec1def6302e9fb6cd464e1e45f44ca}{emg\+\_\+scaler\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Scaler function keywords for emg signals \end{DoxyCompactList}\item 
+List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaa0a1d210198e92923a36ba1e4d12569}{max\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aca458855f412ada9458578778ee38c21}{min\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1dd76b57ee06a29727fe5b3754906d5a}{mean\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a10f5c11cdf827415bb7f9ca843eee85b}{stdev\+\_\+values}}
+\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a054cb2509d1e52f8e0f3efad904ad73b}{generic\+\_\+filter\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of filter functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaddd33667c65e36de6a68bbedd553109}{emg\+\_\+filter\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of filter functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a21dc2f24cc7dcff647dbfc791e555ff3}{generic\+\_\+filter\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of filter function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aec156480a6659381c882555d3c303646}{emg\+\_\+filter\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of filter function keywords for emg signals \end{DoxyCompactList}\item 
+Dictionary$<$ string, double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4a3bebe32a87400b59130705c120b21d}{emg\+\_\+filter\+\_\+params}} = new Dictionary$<$string, double$>$()
+\item 
+Dictionary$<$ string, double $>$ \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a7184de85375ac965fae73d636068868a}{generic\+\_\+filter\+\_\+params}} = new Dictionary$<$string, double$>$()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+utilizes \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_scalers}{Scalers}}, \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_features}{Features}}, and \mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_filters}{Filters}} functions to create a pipeline mapping raw input signals to features 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1894fab4fb2bb77bbc9321ae517f5bc9}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1894fab4fb2bb77bbc9321ae517f5bc9}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!Mapper@{Mapper}}
+\index{Mapper@{Mapper}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{Mapper()}{Mapper()}}
+{\footnotesize\ttfamily Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+Mapper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!feature\_pipeline\_func@{feature\_pipeline\_func}}
+\index{feature\_pipeline\_func@{feature\_pipeline\_func}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{feature\_pipeline\_func()}{feature\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+feature\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{data\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Feature functions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+} & input signal\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+features from input signal
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!filter\_pipeline\_func@{filter\_pipeline\_func}}
+\index{filter\_pipeline\_func@{filter\_pipeline\_func}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{filter\_pipeline\_func()}{filter\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+filter\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{channel\+\_\+num\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Filter functions 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & \\
+\hline
+{\em raw\+\_\+values} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac029d2edf050c14e08bbfdb34cd030a8}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac029d2edf050c14e08bbfdb34cd030a8}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!filter\_signals@{filter\_signals}}
+\index{filter\_signals@{filter\_signals}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{filter\_signals()}{filter\_signals()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+filter\+\_\+signals (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Filter functions in filter pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals of size timestepnum X inputnum\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a373a27595e9b6eacba194c99aa910200}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a373a27595e9b6eacba194c99aa910200}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!map\_features@{map\_features}}
+\index{map\_features@{map\_features}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{map\_features()}{map\_features()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+map\+\_\+features (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Feature functions in feature pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab3bec69ea2e67ecfc641123f65be2afd}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab3bec69ea2e67ecfc641123f65be2afd}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!scale\_signals@{scale\_signals}}
+\index{scale\_signals@{scale\_signals}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{scale\_signals()}{scale\_signals()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+scale\+\_\+signals (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Scaler functions in scaler pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!scaler\_pipeline\_func@{scaler\_pipeline\_func}}
+\index{scaler\_pipeline\_func@{scaler\_pipeline\_func}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{scaler\_pipeline\_func()}{scaler\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+scaler\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{data\+\_\+,  }\item[{int}]{channel\+\_\+num\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Scaler functions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+} & input signal\\
+\hline
+{\em channel\+\_\+num\+\_\+} & input channel num, used for selecting which min/max/mean value to use fo scaling\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8a4695caf7db4b89b887a59253c16ffd}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8a4695caf7db4b89b887a59253c16ffd}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_feature\_pipeline@{emg\_feature\_pipeline}}
+\index{emg\_feature\_pipeline@{emg\_feature\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_feature\_pipeline}{emg\_feature\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+feature\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of Feature functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a163a3dc89fae8004ceaf79a3306b6c49}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a163a3dc89fae8004ceaf79a3306b6c49}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_feature\_pipeline\_titles@{emg\_feature\_pipeline\_titles}}
+\index{emg\_feature\_pipeline\_titles@{emg\_feature\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_feature\_pipeline\_titles}{emg\_feature\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+feature\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Feature function keywords for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4a3bebe32a87400b59130705c120b21d}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4a3bebe32a87400b59130705c120b21d}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_filter\_params@{emg\_filter\_params}}
+\index{emg\_filter\_params@{emg\_filter\_params}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_params}{emg\_filter\_params}}
+{\footnotesize\ttfamily Dictionary$<$string, double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+params = new Dictionary$<$string, double$>$()}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaddd33667c65e36de6a68bbedd553109}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaddd33667c65e36de6a68bbedd553109}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_filter\_pipeline@{emg\_filter\_pipeline}}
+\index{emg\_filter\_pipeline@{emg\_filter\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_pipeline}{emg\_filter\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of filter functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aec156480a6659381c882555d3c303646}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aec156480a6659381c882555d3c303646}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_filter\_pipeline\_titles@{emg\_filter\_pipeline\_titles}}
+\index{emg\_filter\_pipeline\_titles@{emg\_filter\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_pipeline\_titles}{emg\_filter\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of filter function keywords for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_add62d2396ae93a0933142310756f1ba1}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_add62d2396ae93a0933142310756f1ba1}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_scaler\_pipeline@{emg\_scaler\_pipeline}}
+\index{emg\_scaler\_pipeline@{emg\_scaler\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_scaler\_pipeline}{emg\_scaler\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+scaler\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of scaler functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab2ec1def6302e9fb6cd464e1e45f44ca}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ab2ec1def6302e9fb6cd464e1e45f44ca}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!emg\_scaler\_pipeline\_titles@{emg\_scaler\_pipeline\_titles}}
+\index{emg\_scaler\_pipeline\_titles@{emg\_scaler\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_scaler\_pipeline\_titles}{emg\_scaler\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+emg\+\_\+scaler\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Scaler function keywords for emg signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4091e03399e2ae85df3a834d65dba72e}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a4091e03399e2ae85df3a834d65dba72e}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_feature\_pipeline@{generic\_feature\_pipeline}}
+\index{generic\_feature\_pipeline@{generic\_feature\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_feature\_pipeline}{generic\_feature\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+feature\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a01ce8dab85be08bb222c21c6db96fa7c}{feature\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of Feature functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a19fad1ce97eac4d2c1be3dfc9f56cc97}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a19fad1ce97eac4d2c1be3dfc9f56cc97}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_feature\_pipeline\_titles@{generic\_feature\_pipeline\_titles}}
+\index{generic\_feature\_pipeline\_titles@{generic\_feature\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_feature\_pipeline\_titles}{generic\_feature\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+feature\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Feature function keywords for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a7184de85375ac965fae73d636068868a}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a7184de85375ac965fae73d636068868a}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_filter\_params@{generic\_filter\_params}}
+\index{generic\_filter\_params@{generic\_filter\_params}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_params}{generic\_filter\_params}}
+{\footnotesize\ttfamily Dictionary$<$string, double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+params = new Dictionary$<$string, double$>$()}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a054cb2509d1e52f8e0f3efad904ad73b}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a054cb2509d1e52f8e0f3efad904ad73b}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_filter\_pipeline@{generic\_filter\_pipeline}}
+\index{generic\_filter\_pipeline@{generic\_filter\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_pipeline}{generic\_filter\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a98bd1f3dcea4d2b3159bc55aeb436744}{filter\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of filter functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a21dc2f24cc7dcff647dbfc791e555ff3}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a21dc2f24cc7dcff647dbfc791e555ff3}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_filter\_pipeline\_titles@{generic\_filter\_pipeline\_titles}}
+\index{generic\_filter\_pipeline\_titles@{generic\_filter\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_pipeline\_titles}{generic\_filter\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of filter function keywords for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_adf3f5abd499e0b9a032c3ca2b12c473a}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_adf3f5abd499e0b9a032c3ca2b12c473a}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_scaler\_pipeline@{generic\_scaler\_pipeline}}
+\index{generic\_scaler\_pipeline@{generic\_scaler\_pipeline}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_scaler\_pipeline}{generic\_scaler\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+scaler\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a8ede3b6f9372326bcea6642d2c5cd60a}{scaler\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of scaler functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac03a1914a42f6898374618fba133c93c}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_ac03a1914a42f6898374618fba133c93c}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!generic\_scaler\_pipeline\_titles@{generic\_scaler\_pipeline\_titles}}
+\index{generic\_scaler\_pipeline\_titles@{generic\_scaler\_pipeline\_titles}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_scaler\_pipeline\_titles}{generic\_scaler\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+generic\+\_\+scaler\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Scaler function keywords for generic signals 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaa0a1d210198e92923a36ba1e4d12569}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aaa0a1d210198e92923a36ba1e4d12569}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!max\_values@{max\_values}}
+\index{max\_values@{max\_values}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{max\_values}{max\_values}}
+{\footnotesize\ttfamily List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+max\+\_\+values}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1dd76b57ee06a29727fe5b3754906d5a}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1dd76b57ee06a29727fe5b3754906d5a}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!mean\_values@{mean\_values}}
+\index{mean\_values@{mean\_values}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{mean\_values}{mean\_values}}
+{\footnotesize\ttfamily List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+mean\+\_\+values}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aca458855f412ada9458578778ee38c21}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aca458855f412ada9458578778ee38c21}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!min\_values@{min\_values}}
+\index{min\_values@{min\_values}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{min\_values}{min\_values}}
+{\footnotesize\ttfamily List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+min\+\_\+values}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a10f5c11cdf827415bb7f9ca843eee85b}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a10f5c11cdf827415bb7f9ca843eee85b}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!stdev\_values@{stdev\_values}}
+\index{stdev\_values@{stdev\_values}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{stdev\_values}{stdev\_values}}
+{\footnotesize\ttfamily List$<$double$>$ Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+stdev\+\_\+values}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a0275c68655a865bbb31ea3df855c5218}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a0275c68655a865bbb31ea3df855c5218}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!window\_n@{window\_n}}
+\index{window\_n@{window\_n}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_n}{window\_n}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+window\+\_\+n}
+
+
+
+number of windows to use per model input 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aa66bb4b5fa9e242d156d0a7ec050ee8e}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_aa66bb4b5fa9e242d156d0a7ec050ee8e}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!window\_overlap\_n@{window\_overlap\_n}}
+\index{window\_overlap\_n@{window\_overlap\_n}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_overlap\_n}{window\_overlap\_n}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+window\+\_\+overlap\+\_\+n}
+
+
+
+number of timesteps to overlap 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1ac0343ae21ff81682d0069d968d5f1a}\label{class_real_time_pattern_rec_1_1_mapping_1_1_mapper_a1ac0343ae21ff81682d0069d968d5f1a}} 
+\index{RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}!window\_size\_n@{window\_size\_n}}
+\index{window\_size\_n@{window\_size\_n}!RealTimePatternRec.Mapping.Mapper@{RealTimePatternRec.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_size\_n}{window\_size\_n}}
+{\footnotesize\ttfamily int Real\+Time\+Pattern\+Rec.\+Mapping.\+Mapper.\+window\+\_\+size\+\_\+n}
+
+
+
+number of timesteps per window 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

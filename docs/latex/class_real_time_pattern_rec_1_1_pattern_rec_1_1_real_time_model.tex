@@ -1,0 +1,124 @@
+\hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model}{}\doxysection{Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model Class Reference}
+\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model}\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+
+
+Enables consistent real-\/time prediction from a \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}} object at the specified frequency it was trained on. Inherits from Data\+Logger class  
+
+
+Inheritance diagram for Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a078fddfe1cf96f05efd80652d0f6b1dc}{Real\+Time\+Model}} (\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}} model\+\_\+)
+\item 
+override void \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a30b351c083f3a1ffc12eb1f2e1481fe4}{thread\+\_\+loop}} ()
+\begin{DoxyCompactList}\small\item\em override Data\+Loggers thread to filter all inputs and make a prediction on each successive data grab \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a50a7cf8f21dc1aec390972a1fc4c2a37}{model}}
+\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a0099c3522754b669b97fb2cd5457ad03}{realtime\+Filter\+Flag}}
+\begin{DoxyCompactList}\small\item\em if true, data will be filtered using model.\+mapper each time data is collected \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a183e5305e72cf4e5a18df852724ddcca}{realtime\+Predict\+Flag}}
+\begin{DoxyCompactList}\small\item\em if true, prediction will be updated each time data is collected \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a8f922962376d15d3f67b7ccd4ec21bb0}{Real\+Time\+Scores}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em gets current realtime prediction scores \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_ac4e088058b49f5bb7a9be8223a59a0ac}{\+\_\+realtime\+Scores}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Enables consistent real-\/time prediction from a \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}} object at the specified frequency it was trained on. Inherits from Data\+Logger class 
+
+A seperate digital filter must be used for each signal due to digital filters reliance on previous inputs. These digital filters rely on signals at the specified sampling frequency, and must be updated consistently, not just each time a prediction is made. Similarly, the post-\/processing algorithms are dependent on sampling rate, and must be done consistently. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a078fddfe1cf96f05efd80652d0f6b1dc}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a078fddfe1cf96f05efd80652d0f6b1dc}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!RealTimeModel@{RealTimeModel}}
+\index{RealTimeModel@{RealTimeModel}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{RealTimeModel()}{RealTimeModel()}}
+{\footnotesize\ttfamily Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+Real\+Time\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}}}]{model\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a30b351c083f3a1ffc12eb1f2e1481fe4}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a30b351c083f3a1ffc12eb1f2e1481fe4}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!thread\_loop@{thread\_loop}}
+\index{thread\_loop@{thread\_loop}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{thread\_loop()}{thread\_loop()}}
+{\footnotesize\ttfamily override void Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+thread\+\_\+loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+override Data\+Loggers thread to filter all inputs and make a prediction on each successive data grab 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger_ab2cd46788888568fe9a4a5ae1c396f32}{Real\+Time\+Pattern\+Rec.\+Data\+Logging.\+Data\+Logger}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_ac4e088058b49f5bb7a9be8223a59a0ac}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_ac4e088058b49f5bb7a9be8223a59a0ac}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!\_realtimeScores@{\_realtimeScores}}
+\index{\_realtimeScores@{\_realtimeScores}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{\_realtimeScores}{\_realtimeScores}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+\_\+realtime\+Scores\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a50a7cf8f21dc1aec390972a1fc4c2a37}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a50a7cf8f21dc1aec390972a1fc4c2a37}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!model@{model}}
+\index{model@{model}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_real_time_pattern_rec_1_1_pattern_rec_1_1_model}{Model}} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+model}
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a0099c3522754b669b97fb2cd5457ad03}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a0099c3522754b669b97fb2cd5457ad03}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!realtimeFilterFlag@{realtimeFilterFlag}}
+\index{realtimeFilterFlag@{realtimeFilterFlag}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{realtimeFilterFlag}{realtimeFilterFlag}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+realtime\+Filter\+Flag}
+
+
+
+if true, data will be filtered using model.\+mapper each time data is collected 
+
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a183e5305e72cf4e5a18df852724ddcca}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a183e5305e72cf4e5a18df852724ddcca}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!realtimePredictFlag@{realtimePredictFlag}}
+\index{realtimePredictFlag@{realtimePredictFlag}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{realtimePredictFlag}{realtimePredictFlag}}
+{\footnotesize\ttfamily bool Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+realtime\+Predict\+Flag}
+
+
+
+if true, prediction will be updated each time data is collected 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a8f922962376d15d3f67b7ccd4ec21bb0}\label{class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model_a8f922962376d15d3f67b7ccd4ec21bb0}} 
+\index{RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}!RealTimeScores@{RealTimeScores}}
+\index{RealTimeScores@{RealTimeScores}!RealTimePatternRec.PatternRec.RealTimeModel@{RealTimePatternRec.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{RealTimeScores}{RealTimeScores}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} Real\+Time\+Pattern\+Rec.\+Pattern\+Rec.\+Real\+Time\+Model.\+Real\+Time\+Scores\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+gets current realtime prediction scores 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+RTPR\+\_\+\+CSharp/\+Real\+Time\+Pattern\+Rec/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

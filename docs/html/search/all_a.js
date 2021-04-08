@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['majorityvoteflag_95',['majorityVoteFlag',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#a6a6d957859e3bc2b9250a4ca774de702',1,'RealTimePatternRec::Mapping::PostProcessor']]],
+  ['majorityvoting_96',['majorityVoting',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#aec5956bb1cc6e2a61179d877e73dc2ae',1,'RealTimePatternRec::Mapping::PostProcessor']]],
+  ['majorityvotingbuflength_97',['majorityVotingBufLength',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#a13f5ba12029dc5ad31386850baf9ad3b',1,'RealTimePatternRec::Mapping::PostProcessor']]],
+  ['majorityvotingqueue_98',['majorityVotingQueue',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#a00e3e262028f1fafcc265d637fb4dd48',1,'RealTimePatternRec::Mapping::PostProcessor']]],
+  ['map_5ffeatures_99',['map_features',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a373a27595e9b6eacba194c99aa910200',1,'RealTimePatternRec::Mapping::Mapper']]],
+  ['map_5ftrainingdata_5fto_5ffeatures_100',['map_trainingdata_to_features',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#afcf0bf731b7540357336ee18a7930f11',1,'RealTimePatternRec::PatternRec::Model']]],
+  ['mapper_101',['mapper',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#a3032765ad7748f362c4f59541caf8209',1,'RealTimePatternRec::PatternRec::Model']]],
+  ['mapper_102',['Mapper',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a1894fab4fb2bb77bbc9321ae517f5bc9',1,'RealTimePatternRec.Mapping.Mapper.Mapper()'],['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html',1,'RealTimePatternRec.Mapping.Mapper']]],
+  ['mapperbasicusage_103',['MapperBasicUsage',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a34aacf2f7e8d519d87f65c13ef97e083',1,'RealTimePatternRec::Examples::Examples']]],
+  ['mapping_2ecs_104',['Mapping.cs',['../_mapping_8cs.html',1,'']]],
+  ['mav_105',['MAV',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#ab267c6adba5d2e92456291ded9d382f7',1,'RealTimePatternRec::Mapping::Features']]],
+  ['max_5fvalues_106',['max_values',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#aaa0a1d210198e92923a36ba1e4d12569',1,'RealTimePatternRec::Mapping::Mapper']]],
+  ['mean_5fvalues_107',['mean_values',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a1dd76b57ee06a29727fe5b3754906d5a',1,'RealTimePatternRec::Mapping::Mapper']]],
+  ['min_5fvalues_108',['min_values',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#aca458855f412ada9458578778ee38c21',1,'RealTimePatternRec::Mapping::Mapper']]],
+  ['minmaxscaling_109',['MinMaxScaling',['../class_real_time_pattern_rec_1_1_mapping_1_1_scalers.html#ad13116776ab52be0e3d333f0ce7e86fc',1,'RealTimePatternRec::Mapping::Scalers']]],
+  ['minmaxzerocenter_110',['MinMaxZeroCenter',['../class_real_time_pattern_rec_1_1_mapping_1_1_scalers.html#a37ee5dc52d5a52983ca31b7594c29da7',1,'RealTimePatternRec::Mapping::Scalers']]],
+  ['mlcontext_111',['mlContext',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a01dbd329bcf70e70074d455180baf2d5',1,'RealTimePatternRec::PatternRec::ONNXModel']]],
+  ['mmav1_112',['MMAV1',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a6a24c0f795ebb6f97d472a970b6cc1c8',1,'RealTimePatternRec::Mapping::Features']]],
+  ['mmav2_113',['MMAV2',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a1b6ba40a3457a607d4aa6d809924ac20',1,'RealTimePatternRec::Mapping::Features']]],
+  ['model_114',['model',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#a5f0c742fee02d2c3ec972853b358af0f',1,'RealTimePatternRec.PatternRec.Model.model()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a50a7cf8f21dc1aec390972a1fc4c2a37',1,'RealTimePatternRec.PatternRec.RealTimeModel.model()']]],
+  ['model_115',['Model',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#a9179c5efe4a80b848b300d6fb7cbcbd8',1,'RealTimePatternRec.PatternRec.Model.Model()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html',1,'RealTimePatternRec.PatternRec.Model']]],
+  ['model_5ftype_116',['model_type',['../interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor.html#a734b6295e90d0baf15c4d477e5dd29c0',1,'RealTimePatternRec.PatternRec.IPredictor.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#aeef622f93b9cd733930a5044d852eca0',1,'RealTimePatternRec.PatternRec.AccordSVMGaussianModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_linear_model.html#a8b8671bd8443ca42dbf0760c3874f3af',1,'RealTimePatternRec.PatternRec.AccordSVMLinearModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_l_d_a_model.html#ada5784f18d301dd739f2fc7356600abc',1,'RealTimePatternRec.PatternRec.AccordLDAModel.model_type()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a8b357861697c66de068699a9a2407d37',1,'RealTimePatternRec.PatternRec.ONNXModel.model_type()']]],
+  ['modelbasicusage_117',['ModelBasicUsage',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ae7c8bd3a27b88f51f5dfe2d80fd44055',1,'RealTimePatternRec::Examples::Examples']]],
+  ['mv_118',['MV',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a5ed8e31f730d44ce82c1cb315a7ff020',1,'RealTimePatternRec::Mapping::Features']]]
+];

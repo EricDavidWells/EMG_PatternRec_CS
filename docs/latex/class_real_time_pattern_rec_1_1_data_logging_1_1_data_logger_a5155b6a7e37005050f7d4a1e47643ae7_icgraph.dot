@@ -1,0 +1,24 @@
+digraph "RealTimePatternRec.DataLogging.DataLogger.write_csv"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="RealTimePatternRec.DataLogging.\lDataLogger.write_csv",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="writes data to file as comma seperated values"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="RealTimePatternRec.DataLogging.\lDataLogger.write_data_with\l_timestamp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ae49c4de5079f2382e4666d4daacb5ec4",tooltip="writes timestamp before writing data as comma seperated value"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="RealTimePatternRec.DataLogging.\lDataLogger.thread_loop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ab2cd46788888568fe9a4a5ae1c396f32",tooltip="main loop for logging thread. waits till sample frequency specified delay before grabbing data and wr..."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="RealTimePatternRec.DataLogging.\lDataLogger.start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#aa06a1b07ca8c96e97a08683403dc2835",tooltip="starts data grabbing thread"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="RealTimePatternRec.Examples.\lExamples.DataLoggerBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a7d440d57643a4fa77f73987df7d3be31",tooltip=" "];
+  Node4 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="RealTimePatternRec.Examples.\lExamples.RealTimeBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ab943be10309862940903952cad6ee12e",tooltip=" "];
+  Node4 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="RealTimePatternRec.DataLogging.\lPR_Logger.start_data_collection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#a7be2a2ab0022a469724edb8053406514",tooltip="initiates data collection sequence"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="RealTimePatternRec.Examples.\lExamples.PR_LoggerBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a095c921794555809e57339be2aa8013d",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="RealTimePatternRec.DataLogging.\lPR_Logger.write_data_with\l_timestamp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#a07fcd112d382f80a62c228d2b2b03b98",tooltip="writes data with timestamp and appended ground truth output class"];
+}

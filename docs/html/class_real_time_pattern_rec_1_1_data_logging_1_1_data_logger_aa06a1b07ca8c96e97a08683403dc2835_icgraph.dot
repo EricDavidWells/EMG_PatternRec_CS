@@ -1,0 +1,16 @@
+digraph "RealTimePatternRec.DataLogging.DataLogger.start"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="RealTimePatternRec.DataLogging.\lDataLogger.start",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="starts data grabbing thread"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="RealTimePatternRec.Examples.\lExamples.DataLoggerBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a7d440d57643a4fa77f73987df7d3be31",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="RealTimePatternRec.Examples.\lExamples.RealTimeBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ab943be10309862940903952cad6ee12e",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="RealTimePatternRec.DataLogging.\lPR_Logger.start_data_collection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#a7be2a2ab0022a469724edb8053406514",tooltip="initiates data collection sequence"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="RealTimePatternRec.Examples.\lExamples.PR_LoggerBasicUsage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a095c921794555809e57339be2aa8013d",tooltip=" "];
+}

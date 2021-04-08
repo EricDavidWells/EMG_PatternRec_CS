@@ -1,0 +1,25 @@
+var class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model =
+[
+    [ "DynamicInputType", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_input_type.html", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_input_type" ],
+    [ "DynamicOutputType", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_output_type.html", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_output_type" ],
+    [ "ONNXModel", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#afd030d94fefc898bd6ae2b51c2d9a6de", null ],
+    [ "convert_dataview_to_output< T >", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a16677503a58eadf843257ed0ba055354", null ],
+    [ "convert_input_to_dataview< Tinput >", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a4d80dcd0e7a7172356614698d2495951", null ],
+    [ "load", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a5ad015835bc3e8decbf6a4268367932f", null ],
+    [ "load_onnx< Tinput, Toutput >", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#ae22cf728c0c2cba4ccc7ea595184a944", null ],
+    [ "predict", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a277459a59bd5f1ec92d587fb2f9b505f", null ],
+    [ "save", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#ada3876bf615855a2235b6ff5cc37eaf8", null ],
+    [ "train", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a4743d95f615b6868e687fcbe5994d0e7", null ],
+    [ "filepath", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a0d254b61c5bdda759e76d7f827d63f3f", null ],
+    [ "input_layer_name", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a3cef72c41d98d9a48b1b7763264fe983", null ],
+    [ "input_num", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a228d16aad67f1c0d5f094cba18716547", null ],
+    [ "input_schemadef", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a5c4ed560e65f3bad22ae356c3e344777", null ],
+    [ "mlContext", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a01dbd329bcf70e70074d455180baf2d5", null ],
+    [ "output_layer_name", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#ad553a1b196e76634c358757042fcb286", null ],
+    [ "output_num", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a650cf90c501a61cf3736ff73879fa28e", null ],
+    [ "output_schemadef", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#ac021e49d45643e816a8ab9c9cb4210c0", null ],
+    [ "primitive_type", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#ae3c966ac3fd9d52985acd2ad6467470d", null ],
+    [ "transformer", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a06160897ee4a121211307d6a20477259", null ],
+    [ "is_trained", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a4ba30045f915eb7484ee5a3649cafb94", null ],
+    [ "model_type", "class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model.html#a8b357861697c66de068699a9a2407d37", null ]
+];

@@ -47,7 +47,7 @@ namespace RealTimePatternRec.Mapping
         }
 
         /// <summary>
-        /// Returns the windowed raw value (downsamples to match other windowed features)
+        /// Returns the windowed raw value (downsampled to match other windowed features)
         /// </summary>
         /// <param name="raw_values"></param>
         /// <param name="window_size_n"></param>

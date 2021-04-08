@@ -1,0 +1,26 @@
+digraph "RealTimePatternRec.PatternRec.Model.train_model"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="RealTimePatternRec.Pattern\lRec.Model.train_model",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Splits data into training and testing set, trains model, and calculates accuracy"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="RealTimePatternRec.Pattern\lRec.Model.map_trainingdata\l_to_features",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#afcf0bf731b7540357336ee18a7930f11",tooltip="runs all of the training data through the Mapper pipeline and stores features and outputs in the Data..."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="RealTimePatternRec.Mapping.\lMapper.filter_signals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#ac029d2edf050c14e08bbfdb34cd030a8",tooltip="Apply all Filter functions in filter pipelines to both generic and emg signals"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="RealTimePatternRec.Mapping.\lMapper.filter_pipeline_func",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a98bd1f3dcea4d2b3159bc55aeb436744",tooltip="delegate for Filter functions"];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="RealTimePatternRec.Mapping.\lMapper.map_features",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a373a27595e9b6eacba194c99aa910200",tooltip="Apply all Feature functions in feature pipelines to both generic and emg signals"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="RealTimePatternRec.Mapping.\lMapper.feature_pipeline_func",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a01ce8dab85be08bb222c21c6db96fa7c",tooltip="delegate for Feature functions"];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="RealTimePatternRec.Mapping.\lMapper.scale_signals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#ab3bec69ea2e67ecfc641123f65be2afd",tooltip="Apply all Scaler functions in scaler pipelines to both generic and emg signals"];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="RealTimePatternRec.Mapping.\lMapper.scaler_pipeline_func",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a8ede3b6f9372326bcea6642d2c5cd60a",tooltip="delegate for Scaler functions"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="RealTimePatternRec.Pattern\lRec.IPredictor.predict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor.html#aeb04304e19542536c12b156443c4854c",tooltip="predicts output"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="RealTimePatternRec.Pattern\lRec.IPredictor.train",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor.html#a8a0fccf4ba65222797052d93355f198d",tooltip="trains model"];
+}

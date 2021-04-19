@@ -1,0 +1,409 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper}\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+
+
+utilizes \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers}{Scalers}}, \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features}{Features}}, and \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters}{Filters}} functions to create a pipeline mapping raw input signals to features  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ data\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Feature functions \end{DoxyCompactList}\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ data\+\_\+, int channel\+\_\+num\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Scaler functions \end{DoxyCompactList}\item 
+delegate List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}} (List$<$ double $>$ raw\+\_\+values, int channel\+\_\+num\+\_\+)
+\begin{DoxyCompactList}\small\item\em delegate for Filter functions \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0bdc2a5d49d6c0754f028ce9ee1405ef}{Mapper}} ()
+\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a6d5374f403b679e824fa277ec5cccc49}{scale\+\_\+signals}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Scaler functions in scaler pipelines to both generic and emg signals \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3da64607914ad848af295ae1b506717b}{filter\+\_\+signals}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Filter functions in filter pipelines to both generic and emg signals \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ab75428c8a5764c8b11d68eec2502e621}{map\+\_\+features}} (List$<$ List$<$ double $>$$>$ raw\+\_\+inputs, List$<$ int $>$ input\+\_\+types, List$<$ bool $>$ input\+\_\+active\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Apply all Feature functions in feature pipelines to both generic and emg signals \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9f72f51cb5c167c55e26f22658bc0626}{window\+\_\+size\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of timesteps per window \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2ba6182af85b7100e4f1de2003e16a57}{window\+\_\+overlap\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of timesteps to overlap \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_adac12e38a6a7c2f022bb4aa627245fb9}{window\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em number of windows to use per model input \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_acf3a3cc522971381a98d67e3cb80f947}{generic\+\_\+feature\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a89e512bac2299613d30f38180119e045}{emg\+\_\+feature\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ae11557429118a5a917d29323e6b754c3}{generic\+\_\+feature\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aea5f7a4b543c1cc999a16a50ffc878d5}{emg\+\_\+feature\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Feature function keywords for emg signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_abffb8b95f069ad62313da6ec5317c337}{generic\+\_\+scaler\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of scaler functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a50f98f6eadab4eee056ebbc1b5d169ec}{emg\+\_\+scaler\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of scaler functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a4e42722b7fd1ba30fdfd4c3301611217}{generic\+\_\+scaler\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Scaler function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a8d1fcce1c25cdb9d507f18a9e96f82c2}{emg\+\_\+scaler\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of Scaler function keywords for emg signals \end{DoxyCompactList}\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ad0b0e63b300f20697db10ce22c0fd461}{max\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2af888c1a5a0b28fc313a74cf0fba635}{min\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0d145119c90f102b8eacfc755f251c49}{mean\+\_\+values}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aca4439722060882dfbc01605334ffa6f}{stdev\+\_\+values}}
+\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af107850bb3896ca77d6ada07446dfd57}{generic\+\_\+filter\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of filter functions pipeline will iterate through for generic signals \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}} $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a983bd01993eae59b8f977415b576ac97}{emg\+\_\+filter\+\_\+pipeline}} = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$()
+\begin{DoxyCompactList}\small\item\em list of filter functions pipeline will iterate through for emg signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9743c2cb8604d44f7a62e991414a393c}{generic\+\_\+filter\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of filter function keywords for generic signals \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af90adee331a659123dd187d6ca80531b}{emg\+\_\+filter\+\_\+pipeline\+\_\+titles}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of filter function keywords for emg signals \end{DoxyCompactList}\item 
+Dictionary$<$ string, double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a1e0f178bb4e3f4240b03aa1adb68c5c3}{emg\+\_\+filter\+\_\+params}} = new Dictionary$<$string, double$>$()
+\item 
+Dictionary$<$ string, double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a5e3c29be59ebff22925e06db6a95270b}{generic\+\_\+filter\+\_\+params}} = new Dictionary$<$string, double$>$()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+utilizes \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers}{Scalers}}, \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features}{Features}}, and \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters}{Filters}} functions to create a pipeline mapping raw input signals to features 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0bdc2a5d49d6c0754f028ce9ee1405ef}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0bdc2a5d49d6c0754f028ce9ee1405ef}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!Mapper@{Mapper}}
+\index{Mapper@{Mapper}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{Mapper()}{Mapper()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+Mapper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!feature\_pipeline\_func@{feature\_pipeline\_func}}
+\index{feature\_pipeline\_func@{feature\_pipeline\_func}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{feature\_pipeline\_func()}{feature\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+feature\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{data\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Feature functions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+} & input signal\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+features from input signal
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!filter\_pipeline\_func@{filter\_pipeline\_func}}
+\index{filter\_pipeline\_func@{filter\_pipeline\_func}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{filter\_pipeline\_func()}{filter\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+filter\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{channel\+\_\+num\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Filter functions 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & \\
+\hline
+{\em raw\+\_\+values} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3da64607914ad848af295ae1b506717b}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3da64607914ad848af295ae1b506717b}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!filter\_signals@{filter\_signals}}
+\index{filter\_signals@{filter\_signals}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{filter\_signals()}{filter\_signals()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+filter\+\_\+signals (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Filter functions in filter pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals of size timestepnum X inputnum\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ab75428c8a5764c8b11d68eec2502e621}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ab75428c8a5764c8b11d68eec2502e621}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!map\_features@{map\_features}}
+\index{map\_features@{map\_features}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{map\_features()}{map\_features()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+map\+\_\+features (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Feature functions in feature pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a6d5374f403b679e824fa277ec5cccc49}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a6d5374f403b679e824fa277ec5cccc49}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!scale\_signals@{scale\_signals}}
+\index{scale\_signals@{scale\_signals}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{scale\_signals()}{scale\_signals()}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+scale\+\_\+signals (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{raw\+\_\+inputs,  }\item[{List$<$ int $>$}]{input\+\_\+types,  }\item[{List$<$ bool $>$}]{input\+\_\+active\+\_\+flags }\end{DoxyParamCaption})}
+
+
+
+Apply all Scaler functions in scaler pipelines to both generic and emg signals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+inputs} & raw signals\\
+\hline
+{\em input\+\_\+types} & signal types (0 for generic, 1 for emg)\\
+\hline
+{\em input\+\_\+active\+\_\+flags} & indicates whether each signal is being used (true/false)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!scaler\_pipeline\_func@{scaler\_pipeline\_func}}
+\index{scaler\_pipeline\_func@{scaler\_pipeline\_func}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{scaler\_pipeline\_func()}{scaler\_pipeline\_func()}}
+{\footnotesize\ttfamily delegate List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+scaler\+\_\+pipeline\+\_\+func (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{data\+\_\+,  }\item[{int}]{channel\+\_\+num\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+delegate for Scaler functions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+} & input signal\\
+\hline
+{\em channel\+\_\+num\+\_\+} & input channel num, used for selecting which min/max/mean value to use fo scaling\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a89e512bac2299613d30f38180119e045}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a89e512bac2299613d30f38180119e045}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_feature\_pipeline@{emg\_feature\_pipeline}}
+\index{emg\_feature\_pipeline@{emg\_feature\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_feature\_pipeline}{emg\_feature\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+feature\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of Feature functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aea5f7a4b543c1cc999a16a50ffc878d5}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aea5f7a4b543c1cc999a16a50ffc878d5}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_feature\_pipeline\_titles@{emg\_feature\_pipeline\_titles}}
+\index{emg\_feature\_pipeline\_titles@{emg\_feature\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_feature\_pipeline\_titles}{emg\_feature\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+feature\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Feature function keywords for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a1e0f178bb4e3f4240b03aa1adb68c5c3}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a1e0f178bb4e3f4240b03aa1adb68c5c3}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_filter\_params@{emg\_filter\_params}}
+\index{emg\_filter\_params@{emg\_filter\_params}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_params}{emg\_filter\_params}}
+{\footnotesize\ttfamily Dictionary$<$string, double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+params = new Dictionary$<$string, double$>$()}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a983bd01993eae59b8f977415b576ac97}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a983bd01993eae59b8f977415b576ac97}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_filter\_pipeline@{emg\_filter\_pipeline}}
+\index{emg\_filter\_pipeline@{emg\_filter\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_pipeline}{emg\_filter\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of filter functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af90adee331a659123dd187d6ca80531b}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af90adee331a659123dd187d6ca80531b}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_filter\_pipeline\_titles@{emg\_filter\_pipeline\_titles}}
+\index{emg\_filter\_pipeline\_titles@{emg\_filter\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_filter\_pipeline\_titles}{emg\_filter\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+filter\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of filter function keywords for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a50f98f6eadab4eee056ebbc1b5d169ec}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a50f98f6eadab4eee056ebbc1b5d169ec}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_scaler\_pipeline@{emg\_scaler\_pipeline}}
+\index{emg\_scaler\_pipeline@{emg\_scaler\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_scaler\_pipeline}{emg\_scaler\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+scaler\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of scaler functions pipeline will iterate through for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a8d1fcce1c25cdb9d507f18a9e96f82c2}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a8d1fcce1c25cdb9d507f18a9e96f82c2}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!emg\_scaler\_pipeline\_titles@{emg\_scaler\_pipeline\_titles}}
+\index{emg\_scaler\_pipeline\_titles@{emg\_scaler\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{emg\_scaler\_pipeline\_titles}{emg\_scaler\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+emg\+\_\+scaler\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Scaler function keywords for emg signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_acf3a3cc522971381a98d67e3cb80f947}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_acf3a3cc522971381a98d67e3cb80f947}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_feature\_pipeline@{generic\_feature\_pipeline}}
+\index{generic\_feature\_pipeline@{generic\_feature\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_feature\_pipeline}{generic\_feature\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+feature\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a679498990a25f8f7c0f729cfde54d936}{feature\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of Feature functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ae11557429118a5a917d29323e6b754c3}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ae11557429118a5a917d29323e6b754c3}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_feature\_pipeline\_titles@{generic\_feature\_pipeline\_titles}}
+\index{generic\_feature\_pipeline\_titles@{generic\_feature\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_feature\_pipeline\_titles}{generic\_feature\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+feature\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Feature function keywords for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a5e3c29be59ebff22925e06db6a95270b}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a5e3c29be59ebff22925e06db6a95270b}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_filter\_params@{generic\_filter\_params}}
+\index{generic\_filter\_params@{generic\_filter\_params}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_params}{generic\_filter\_params}}
+{\footnotesize\ttfamily Dictionary$<$string, double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+params = new Dictionary$<$string, double$>$()}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af107850bb3896ca77d6ada07446dfd57}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_af107850bb3896ca77d6ada07446dfd57}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_filter\_pipeline@{generic\_filter\_pipeline}}
+\index{generic\_filter\_pipeline@{generic\_filter\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_pipeline}{generic\_filter\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_addf90263953bb7834a4b702ab6128258}{filter\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of filter functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9743c2cb8604d44f7a62e991414a393c}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9743c2cb8604d44f7a62e991414a393c}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_filter\_pipeline\_titles@{generic\_filter\_pipeline\_titles}}
+\index{generic\_filter\_pipeline\_titles@{generic\_filter\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_filter\_pipeline\_titles}{generic\_filter\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+filter\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of filter function keywords for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_abffb8b95f069ad62313da6ec5317c337}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_abffb8b95f069ad62313da6ec5317c337}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_scaler\_pipeline@{generic\_scaler\_pipeline}}
+\index{generic\_scaler\_pipeline@{generic\_scaler\_pipeline}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_scaler\_pipeline}{generic\_scaler\_pipeline}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+scaler\+\_\+pipeline = new List$<$\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a3d325dc2fbb461b120d10fe7f4a3e1d8}{scaler\+\_\+pipeline\+\_\+func}}$>$()}
+
+
+
+list of scaler functions pipeline will iterate through for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a4e42722b7fd1ba30fdfd4c3301611217}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a4e42722b7fd1ba30fdfd4c3301611217}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!generic\_scaler\_pipeline\_titles@{generic\_scaler\_pipeline\_titles}}
+\index{generic\_scaler\_pipeline\_titles@{generic\_scaler\_pipeline\_titles}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{generic\_scaler\_pipeline\_titles}{generic\_scaler\_pipeline\_titles}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+generic\+\_\+scaler\+\_\+pipeline\+\_\+titles = new List$<$string$>$()}
+
+
+
+list of Scaler function keywords for generic signals 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ad0b0e63b300f20697db10ce22c0fd461}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_ad0b0e63b300f20697db10ce22c0fd461}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!max\_values@{max\_values}}
+\index{max\_values@{max\_values}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{max\_values}{max\_values}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+max\+\_\+values}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0d145119c90f102b8eacfc755f251c49}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a0d145119c90f102b8eacfc755f251c49}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!mean\_values@{mean\_values}}
+\index{mean\_values@{mean\_values}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{mean\_values}{mean\_values}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+mean\+\_\+values}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2af888c1a5a0b28fc313a74cf0fba635}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2af888c1a5a0b28fc313a74cf0fba635}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!min\_values@{min\_values}}
+\index{min\_values@{min\_values}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{min\_values}{min\_values}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+min\+\_\+values}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aca4439722060882dfbc01605334ffa6f}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_aca4439722060882dfbc01605334ffa6f}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!stdev\_values@{stdev\_values}}
+\index{stdev\_values@{stdev\_values}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{stdev\_values}{stdev\_values}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+stdev\+\_\+values}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_adac12e38a6a7c2f022bb4aa627245fb9}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_adac12e38a6a7c2f022bb4aa627245fb9}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!window\_n@{window\_n}}
+\index{window\_n@{window\_n}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_n}{window\_n}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+window\+\_\+n}
+
+
+
+number of windows to use per model input 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2ba6182af85b7100e4f1de2003e16a57}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a2ba6182af85b7100e4f1de2003e16a57}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!window\_overlap\_n@{window\_overlap\_n}}
+\index{window\_overlap\_n@{window\_overlap\_n}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_overlap\_n}{window\_overlap\_n}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+window\+\_\+overlap\+\_\+n}
+
+
+
+number of timesteps to overlap 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9f72f51cb5c167c55e26f22658bc0626}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper_a9f72f51cb5c167c55e26f22658bc0626}} 
+\index{EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}!window\_size\_n@{window\_size\_n}}
+\index{window\_size\_n@{window\_size\_n}!EMG\_PatternRec\_CS.Mapping.Mapper@{EMG\_PatternRec\_CS.Mapping.Mapper}}
+\doxysubsubsection{\texorpdfstring{window\_size\_n}{window\_size\_n}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Mapper.\+window\+\_\+size\+\_\+n}
+
+
+
+number of timesteps per window 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

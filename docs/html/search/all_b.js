@@ -1,5 +1,30 @@
 var searchData=
 [
-  ['next_5ftick_5ftime_119',['next_tick_time',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ae4bfde1a1b9721a329804ee38837df09',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['num_5foutputs_120',['num_outputs',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#aec8f8ccb224a75eee46b0c12329af1c4',1,'RealTimePatternRec::Mapping::PostProcessor']]]
+  ['majorityvoteflag_100',['majorityVoteFlag',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#a4ddc938c12cb2f5afdccb4954eac8a0d',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]],
+  ['majorityvoting_101',['majorityVoting',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#a5f1c5f6b818cf0aaeb9c2118319c5b07',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]],
+  ['majorityvotingbuflength_102',['majorityVotingBufLength',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#a0a14863ddb2bf4a50a7b72fde6648f21',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]],
+  ['majorityvotingqueue_103',['majorityVotingQueue',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#ab2d41fe6571625a968a6504b39d3d22b',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]],
+  ['map_5ffeatures_104',['map_features',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#ab75428c8a5764c8b11d68eec2502e621',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['map_5ftrainingdata_5fto_5ffeatures_105',['map_trainingdata_to_features',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#a2ca45cf8c484a0590c8355513e772036',1,'EMG_PatternRec_CS::PatternRec::Model']]],
+  ['mapper_106',['Mapper',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html',1,'EMG_PatternRec_CS::Mapping']]],
+  ['mapper_107',['mapper',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#a7fa159037f22a2a6e65b4635745a60f5',1,'EMG_PatternRec_CS::PatternRec::Model']]],
+  ['mapper_108',['Mapper',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a0bdc2a5d49d6c0754f028ce9ee1405ef',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['mapperbasicusage_109',['MapperBasicUsage',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a99fa29ab6ac21e8e8daefe0cabbd39bb',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['mapping_2ecs_110',['Mapping.cs',['../_mapping_8cs.html',1,'']]],
+  ['mav_111',['MAV',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#af70a5cce034e24dc5bba591ab3507735',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['max_5fvalues_112',['max_values',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#ad0b0e63b300f20697db10ce22c0fd461',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['mean_5fvalues_113',['mean_values',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a0d145119c90f102b8eacfc755f251c49',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['min_5fvalues_114',['min_values',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a2af888c1a5a0b28fc313a74cf0fba635',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['minmaxscaling_115',['MinMaxScaling',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers.html#a5a224e07e328d6a4a58f1ed95beb86e4',1,'EMG_PatternRec_CS::Mapping::Scalers']]],
+  ['minmaxzerocenter_116',['MinMaxZeroCenter',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers.html#ad5a7c1e50508835490e1cc2e3af6fa0a',1,'EMG_PatternRec_CS::Mapping::Scalers']]],
+  ['mlcontext_117',['mlContext',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#af68ed2664ab8cf2e11dea0c1dabde523',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]],
+  ['mmav1_118',['MMAV1',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#a351660b14f5504f19099adad8a82534e',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['mmav2_119',['MMAV2',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#a91b88fa72179d82f4ac353ba876e2fc8',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['model_120',['Model',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html',1,'EMG_PatternRec_CS::PatternRec']]],
+  ['model_121',['model',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#a90f0d39877997e698c0e6cf7df20b21a',1,'EMG_PatternRec_CS.PatternRec.Model.model()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model.html#a0da6e6caf6de4ef99bd5458afe4c29fb',1,'EMG_PatternRec_CS.PatternRec.RealTimeModel.model()']]],
+  ['model_122',['Model',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#acfb5ea7ef262529d0cb3f1d04ded3874',1,'EMG_PatternRec_CS::PatternRec::Model']]],
+  ['model_5ftype_123',['model_type',['../interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor.html#a34dcda239d2639bbd39fbd52178996a3',1,'EMG_PatternRec_CS.PatternRec.IPredictor.model_type()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#ab06e5e867583851cc8a66686ce9630a8',1,'EMG_PatternRec_CS.PatternRec.AccordSVMGaussianModel.model_type()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_linear_model.html#a4144131ad86b5400184a9b8304bd9f99',1,'EMG_PatternRec_CS.PatternRec.AccordSVMLinearModel.model_type()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model.html#acb45b62fdab8e1e33a954efc891f8c0b',1,'EMG_PatternRec_CS.PatternRec.AccordLDAModel.model_type()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#a401f084d07034d81646fb7cdee1dbadb',1,'EMG_PatternRec_CS.PatternRec.ONNXModel.model_type()']]],
+  ['modelbasicusage_124',['ModelBasicUsage',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a00343a091a7913c297e4b73b75b709ec',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['multidimensionalfiltertest_125',['MultidimensionalFilterTest',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a6256c27e0fa237b5c137c91bd6cfc797',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['mv_126',['MV',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#afba898aab32fcdf2887ee638b1c5fbb9',1,'EMG_PatternRec_CS::Mapping::Features']]]
 ];

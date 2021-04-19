@@ -1,0 +1,323 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager}\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+
+
+class to hold all information from a data recording session  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_abb735911e1f9e535d2f66a015a0f0a17}{Clear}} ()
+\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aad1025654456d5a489f926604df382a1}{Set\+Input\+Types}} (List$<$ Tuple$<$ string, int $>$$>$ map)
+\begin{DoxyCompactList}\small\item\em sets the input types based on specified list of tuples \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a03096d69e90c1f9ff8cdd5830d3a2c03}{Set\+All\+Input\+Active\+Flags}} (bool flag)
+\begin{DoxyCompactList}\small\item\em sets all input active flags \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aeda9d58dd024f9f1f87cc0199a8aabd3}{Load\+File\+To\+List\+Cols}} (string filepath)
+\begin{DoxyCompactList}\small\item\em loads data file into inputs and outputs fields \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aca9717f9a1543241ea8a3bab99f351fc}{shuffle\+\_\+training\+\_\+data$<$ T $>$}} (List$<$ List$<$ T $>$$>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_af91627087bb03207db46471befdc3f42}{inputs}}, List$<$ int $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a8ed015f8f9f0d520951baffd50f898b8}{outputs}})
+\begin{DoxyCompactList}\small\item\em shuffles training data features and outputs (i.\+e. inputs/outputs passed by reference) \end{DoxyCompactList}\item 
+static List$<$ List$<$ T $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a3405cb2490b20892dd07581aaa094891}{transpose\+\_\+list\+\_\+list$<$ T $>$}} (List$<$ List$<$ T $>$$>$ list)
+\begin{DoxyCompactList}\small\item\em Transposes a list of lists (i.\+e. switches rows/columns) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a9b802ecc73df675cfbc02b5d45731c76}{timestamps}} = new List$<$double$>$()
+\begin{DoxyCompactList}\small\item\em timestamp data \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_af91627087bb03207db46471befdc3f42}{inputs}} = new List$<$List$<$double$>$$>$()
+\begin{DoxyCompactList}\small\item\em raw input values \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a8ed015f8f9f0d520951baffd50f898b8}{outputs}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em raw output values \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a474416ed92b53b4f787c55dac23710ac}{input\+\_\+types}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em types of input signals (0 = generic, 1 = emg) \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ad00ec537267ef86c99035004c8404925}{features}} = new List$<$List$<$double$>$$>$()
+\begin{DoxyCompactList}\small\item\em inputs after mapping to features \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a78dd38ac9a884dc1377b06f42c184ea1}{feature\+\_\+outputs}} = new List$<$int$>$()
+\begin{DoxyCompactList}\small\item\em outputs trimmed to account for windowing \end{DoxyCompactList}\item 
+List$<$ bool $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a2d2bd2c9a1213170a1e4c5350594854c}{input\+\_\+active\+\_\+flags}} = new List$<$bool$>$()
+\begin{DoxyCompactList}\small\item\em indicating which inputs are active in model \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a83ed250d1dac45cf0e4df92d40e8e5c0}{output\+\_\+labels}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em output label names \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a5f8333cd414de0c727a50502b5c91607}{input\+\_\+labels}} = new List$<$string$>$()
+\begin{DoxyCompactList}\small\item\em list of input label names \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_adf5f044987c2b61a8f0d548fa826cd11}{input\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of inputs in data \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a48695ad4b7fa4872df9fe104bd7ea8eb}{output\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of outputs in data \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a90ea2326b5c416fff632daf535e65143}{freq}}
+\begin{DoxyCompactList}\small\item\em frequency data was recorded at \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a4ca3ee32e16f3a5d997e4bd4cc7de320}{collection\+\_\+cycles}}
+\begin{DoxyCompactList}\small\item\em number of times outputs were iterated over during data collection \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ab88edb928d5cdc00bc17983e81f4c9ab}{contraction\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em number of seconds per contraction during data collection \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_acde53011ad848b59e150a95c2a5e9ee1}{relaxation\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em number of seconds for relaxation during data collection \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to hold all information from a data recording session 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_abb735911e1f9e535d2f66a015a0f0a17}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_abb735911e1f9e535d2f66a015a0f0a17}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!Clear@{Clear}}
+\index{Clear@{Clear}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aeda9d58dd024f9f1f87cc0199a8aabd3}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aeda9d58dd024f9f1f87cc0199a8aabd3}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!LoadFileToListCols@{LoadFileToListCols}}
+\index{LoadFileToListCols@{LoadFileToListCols}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{LoadFileToListCols()}{LoadFileToListCols()}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+Load\+File\+To\+List\+Cols (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+loads data file into inputs and outputs fields 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, 1 if not successful
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a03096d69e90c1f9ff8cdd5830d3a2c03}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a03096d69e90c1f9ff8cdd5830d3a2c03}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!SetAllInputActiveFlags@{SetAllInputActiveFlags}}
+\index{SetAllInputActiveFlags@{SetAllInputActiveFlags}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{SetAllInputActiveFlags()}{SetAllInputActiveFlags()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+Set\+All\+Input\+Active\+Flags (\begin{DoxyParamCaption}\item[{bool}]{flag }\end{DoxyParamCaption})}
+
+
+
+sets all input active flags 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flag} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aad1025654456d5a489f926604df382a1}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aad1025654456d5a489f926604df382a1}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!SetInputTypes@{SetInputTypes}}
+\index{SetInputTypes@{SetInputTypes}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{SetInputTypes()}{SetInputTypes()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+Set\+Input\+Types (\begin{DoxyParamCaption}\item[{List$<$ Tuple$<$ string, int $>$$>$}]{map }\end{DoxyParamCaption})}
+
+
+
+sets the input types based on specified list of tuples 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & A list of tuples that map input titles to values\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aca9717f9a1543241ea8a3bab99f351fc}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_aca9717f9a1543241ea8a3bab99f351fc}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!shuffle\_training\_data$<$ T $>$@{shuffle\_training\_data$<$ T $>$}}
+\index{shuffle\_training\_data$<$ T $>$@{shuffle\_training\_data$<$ T $>$}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{shuffle\_training\_data$<$ T $>$()}{shuffle\_training\_data< T >()}}
+{\footnotesize\ttfamily static void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+shuffle\+\_\+training\+\_\+data$<$ T $>$ (\begin{DoxyParamCaption}\item[{List$<$ List$<$ T $>$$>$}]{inputs,  }\item[{List$<$ int $>$}]{outputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+shuffles training data features and outputs (i.\+e. inputs/outputs passed by reference) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & \\
+\hline
+{\em outputs} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a3405cb2490b20892dd07581aaa094891}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a3405cb2490b20892dd07581aaa094891}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!transpose\_list\_list$<$ T $>$@{transpose\_list\_list$<$ T $>$}}
+\index{transpose\_list\_list$<$ T $>$@{transpose\_list\_list$<$ T $>$}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{transpose\_list\_list$<$ T $>$()}{transpose\_list\_list< T >()}}
+{\footnotesize\ttfamily static List$<$List$<$T$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+transpose\+\_\+list\+\_\+list$<$ T $>$ (\begin{DoxyParamCaption}\item[{List$<$ List$<$ T $>$$>$}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Transposes a list of lists (i.\+e. switches rows/columns) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & any primitive data type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & list of lists to transpose\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a4ca3ee32e16f3a5d997e4bd4cc7de320}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a4ca3ee32e16f3a5d997e4bd4cc7de320}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!collection\_cycles@{collection\_cycles}}
+\index{collection\_cycles@{collection\_cycles}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{collection\_cycles}{collection\_cycles}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+collection\+\_\+cycles}
+
+
+
+number of times outputs were iterated over during data collection 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ab88edb928d5cdc00bc17983e81f4c9ab}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ab88edb928d5cdc00bc17983e81f4c9ab}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!contraction\_time@{contraction\_time}}
+\index{contraction\_time@{contraction\_time}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{contraction\_time}{contraction\_time}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+contraction\+\_\+time}
+
+
+
+number of seconds per contraction during data collection 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a78dd38ac9a884dc1377b06f42c184ea1}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a78dd38ac9a884dc1377b06f42c184ea1}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!feature\_outputs@{feature\_outputs}}
+\index{feature\_outputs@{feature\_outputs}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{feature\_outputs}{feature\_outputs}}
+{\footnotesize\ttfamily List$<$int$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+feature\+\_\+outputs = new List$<$int$>$()}
+
+
+
+outputs trimmed to account for windowing 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ad00ec537267ef86c99035004c8404925}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_ad00ec537267ef86c99035004c8404925}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!features@{features}}
+\index{features@{features}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{features}{features}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+features = new List$<$List$<$double$>$$>$()}
+
+
+
+inputs after mapping to features 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a90ea2326b5c416fff632daf535e65143}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a90ea2326b5c416fff632daf535e65143}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!freq@{freq}}
+\index{freq@{freq}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+freq}
+
+
+
+frequency data was recorded at 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a2d2bd2c9a1213170a1e4c5350594854c}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a2d2bd2c9a1213170a1e4c5350594854c}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!input\_active\_flags@{input\_active\_flags}}
+\index{input\_active\_flags@{input\_active\_flags}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_active\_flags}{input\_active\_flags}}
+{\footnotesize\ttfamily List$<$bool$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+active\+\_\+flags = new List$<$bool$>$()}
+
+
+
+indicating which inputs are active in model 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a5f8333cd414de0c727a50502b5c91607}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a5f8333cd414de0c727a50502b5c91607}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!input\_labels@{input\_labels}}
+\index{input\_labels@{input\_labels}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_labels}{input\_labels}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+labels = new List$<$string$>$()}
+
+
+
+list of input label names 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_adf5f044987c2b61a8f0d548fa826cd11}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_adf5f044987c2b61a8f0d548fa826cd11}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!input\_num@{input\_num}}
+\index{input\_num@{input\_num}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_num}{input\_num}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+num}
+
+
+
+number of inputs in data 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a474416ed92b53b4f787c55dac23710ac}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a474416ed92b53b4f787c55dac23710ac}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!input\_types@{input\_types}}
+\index{input\_types@{input\_types}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{input\_types}{input\_types}}
+{\footnotesize\ttfamily List$<$int$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+input\+\_\+types = new List$<$int$>$()}
+
+
+
+types of input signals (0 = generic, 1 = emg) 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_af91627087bb03207db46471befdc3f42}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_af91627087bb03207db46471befdc3f42}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!inputs@{inputs}}
+\index{inputs@{inputs}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+inputs = new List$<$List$<$double$>$$>$()}
+
+
+
+raw input values 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a83ed250d1dac45cf0e4df92d40e8e5c0}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a83ed250d1dac45cf0e4df92d40e8e5c0}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!output\_labels@{output\_labels}}
+\index{output\_labels@{output\_labels}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{output\_labels}{output\_labels}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+output\+\_\+labels = new List$<$string$>$()}
+
+
+
+output label names 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a48695ad4b7fa4872df9fe104bd7ea8eb}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a48695ad4b7fa4872df9fe104bd7ea8eb}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!output\_num@{output\_num}}
+\index{output\_num@{output\_num}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{output\_num}{output\_num}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+output\+\_\+num}
+
+
+
+number of outputs in data 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a8ed015f8f9f0d520951baffd50f898b8}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a8ed015f8f9f0d520951baffd50f898b8}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!outputs@{outputs}}
+\index{outputs@{outputs}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{outputs}{outputs}}
+{\footnotesize\ttfamily List$<$int$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+outputs = new List$<$int$>$()}
+
+
+
+raw output values 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_acde53011ad848b59e150a95c2a5e9ee1}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_acde53011ad848b59e150a95c2a5e9ee1}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!relaxation\_time@{relaxation\_time}}
+\index{relaxation\_time@{relaxation\_time}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{relaxation\_time}{relaxation\_time}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+relaxation\+\_\+time}
+
+
+
+number of seconds for relaxation during data collection 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a9b802ecc73df675cfbc02b5d45731c76}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager_a9b802ecc73df675cfbc02b5d45731c76}} 
+\index{EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}!timestamps@{timestamps}}
+\index{timestamps@{timestamps}!EMG\_PatternRec\_CS.PatternRec.DataManager@{EMG\_PatternRec\_CS.PatternRec.DataManager}}
+\doxysubsubsection{\texorpdfstring{timestamps}{timestamps}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Data\+Manager.\+timestamps = new List$<$double$>$()}
+
+
+
+timestamp data 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

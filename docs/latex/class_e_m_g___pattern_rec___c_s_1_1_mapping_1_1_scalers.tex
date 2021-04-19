@@ -1,0 +1,109 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Scalers Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers}\index{EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}}
+
+
+static class of various scaling techniques for preprocessing data. These functions are designed for use with the \char`\"{}scaler\+\_\+pipeline\+\_\+func\char`\"{} delegate. since the information required(min\+\_\+values, max\+\_\+values, and mean\+\_\+values) will change after each function is performed, only one of these functions should be called  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_ad5a7c1e50508835490e1cc2e3af6fa0a}{Min\+Max\+Zero\+Center}} (List$<$ double $>$ raw\+\_\+values, List$<$ double $>$ min\+\_\+values, List$<$ double $>$ max\+\_\+values, List$<$ double $>$ mean\+\_\+values, int channel\+\_\+num)
+\begin{DoxyCompactList}\small\item\em performs both Min\+Max\+Scaling and Zero\+Centering simultaneously to avoid the need to recalculate each channel\textquotesingle{}s min/max/mean values after each scaling function independently. (i.\+e. the min, max, and mean values change after zero shifting, or after min max scaling) \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a5a224e07e328d6a4a58f1ed95beb86e4}{Min\+Max\+Scaling}} (List$<$ double $>$ raw\+\_\+values, List$<$ double $>$ min\+\_\+values, List$<$ double $>$ max\+\_\+values, int channel\+\_\+num)
+\begin{DoxyCompactList}\small\item\em scales all inputs to a value between 0 (minimum) and 1 (maximum) \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a814480b55a809ff0c15330e35bae0ea4}{Zero\+Centering}} (List$<$ double $>$ raw\+\_\+values, List$<$ double $>$ mean\+\_\+values, int channel\+\_\+num)
+\begin{DoxyCompactList}\small\item\em centers all inputs to have a mean value of 0 \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a4d33c9897d08a92fa09eebb6c7ef6023}{Standardize}} (List$<$ double $>$ raw\+\_\+values, List$<$ double $>$ mean\+\_\+values, List$<$ double $>$ stdev\+\_\+values, int channel\+\_\+num)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+static class of various scaling techniques for preprocessing data. These functions are designed for use with the \char`\"{}scaler\+\_\+pipeline\+\_\+func\char`\"{} delegate. since the information required(min\+\_\+values, max\+\_\+values, and mean\+\_\+values) will change after each function is performed, only one of these functions should be called 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a5a224e07e328d6a4a58f1ed95beb86e4}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a5a224e07e328d6a4a58f1ed95beb86e4}} 
+\index{EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}!MinMaxScaling@{MinMaxScaling}}
+\index{MinMaxScaling@{MinMaxScaling}!EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}}
+\doxysubsubsection{\texorpdfstring{MinMaxScaling()}{MinMaxScaling()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Scalers.\+Min\+Max\+Scaling (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{List$<$ double $>$}]{min\+\_\+values,  }\item[{List$<$ double $>$}]{max\+\_\+values,  }\item[{int}]{channel\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+scales all inputs to a value between 0 (minimum) and 1 (maximum) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em min\+\_\+values} & list of minimum values for each input signal\\
+\hline
+{\em max\+\_\+values} & list of maximum values for each input signal\\
+\hline
+{\em channel\+\_\+num} & input signal number, used to select which min\+\_\+value and which max\+\_\+value to use for scaling\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_ad5a7c1e50508835490e1cc2e3af6fa0a}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_ad5a7c1e50508835490e1cc2e3af6fa0a}} 
+\index{EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}!MinMaxZeroCenter@{MinMaxZeroCenter}}
+\index{MinMaxZeroCenter@{MinMaxZeroCenter}!EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}}
+\doxysubsubsection{\texorpdfstring{MinMaxZeroCenter()}{MinMaxZeroCenter()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Scalers.\+Min\+Max\+Zero\+Center (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{List$<$ double $>$}]{min\+\_\+values,  }\item[{List$<$ double $>$}]{max\+\_\+values,  }\item[{List$<$ double $>$}]{mean\+\_\+values,  }\item[{int}]{channel\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+performs both Min\+Max\+Scaling and Zero\+Centering simultaneously to avoid the need to recalculate each channel\textquotesingle{}s min/max/mean values after each scaling function independently. (i.\+e. the min, max, and mean values change after zero shifting, or after min max scaling) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em min\+\_\+values} & \\
+\hline
+{\em max\+\_\+values} & \\
+\hline
+{\em mean\+\_\+values} & \\
+\hline
+{\em channel\+\_\+num} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a4d33c9897d08a92fa09eebb6c7ef6023}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a4d33c9897d08a92fa09eebb6c7ef6023}} 
+\index{EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}!Standardize@{Standardize}}
+\index{Standardize@{Standardize}!EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}}
+\doxysubsubsection{\texorpdfstring{Standardize()}{Standardize()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Scalers.\+Standardize (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{List$<$ double $>$}]{mean\+\_\+values,  }\item[{List$<$ double $>$}]{stdev\+\_\+values,  }\item[{int}]{channel\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a814480b55a809ff0c15330e35bae0ea4}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_scalers_a814480b55a809ff0c15330e35bae0ea4}} 
+\index{EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}!ZeroCentering@{ZeroCentering}}
+\index{ZeroCentering@{ZeroCentering}!EMG\_PatternRec\_CS.Mapping.Scalers@{EMG\_PatternRec\_CS.Mapping.Scalers}}
+\doxysubsubsection{\texorpdfstring{ZeroCentering()}{ZeroCentering()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Scalers.\+Zero\+Centering (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{List$<$ double $>$}]{mean\+\_\+values,  }\item[{int}]{channel\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+centers all inputs to have a mean value of 0 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em mean\+\_\+values} & list of mean values for each input signal\\
+\hline
+{\em channel\+\_\+num} & input signal number, used to select which min\+\_\+value and which max\+\_\+value to use for scaling\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

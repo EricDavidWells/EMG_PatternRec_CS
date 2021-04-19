@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['examples_217',['Examples',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html',1,'RealTimePatternRec::Examples']]]
+  ['examples_220',['Examples',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html',1,'EMG_PatternRec_CS::Examples']]]
 ];

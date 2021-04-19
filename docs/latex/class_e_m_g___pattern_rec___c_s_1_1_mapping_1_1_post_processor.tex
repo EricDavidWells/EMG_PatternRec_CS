@@ -1,0 +1,223 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor}\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+
+
+class to hold all post processing techniques  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ae3e2b553e511d181a05701bf9a689929}{Post\+Processor}} ()
+\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a72428cedea819aee8f045b0ec3bef56e}{init\+\_\+majority\+Voting}} (int majority\+Voting\+Buf\+Length\+\_\+)
+\begin{DoxyCompactList}\small\item\em enables majority voting technique \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab36cbea35a94eb9336f0cc7ae435c859}{init\+\_\+velocity\+Ramping}} (int num\+\_\+outputs\+\_\+, double velocity\+Ramp\+Increment\+\_\+)
+\begin{DoxyCompactList}\small\item\em enables velocity ramping technique \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a5f1c5f6b818cf0aaeb9c2118319c5b07}{majority\+Voting}} (double\mbox{[}$\,$\mbox{]} scores)
+\begin{DoxyCompactList}\small\item\em applies majority voting technique and returns udpated scores \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_aa8838764f0a6f720c95d362ace3f405a}{velocity\+Ramp}} (double\mbox{[}$\,$\mbox{]} scores)
+\begin{DoxyCompactList}\small\item\em applies velocity ramping technique and returns updated scores \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a29a9653a8262ef3790bc42ac42eb4f59}{process}} (double\mbox{[}$\,$\mbox{]} scores)
+\begin{DoxyCompactList}\small\item\em applies all enabled post-\/processing techniques to scores \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a0a14863ddb2bf4a50a7b72fde6648f21}{majority\+Voting\+Buf\+Length}}
+\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a4ddc938c12cb2f5afdccb4954eac8a0d}{majority\+Vote\+Flag}} = false
+\item 
+double \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a12b5f16eb064d67a274091df71a66448}{velocity\+Ramp\+Increment}}
+\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_abed23b46e7445d5a3021be9e53e3c355}{velocity\+Ramp\+Flag}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a01503522733eb9c5b76055083b0057e2}{get\+Mode$<$ T $>$}} (IEnumerable$<$ T $>$ list)
+\begin{DoxyCompactList}\small\item\em helper function to get the mode from a list of values \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ac8b36fb95484b15a23dd17dc994b0b4e}{num\+\_\+outputs}}
+\item 
+Queue$<$ int $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab2d41fe6571625a968a6504b39d3d22b}{majority\+Voting\+Queue}}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a114bd67a4ed0ba72c453657eb311e08f}{velocity\+Ramp\+Score}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to hold all post processing techniques 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ae3e2b553e511d181a05701bf9a689929}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ae3e2b553e511d181a05701bf9a689929}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!PostProcessor@{PostProcessor}}
+\index{PostProcessor@{PostProcessor}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{PostProcessor()}{PostProcessor()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+Post\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a01503522733eb9c5b76055083b0057e2}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a01503522733eb9c5b76055083b0057e2}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!getMode$<$ T $>$@{getMode$<$ T $>$}}
+\index{getMode$<$ T $>$@{getMode$<$ T $>$}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{getMode$<$ T $>$()}{getMode< T >()}}
+{\footnotesize\ttfamily T EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+get\+Mode$<$ T $>$ (\begin{DoxyParamCaption}\item[{IEnumerable$<$ T $>$}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+helper function to get the mode from a list of values 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & primitive type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a72428cedea819aee8f045b0ec3bef56e}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a72428cedea819aee8f045b0ec3bef56e}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!init\_majorityVoting@{init\_majorityVoting}}
+\index{init\_majorityVoting@{init\_majorityVoting}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{init\_majorityVoting()}{init\_majorityVoting()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+init\+\_\+majority\+Voting (\begin{DoxyParamCaption}\item[{int}]{majority\+Voting\+Buf\+Length\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+enables majority voting technique 
+
+
+\begin{DoxyParams}{Parameters}
+{\em majority\+Voting\+Buf\+Length\+\_\+} & number of previous outputs keep in bufferk\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab36cbea35a94eb9336f0cc7ae435c859}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab36cbea35a94eb9336f0cc7ae435c859}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!init\_velocityRamping@{init\_velocityRamping}}
+\index{init\_velocityRamping@{init\_velocityRamping}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{init\_velocityRamping()}{init\_velocityRamping()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+init\+\_\+velocity\+Ramping (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+outputs\+\_\+,  }\item[{double}]{velocity\+Ramp\+Increment\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+enables velocity ramping technique 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+outputs\+\_\+} & number of available outputs\\
+\hline
+{\em velocity\+Ramp\+Increment\+\_\+} & percentage to increment/decrement each signal with each new output\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a5f1c5f6b818cf0aaeb9c2118319c5b07}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a5f1c5f6b818cf0aaeb9c2118319c5b07}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!majorityVoting@{majorityVoting}}
+\index{majorityVoting@{majorityVoting}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{majorityVoting()}{majorityVoting()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+majority\+Voting (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{scores }\end{DoxyParamCaption})}
+
+
+
+applies majority voting technique and returns udpated scores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scores} & probability predictions for each output\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a29a9653a8262ef3790bc42ac42eb4f59}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a29a9653a8262ef3790bc42ac42eb4f59}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!process@{process}}
+\index{process@{process}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+process (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{scores }\end{DoxyParamCaption})}
+
+
+
+applies all enabled post-\/processing techniques to scores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scores} & probability predictions for each output\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_aa8838764f0a6f720c95d362ace3f405a}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_aa8838764f0a6f720c95d362ace3f405a}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!velocityRamp@{velocityRamp}}
+\index{velocityRamp@{velocityRamp}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{velocityRamp()}{velocityRamp()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+velocity\+Ramp (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{scores }\end{DoxyParamCaption})}
+
+
+
+applies velocity ramping technique and returns updated scores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scores} & probability predictions for each output\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a4ddc938c12cb2f5afdccb4954eac8a0d}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a4ddc938c12cb2f5afdccb4954eac8a0d}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!majorityVoteFlag@{majorityVoteFlag}}
+\index{majorityVoteFlag@{majorityVoteFlag}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{majorityVoteFlag}{majorityVoteFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+majority\+Vote\+Flag = false}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a0a14863ddb2bf4a50a7b72fde6648f21}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a0a14863ddb2bf4a50a7b72fde6648f21}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!majorityVotingBufLength@{majorityVotingBufLength}}
+\index{majorityVotingBufLength@{majorityVotingBufLength}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{majorityVotingBufLength}{majorityVotingBufLength}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+majority\+Voting\+Buf\+Length}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab2d41fe6571625a968a6504b39d3d22b}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ab2d41fe6571625a968a6504b39d3d22b}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!majorityVotingQueue@{majorityVotingQueue}}
+\index{majorityVotingQueue@{majorityVotingQueue}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{majorityVotingQueue}{majorityVotingQueue}}
+{\footnotesize\ttfamily Queue$<$int$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+majority\+Voting\+Queue\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ac8b36fb95484b15a23dd17dc994b0b4e}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_ac8b36fb95484b15a23dd17dc994b0b4e}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!num\_outputs@{num\_outputs}}
+\index{num\_outputs@{num\_outputs}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{num\_outputs}{num\_outputs}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+num\+\_\+outputs\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_abed23b46e7445d5a3021be9e53e3c355}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_abed23b46e7445d5a3021be9e53e3c355}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!velocityRampFlag@{velocityRampFlag}}
+\index{velocityRampFlag@{velocityRampFlag}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{velocityRampFlag}{velocityRampFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+velocity\+Ramp\+Flag = false}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a12b5f16eb064d67a274091df71a66448}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a12b5f16eb064d67a274091df71a66448}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!velocityRampIncrement@{velocityRampIncrement}}
+\index{velocityRampIncrement@{velocityRampIncrement}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{velocityRampIncrement}{velocityRampIncrement}}
+{\footnotesize\ttfamily double EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+velocity\+Ramp\+Increment}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a114bd67a4ed0ba72c453657eb311e08f}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor_a114bd67a4ed0ba72c453657eb311e08f}} 
+\index{EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}!velocityRampScore@{velocityRampScore}}
+\index{velocityRampScore@{velocityRampScore}!EMG\_PatternRec\_CS.Mapping.PostProcessor@{EMG\_PatternRec\_CS.Mapping.PostProcessor}}
+\doxysubsubsection{\texorpdfstring{velocityRampScore}{velocityRampScore}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Post\+Processor.\+velocity\+Ramp\+Score\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

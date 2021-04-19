@@ -1,0 +1,390 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger}\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+
+
+Creates an object that runs on it\textquotesingle{}s own thread to manage data collection at reliable time intervals  
+
+
+Inheritance diagram for EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.885522cm]{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aa81ca3f09fd6c73289a020ca8aeb84d4}{Data\+Logger}} ()
+\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a3769b8a58f5926a278fdd40ceecd1fe8}{init\+\_\+file}} (string filepath\+\_\+)
+\begin{DoxyCompactList}\small\item\em initiates file stream writer \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a2c1e2110eeb975ab005bbd583a549ed2}{close\+\_\+file}} ()
+\begin{DoxyCompactList}\small\item\em closes file stream writer \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a83c67b53435ac0f9733ae21f31e13759}{start}} ()
+\begin{DoxyCompactList}\small\item\em starts data grabbing thread \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a7153d52e9e56435983fdb7ca55143727}{stop}} ()
+\begin{DoxyCompactList}\small\item\em kills thread if thread is currently running \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae63090da8f311684fbe0c3c0b70b8da5}{write\+\_\+csv}} (List$<$ string $>$ data)
+\begin{DoxyCompactList}\small\item\em writes data to file as comma seperated values \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad48ff1c6828fd754099a011880b2cf36}{write\+\_\+data\+\_\+with\+\_\+timestamp}} (List$<$ string $>$ data)
+\begin{DoxyCompactList}\small\item\em writes timestamp before writing data as comma seperated value \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aef60ab3d5de7c68a6a6a1246b867b41f}{thread\+\_\+loop}} ()
+\begin{DoxyCompactList}\small\item\em main loop for logging thread. waits till sample frequency specified delay before grabbing data and writing to file \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a6ead36a41669ad529af520a2f5ce5084}{tick}} ()
+\begin{DoxyCompactList}\small\item\em updates stopwatch and flips timeflag if enough time has passed to log another value \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a73027548f9a57b1bbdb16f3ab638cc97}{close}} ()
+\begin{DoxyCompactList}\small\item\em ends thread and closes file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91d2c27443db070b0571534f4b3bf23c}{filepath}}
+\begin{DoxyCompactList}\small\item\em path to streamwriter file location \end{DoxyCompactList}\item 
+Stream\+Writer \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a4f1c099268e104057ae83b9f0127f42e}{file}}
+\begin{DoxyCompactList}\small\item\em streamwriter object for writing values to file \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ac6c64e69133fe5ce74c1ba2a154132be}{recordflag}} = false
+\begin{DoxyCompactList}\small\item\em flag to trigger data recording \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a9617221ba63ea714079ec0c0e746db22}{historyflag}} = false
+\begin{DoxyCompactList}\small\item\em flag to trigger \end{DoxyCompactList}\item 
+Stopwatch \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aced771f1aeb677e7a9438812c640453f}{sw}} = new Stopwatch()
+\begin{DoxyCompactList}\small\item\em stopwatch to keep track of logging frequency \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_adb9bfb70fb8a860d410e2883d6c9b9c6}{freq}}
+\begin{DoxyCompactList}\small\item\em frequency to log data in Hz \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0eb8a256303132f9400b2bf5500af5cf}{signal\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of signals being logged \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad52c8b78bd382e8c22b0350cd8843b63}{history\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of data points to keep in history \end{DoxyCompactList}\item 
+get\+\_\+data\+\_\+f\+\_\+func$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a44c0421854bf2e2d5d6949b42d5bf1f5}{get\+\_\+data\+\_\+f}}
+\begin{DoxyCompactList}\small\item\em delegate function used to grab data \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a37285f61e541af8ee9fdaefdfc3b9992}{lock\+Obj}} = new object()
+\begin{DoxyCompactList}\small\item\em object to be used in lock statement while reading data from logger \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae938118a14cd83e8c298ccdf222076de}{formatspec}} = \char`\"{}F4\char`\"{}
+\begin{DoxyCompactList}\small\item\em format specifier for converting data values from double to strings \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0e00e2db8458ff12b75f5b6ead8a5fac}{\+\_\+data\+\_\+history}} = new List$<$List$<$double$>$$>$()
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91ec14934f756b3deb44374b5b9fe71a}{\+\_\+data}}
+\item 
+float \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ab31aa92407877159619777083b6032e4}{prevtime}}
+\item 
+float \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a8457a0ba607bd463f867af9086b97c6e}{curtime}}
+\item 
+float \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a932ca317a57f0be41ebbed97ae37bb10}{next\+\_\+tick\+\_\+time}}
+\item 
+Thread \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a28ce5155387158711bf32134739f3d4e}{t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a5831ab2448c07cefb20a066f34541495}{Data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em read only current data property \end{DoxyCompactList}\item 
+List$<$ List$<$ double $>$ $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae3a43ad175988d1276bdf56ee120ef35}{Data\+\_\+history}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em read only data history property \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Creates an object that runs on it\textquotesingle{}s own thread to manage data collection at reliable time intervals 
+
+Note that the thread spins when not logging to update its timer and therefore clogs cpu usage. This makes data sample rate as consistent as possible on a windows OS 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aa81ca3f09fd6c73289a020ca8aeb84d4}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aa81ca3f09fd6c73289a020ca8aeb84d4}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!DataLogger@{DataLogger}}
+\index{DataLogger@{DataLogger}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{DataLogger()}{DataLogger()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+Data\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a73027548f9a57b1bbdb16f3ab638cc97}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a73027548f9a57b1bbdb16f3ab638cc97}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!close@{close}}
+\index{close@{close}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+ends thread and closes file 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a2c1e2110eeb975ab005bbd583a549ed2}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a2c1e2110eeb975ab005bbd583a549ed2}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!close\_file@{close\_file}}
+\index{close\_file@{close\_file}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{close\_file()}{close\_file()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+close\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+closes file stream writer 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a3769b8a58f5926a278fdd40ceecd1fe8}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a3769b8a58f5926a278fdd40ceecd1fe8}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!init\_file@{init\_file}}
+\index{init\_file@{init\_file}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{init\_file()}{init\_file()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+init\+\_\+file (\begin{DoxyParamCaption}\item[{string}]{filepath\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+initiates file stream writer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath\+\_\+} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a83c67b53435ac0f9733ae21f31e13759}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a83c67b53435ac0f9733ae21f31e13759}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!start@{start}}
+\index{start@{start}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+starts data grabbing thread 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a7153d52e9e56435983fdb7ca55143727}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a7153d52e9e56435983fdb7ca55143727}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!stop@{stop}}
+\index{stop@{stop}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+kills thread if thread is currently running 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aef60ab3d5de7c68a6a6a1246b867b41f}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aef60ab3d5de7c68a6a6a1246b867b41f}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!thread\_loop@{thread\_loop}}
+\index{thread\_loop@{thread\_loop}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{thread\_loop()}{thread\_loop()}}
+{\footnotesize\ttfamily virtual void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+thread\+\_\+loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+main loop for logging thread. waits till sample frequency specified delay before grabbing data and writing to file 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0f8e2e7afe7e96afe842dae378e94c7c}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model}}.
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a6ead36a41669ad529af520a2f5ce5084}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a6ead36a41669ad529af520a2f5ce5084}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!tick@{tick}}
+\index{tick@{tick}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+tick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+updates stopwatch and flips timeflag if enough time has passed to log another value 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae63090da8f311684fbe0c3c0b70b8da5}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae63090da8f311684fbe0c3c0b70b8da5}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!write\_csv@{write\_csv}}
+\index{write\_csv@{write\_csv}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{write\_csv()}{write\_csv()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+write\+\_\+csv (\begin{DoxyParamCaption}\item[{List$<$ string $>$}]{data }\end{DoxyParamCaption})}
+
+
+
+writes data to file as comma seperated values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & data to write as list of strings\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad48ff1c6828fd754099a011880b2cf36}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad48ff1c6828fd754099a011880b2cf36}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!write\_data\_with\_timestamp@{write\_data\_with\_timestamp}}
+\index{write\_data\_with\_timestamp@{write\_data\_with\_timestamp}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{write\_data\_with\_timestamp()}{write\_data\_with\_timestamp()}}
+{\footnotesize\ttfamily virtual void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+write\+\_\+data\+\_\+with\+\_\+timestamp (\begin{DoxyParamCaption}\item[{List$<$ string $>$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+writes timestamp before writing data as comma seperated value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a8fd0d6c479e0befeb17e93ba473a8cee}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91ec14934f756b3deb44374b5b9fe71a}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91ec14934f756b3deb44374b5b9fe71a}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!\_data@{\_data}}
+\index{\_data@{\_data}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{\_data}{\_data}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0e00e2db8458ff12b75f5b6ead8a5fac}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0e00e2db8458ff12b75f5b6ead8a5fac}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!\_data\_history@{\_data\_history}}
+\index{\_data\_history@{\_data\_history}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{\_data\_history}{\_data\_history}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+\_\+data\+\_\+history = new List$<$List$<$double$>$$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a8457a0ba607bd463f867af9086b97c6e}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a8457a0ba607bd463f867af9086b97c6e}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!curtime@{curtime}}
+\index{curtime@{curtime}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{curtime}{curtime}}
+{\footnotesize\ttfamily float EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+curtime\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a4f1c099268e104057ae83b9f0127f42e}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a4f1c099268e104057ae83b9f0127f42e}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!file@{file}}
+\index{file@{file}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{file}{file}}
+{\footnotesize\ttfamily Stream\+Writer EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+file}
+
+
+
+streamwriter object for writing values to file 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91d2c27443db070b0571534f4b3bf23c}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a91d2c27443db070b0571534f4b3bf23c}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!filepath@{filepath}}
+\index{filepath@{filepath}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{filepath}{filepath}}
+{\footnotesize\ttfamily string EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+filepath}
+
+
+
+path to streamwriter file location 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae938118a14cd83e8c298ccdf222076de}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae938118a14cd83e8c298ccdf222076de}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!formatspec@{formatspec}}
+\index{formatspec@{formatspec}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{formatspec}{formatspec}}
+{\footnotesize\ttfamily string EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+formatspec = \char`\"{}F4\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+format specifier for converting data values from double to strings 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_adb9bfb70fb8a860d410e2883d6c9b9c6}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_adb9bfb70fb8a860d410e2883d6c9b9c6}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!freq@{freq}}
+\index{freq@{freq}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+freq}
+
+
+
+frequency to log data in Hz 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a44c0421854bf2e2d5d6949b42d5bf1f5}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a44c0421854bf2e2d5d6949b42d5bf1f5}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!get\_data\_f@{get\_data\_f}}
+\index{get\_data\_f@{get\_data\_f}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{get\_data\_f}{get\_data\_f}}
+{\footnotesize\ttfamily get\+\_\+data\+\_\+f\+\_\+func$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+get\+\_\+data\+\_\+f}
+
+
+
+delegate function used to grab data 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad52c8b78bd382e8c22b0350cd8843b63}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad52c8b78bd382e8c22b0350cd8843b63}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!history\_num@{history\_num}}
+\index{history\_num@{history\_num}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{history\_num}{history\_num}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+history\+\_\+num}
+
+
+
+number of data points to keep in history 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a9617221ba63ea714079ec0c0e746db22}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a9617221ba63ea714079ec0c0e746db22}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!historyflag@{historyflag}}
+\index{historyflag@{historyflag}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{historyflag}{historyflag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+historyflag = false}
+
+
+
+flag to trigger 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a37285f61e541af8ee9fdaefdfc3b9992}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a37285f61e541af8ee9fdaefdfc3b9992}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!lockObj@{lockObj}}
+\index{lockObj@{lockObj}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{lockObj}{lockObj}}
+{\footnotesize\ttfamily object EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+lock\+Obj = new object()}
+
+
+
+object to be used in lock statement while reading data from logger 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a932ca317a57f0be41ebbed97ae37bb10}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a932ca317a57f0be41ebbed97ae37bb10}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!next\_tick\_time@{next\_tick\_time}}
+\index{next\_tick\_time@{next\_tick\_time}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{next\_tick\_time}{next\_tick\_time}}
+{\footnotesize\ttfamily float EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+next\+\_\+tick\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ab31aa92407877159619777083b6032e4}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ab31aa92407877159619777083b6032e4}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!prevtime@{prevtime}}
+\index{prevtime@{prevtime}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{prevtime}{prevtime}}
+{\footnotesize\ttfamily float EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+prevtime\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ac6c64e69133fe5ce74c1ba2a154132be}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ac6c64e69133fe5ce74c1ba2a154132be}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!recordflag@{recordflag}}
+\index{recordflag@{recordflag}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{recordflag}{recordflag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+recordflag = false}
+
+
+
+flag to trigger data recording 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0eb8a256303132f9400b2bf5500af5cf}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a0eb8a256303132f9400b2bf5500af5cf}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!signal\_num@{signal\_num}}
+\index{signal\_num@{signal\_num}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{signal\_num}{signal\_num}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+signal\+\_\+num}
+
+
+
+number of signals being logged 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aced771f1aeb677e7a9438812c640453f}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aced771f1aeb677e7a9438812c640453f}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!sw@{sw}}
+\index{sw@{sw}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{sw}{sw}}
+{\footnotesize\ttfamily Stopwatch EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+sw = new Stopwatch()}
+
+
+
+stopwatch to keep track of logging frequency 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a28ce5155387158711bf32134739f3d4e}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a28ce5155387158711bf32134739f3d4e}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!t@{t}}
+\index{t@{t}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily Thread EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+t\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a5831ab2448c07cefb20a066f34541495}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_a5831ab2448c07cefb20a066f34541495}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!Data@{Data}}
+\index{Data@{Data}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+Data\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+read only current data property 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae3a43ad175988d1276bdf56ee120ef35}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ae3a43ad175988d1276bdf56ee120ef35}} 
+\index{EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}!Data\_history@{Data\_history}}
+\index{Data\_history@{Data\_history}!EMG\_PatternRec\_CS.DataLogging.DataLogger@{EMG\_PatternRec\_CS.DataLogging.DataLogger}}
+\doxysubsubsection{\texorpdfstring{Data\_history}{Data\_history}}
+{\footnotesize\ttfamily List$<$List$<$double$>$ $>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger.\+Data\+\_\+history\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+read only data history property 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_data_logging_8cs}{Data\+Logging.\+cs}}\end{DoxyCompactItemize}

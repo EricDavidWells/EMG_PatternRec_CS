@@ -1,13 +1,19 @@
 var searchData=
 [
-  ['data_27',['data',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#a4806fb156a66f7191421051ca87d34eb',1,'RealTimePatternRec::PatternRec::Model']]],
-  ['data_28',['Data',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a79169d8990e97d6144c099ee3d79eeac',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['data_5fhistory_29',['Data_history',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a517342c9349e887edef133a566b4abf4',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['datalogger_30',['DataLogger',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ace8e7ff39431f7ee3d3dcac10cb3ddbb',1,'RealTimePatternRec.DataLogging.DataLogger.DataLogger()'],['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html',1,'RealTimePatternRec.DataLogging.DataLogger']]],
-  ['dataloggerbasicusage_31',['DataLoggerBasicUsage',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#a7d440d57643a4fa77f73987df7d3be31',1,'RealTimePatternRec::Examples::Examples']]],
-  ['datalogging_2ecs_32',['DataLogging.cs',['../_data_logging_8cs.html',1,'']]],
-  ['datamanager_33',['DataManager',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager.html',1,'RealTimePatternRec::PatternRec']]],
-  ['dummy_5ffeature_5fexample_34',['dummy_feature_example',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a5a4f013b8d738b145a93e1de8f3fba03',1,'RealTimePatternRec::Mapping::Features']]],
-  ['dynamicinputtype_35',['DynamicInputType',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_input_type.html',1,'RealTimePatternRec::PatternRec::ONNXModel']]],
-  ['dynamicoutputtype_36',['DynamicOutputType',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_output_type.html',1,'RealTimePatternRec::PatternRec::ONNXModel']]]
+  ['clear_12',['Clear',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager.html#abb735911e1f9e535d2f66a015a0f0a17',1,'EMG_PatternRec_CS::PatternRec::DataManager']]],
+  ['close_13',['close',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a73027548f9a57b1bbdb16f3ab638cc97',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['close_5ffile_14',['close_file',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a2c1e2110eeb975ab005bbd583a549ed2',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['collection_5fcycles_15',['collection_cycles',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#a0dbf4648acf78e3d9eabead28dcf00a6',1,'EMG_PatternRec_CS.DataLogging.PR_Logger.collection_cycles()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager.html#a4ca3ee32e16f3a5d997e4bd4cc7de320',1,'EMG_PatternRec_CS.PatternRec.DataManager.collection_cycles()']]],
+  ['complexity_16',['complexity',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#af8db3c9470b13bba84add70dcd5ab423',1,'EMG_PatternRec_CS.PatternRec.AccordSVMGaussianModel.complexity()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_linear_model.html#a32830a50e45dee52baa19dbfa2866c44',1,'EMG_PatternRec_CS.PatternRec.AccordSVMLinearModel.complexity()']]],
+  ['contractflag_17',['contractFlag',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#af1643d3843c7fde05cdb668ecc86120a',1,'EMG_PatternRec_CS::DataLogging::PR_Logger']]],
+  ['contraction_5ftime_18',['contraction_time',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#ad289f4ff18514bad54ad31447ab5143f',1,'EMG_PatternRec_CS.DataLogging.PR_Logger.contraction_time()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager.html#ab88edb928d5cdc00bc17983e81f4c9ab',1,'EMG_PatternRec_CS.PatternRec.DataManager.contraction_time()']]],
+  ['convert_5fdataview_5fto_5foutput_3c_20t_20_3e_19',['convert_dataview_to_output&lt; T &gt;',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#a03c81847bb1108a1023b46cbc0e1f953',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]],
+  ['convert_5finput_5fto_5fdataview_3c_20tinput_20_3e_20',['convert_input_to_dataview&lt; Tinput &gt;',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#afceebccc166d54f8904d1bdb05b164d1',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]],
+  ['create_5fhighpass_5fbutterworth_5ffilter_21',['create_highpass_butterworth_filter',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters.html#a30ab5920d51e255418c237e266c19a9a',1,'EMG_PatternRec_CS::Mapping::Filters']]],
+  ['create_5flowpass_5fbutterworth_5ffilter_22',['create_lowpass_butterworth_filter',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters.html#abfe2c571f0dbc4710f3950d8af5f2dbb',1,'EMG_PatternRec_CS::Mapping::Filters']]],
+  ['create_5fmovingaverage_5ffilter_23',['create_movingaverage_filter',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters.html#af9c5eefc3c4600f27bcfbcabbab87b6c',1,'EMG_PatternRec_CS::Mapping::Filters']]],
+  ['create_5fnotch_5ffilter_24',['create_notch_filter',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters.html#a91830fb7e5e7db88222fd68175261d41',1,'EMG_PatternRec_CS::Mapping::Filters']]],
+  ['current_5fcycle_25',['current_cycle',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#a686354926b85fa00a496ef59fe45cf6e',1,'EMG_PatternRec_CS::DataLogging::PR_Logger']]],
+  ['current_5foutput_26',['current_output',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#a763d1392a653fd7b15ba6f8091598b84',1,'EMG_PatternRec_CS::DataLogging::PR_Logger']]],
+  ['curtime_27',['curtime',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a8457a0ba607bd463f867af9086b97c6e',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]]
 ];

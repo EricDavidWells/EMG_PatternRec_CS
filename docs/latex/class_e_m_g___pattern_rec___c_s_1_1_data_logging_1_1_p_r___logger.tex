@@ -1,0 +1,255 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger}\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+
+
+class derived from regular \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger}{Data\+Logger}} class to facilitate data collection for pattern recognition with ground truth labels  
+
+
+Inheritance diagram for EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aae0d3005057e89808b1da0ea9e937c48}{PR\+\_\+\+Logger}} ()
+\item 
+override void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a8fd0d6c479e0befeb17e93ba473a8cee}{write\+\_\+data\+\_\+with\+\_\+timestamp}} (List$<$ string $>$ data)
+\begin{DoxyCompactList}\small\item\em writes data with timestamp and appended ground truth output class \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a7e30d0795d610533a173d7422de049b3}{PR\+\_\+tick}} ()
+\begin{DoxyCompactList}\small\item\em updates data collection variables \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aaf62a489e88e39e6b7d77b856542d104}{start\+\_\+data\+\_\+collection}} ()
+\begin{DoxyCompactList}\small\item\em initiates data collection sequence \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a86c2b1070f5bcde8d82064a6b05c8065}{end\+\_\+data\+\_\+collection}} ()
+\begin{DoxyCompactList}\small\item\em ends data collection sequence \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a763d1392a653fd7b15ba6f8091598b84}{current\+\_\+output}}
+\begin{DoxyCompactList}\small\item\em current ground truth output \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ad289f4ff18514bad54ad31447ab5143f}{contraction\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em amount of time for each contraction in ms$<$/summary \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a78beabea32ba89bcf0071ecc4d25e2ed}{relax\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em amount of time for rest between contractions in ms \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0dbf4648acf78e3d9eabead28dcf00a6}{collection\+\_\+cycles}}
+\begin{DoxyCompactList}\small\item\em number of times to cycle through all output classest \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a686354926b85fa00a496ef59fe45cf6e}{current\+\_\+cycle}}
+\begin{DoxyCompactList}\small\item\em number of times to cycle through all output classest$<$/summary \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab5ea4d5073d7b6722ffde8d220e2dab2}{train\+\_\+output\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em number of outputs to train \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0fff219bc0c630d7432eaed9d2bee2b7}{timetonext}}
+\begin{DoxyCompactList}\small\item\em time in ms to next contraction \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab309b0970098a9402d80970d17910ed8}{train\+Flag}} = false
+\begin{DoxyCompactList}\small\item\em flag indicating training is happening \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a14d20f37290c885a04e583cb1fa6cf5b}{training\+Complete\+Flag}} = false
+\begin{DoxyCompactList}\small\item\em flag indicating training is completed \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_af1643d3843c7fde05cdb668ecc86120a}{contract\+Flag}} = false
+\begin{DoxyCompactList}\small\item\em flag indicating that participant should be contracting \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a4435cb74563f1ca004e8405a330f93dc}{output\+\_\+labels}}
+\begin{DoxyCompactList}\small\item\em list of output labels \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aa95c0559b1e5465d9d852837ee3cd395}{start\+\_\+time}}
+\item 
+Stopwatch \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ac67808dd67f543cc49a3169732d115e7}{PR\+\_\+sw}} = new Stopwatch()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+class derived from regular \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger}{Data\+Logger}} class to facilitate data collection for pattern recognition with ground truth labels 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aae0d3005057e89808b1da0ea9e937c48}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aae0d3005057e89808b1da0ea9e937c48}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!PR\_Logger@{PR\_Logger}}
+\index{PR\_Logger@{PR\_Logger}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{PR\_Logger()}{PR\_Logger()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+PR\+\_\+\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a86c2b1070f5bcde8d82064a6b05c8065}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a86c2b1070f5bcde8d82064a6b05c8065}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!end\_data\_collection@{end\_data\_collection}}
+\index{end\_data\_collection@{end\_data\_collection}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{end\_data\_collection()}{end\_data\_collection()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+end\+\_\+data\+\_\+collection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+ends data collection sequence 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a7e30d0795d610533a173d7422de049b3}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a7e30d0795d610533a173d7422de049b3}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!PR\_tick@{PR\_tick}}
+\index{PR\_tick@{PR\_tick}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{PR\_tick()}{PR\_tick()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+PR\+\_\+tick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+updates data collection variables 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aaf62a489e88e39e6b7d77b856542d104}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aaf62a489e88e39e6b7d77b856542d104}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!start\_data\_collection@{start\_data\_collection}}
+\index{start\_data\_collection@{start\_data\_collection}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{start\_data\_collection()}{start\_data\_collection()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+start\+\_\+data\+\_\+collection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initiates data collection sequence 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a8fd0d6c479e0befeb17e93ba473a8cee}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a8fd0d6c479e0befeb17e93ba473a8cee}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!write\_data\_with\_timestamp@{write\_data\_with\_timestamp}}
+\index{write\_data\_with\_timestamp@{write\_data\_with\_timestamp}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{write\_data\_with\_timestamp()}{write\_data\_with\_timestamp()}}
+{\footnotesize\ttfamily override void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+write\+\_\+data\+\_\+with\+\_\+timestamp (\begin{DoxyParamCaption}\item[{List$<$ string $>$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+writes data with timestamp and appended ground truth output class 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & data to write as list of strings\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_ad48ff1c6828fd754099a011880b2cf36}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0dbf4648acf78e3d9eabead28dcf00a6}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0dbf4648acf78e3d9eabead28dcf00a6}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!collection\_cycles@{collection\_cycles}}
+\index{collection\_cycles@{collection\_cycles}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{collection\_cycles}{collection\_cycles}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+collection\+\_\+cycles}
+
+
+
+number of times to cycle through all output classest 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_af1643d3843c7fde05cdb668ecc86120a}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_af1643d3843c7fde05cdb668ecc86120a}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!contractFlag@{contractFlag}}
+\index{contractFlag@{contractFlag}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{contractFlag}{contractFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+contract\+Flag = false}
+
+
+
+flag indicating that participant should be contracting 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ad289f4ff18514bad54ad31447ab5143f}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ad289f4ff18514bad54ad31447ab5143f}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!contraction\_time@{contraction\_time}}
+\index{contraction\_time@{contraction\_time}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{contraction\_time}{contraction\_time}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+contraction\+\_\+time}
+
+
+
+amount of time for each contraction in ms$<$/summary 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a686354926b85fa00a496ef59fe45cf6e}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a686354926b85fa00a496ef59fe45cf6e}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!current\_cycle@{current\_cycle}}
+\index{current\_cycle@{current\_cycle}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{current\_cycle}{current\_cycle}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+current\+\_\+cycle}
+
+
+
+number of times to cycle through all output classest$<$/summary 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a763d1392a653fd7b15ba6f8091598b84}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a763d1392a653fd7b15ba6f8091598b84}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!current\_output@{current\_output}}
+\index{current\_output@{current\_output}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{current\_output}{current\_output}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+current\+\_\+output}
+
+
+
+current ground truth output 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a4435cb74563f1ca004e8405a330f93dc}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a4435cb74563f1ca004e8405a330f93dc}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!output\_labels@{output\_labels}}
+\index{output\_labels@{output\_labels}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{output\_labels}{output\_labels}}
+{\footnotesize\ttfamily List$<$string$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+output\+\_\+labels}
+
+
+
+list of output labels 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ac67808dd67f543cc49a3169732d115e7}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ac67808dd67f543cc49a3169732d115e7}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!PR\_sw@{PR\_sw}}
+\index{PR\_sw@{PR\_sw}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{PR\_sw}{PR\_sw}}
+{\footnotesize\ttfamily Stopwatch EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+PR\+\_\+sw = new Stopwatch()\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a78beabea32ba89bcf0071ecc4d25e2ed}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a78beabea32ba89bcf0071ecc4d25e2ed}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!relax\_time@{relax\_time}}
+\index{relax\_time@{relax\_time}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{relax\_time}{relax\_time}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+relax\+\_\+time}
+
+
+
+amount of time for rest between contractions in ms 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aa95c0559b1e5465d9d852837ee3cd395}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_aa95c0559b1e5465d9d852837ee3cd395}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily long EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+start\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0fff219bc0c630d7432eaed9d2bee2b7}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a0fff219bc0c630d7432eaed9d2bee2b7}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!timetonext@{timetonext}}
+\index{timetonext@{timetonext}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{timetonext}{timetonext}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+timetonext}
+
+
+
+time in ms to next contraction 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab5ea4d5073d7b6722ffde8d220e2dab2}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab5ea4d5073d7b6722ffde8d220e2dab2}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!train\_output\_num@{train\_output\_num}}
+\index{train\_output\_num@{train\_output\_num}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{train\_output\_num}{train\_output\_num}}
+{\footnotesize\ttfamily int EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+train\+\_\+output\+\_\+num}
+
+
+
+number of outputs to train 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab309b0970098a9402d80970d17910ed8}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_ab309b0970098a9402d80970d17910ed8}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!trainFlag@{trainFlag}}
+\index{trainFlag@{trainFlag}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{trainFlag}{trainFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+train\+Flag = false}
+
+
+
+flag indicating training is happening 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a14d20f37290c885a04e583cb1fa6cf5b}\label{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger_a14d20f37290c885a04e583cb1fa6cf5b}} 
+\index{EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}!trainingCompleteFlag@{trainingCompleteFlag}}
+\index{trainingCompleteFlag@{trainingCompleteFlag}!EMG\_PatternRec\_CS.DataLogging.PR\_Logger@{EMG\_PatternRec\_CS.DataLogging.PR\_Logger}}
+\doxysubsubsection{\texorpdfstring{trainingCompleteFlag}{trainingCompleteFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+PR\+\_\+\+Logger.\+training\+Complete\+Flag = false}
+
+
+
+flag indicating training is completed 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_data_logging_8cs}{Data\+Logging.\+cs}}\end{DoxyCompactItemize}

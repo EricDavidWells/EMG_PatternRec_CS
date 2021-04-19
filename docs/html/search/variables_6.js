@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['gamma_358',['gamma',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#ab600b9c82afe85c4249001646a636767',1,'RealTimePatternRec::PatternRec::AccordSVMGaussianModel']]],
-  ['generic_5ffeature_5fpipeline_359',['generic_feature_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a4091e03399e2ae85df3a834d65dba72e',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5ffeature_5fpipeline_5ftitles_360',['generic_feature_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a19fad1ce97eac4d2c1be3dfc9f56cc97',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5ffilter_5fparams_361',['generic_filter_params',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a7184de85375ac965fae73d636068868a',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5ffilter_5fpipeline_362',['generic_filter_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a054cb2509d1e52f8e0f3efad904ad73b',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5ffilter_5fpipeline_5ftitles_363',['generic_filter_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a21dc2f24cc7dcff647dbfc791e555ff3',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5fscaler_5fpipeline_364',['generic_scaler_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#adf3f5abd499e0b9a032c3ca2b12c473a',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['generic_5fscaler_5fpipeline_5ftitles_365',['generic_scaler_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#ac03a1914a42f6898374618fba133c93c',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['get_5fdata_5ff_366',['get_data_f',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a16ba4a01ebcd15a1404ed0694220377e',1,'RealTimePatternRec::DataLogging::DataLogger']]]
+  ['gamma_363',['gamma',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#a8e6902759929d74d5f99ade93d4906b7',1,'EMG_PatternRec_CS::PatternRec::AccordSVMGaussianModel']]],
+  ['generic_5ffeature_5fpipeline_364',['generic_feature_pipeline',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#acf3a3cc522971381a98d67e3cb80f947',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5ffeature_5fpipeline_5ftitles_365',['generic_feature_pipeline_titles',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#ae11557429118a5a917d29323e6b754c3',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5ffilter_5fparams_366',['generic_filter_params',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a5e3c29be59ebff22925e06db6a95270b',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5ffilter_5fpipeline_367',['generic_filter_pipeline',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#af107850bb3896ca77d6ada07446dfd57',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5ffilter_5fpipeline_5ftitles_368',['generic_filter_pipeline_titles',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a9743c2cb8604d44f7a62e991414a393c',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5fscaler_5fpipeline_369',['generic_scaler_pipeline',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#abffb8b95f069ad62313da6ec5317c337',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['generic_5fscaler_5fpipeline_5ftitles_370',['generic_scaler_pipeline_titles',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a4e42722b7fd1ba30fdfd4c3301611217',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['get_5fdata_5ff_371',['get_data_f',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a44c0421854bf2e2d5d6949b42d5bf1f5',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]]
 ];

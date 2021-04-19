@@ -1,0 +1,144 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+
+
+class to hold all pattern recognition model information and capabilities  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_acfb5ea7ef262529d0cb3f1d04ded3874}{Model}} ()
+\begin{DoxyCompactList}\small\item\em flag to indicate whether real-\/time is enabled \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a2ca45cf8c484a0590c8355513e772036}{map\+\_\+trainingdata\+\_\+to\+\_\+features}} ()
+\begin{DoxyCompactList}\small\item\em runs all of the training data through the Mapper pipeline and stores features and outputs in the Data object \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a6554ce685d57a13f0b59ffde2695cb59}{train\+\_\+model}} ()
+\begin{DoxyCompactList}\small\item\em Splits data into training and testing set, trains model, and calculates accuracy \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_af9eb45226fb9e43212dc11aaffaa4583}{get\+\_\+scores}} (List$<$ List$<$ double $>$$>$ input)
+\begin{DoxyCompactList}\small\item\em predicts scores for a single input of filtered data \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager}{Data\+Manager}} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a3f8766ef71c1c66e191eef1b90f5196b}{data}}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper}{Mapper}} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a7fa159037f22a2a6e65b4635745a60f5}{mapper}}
+\item 
+\mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor}{IPredictor}} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a90f0d39877997e698c0e6cf7df20b21a}{model}}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor}{Post\+Processor}} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_abd977cac93db7fca0262e614737093de}{postprocessor}}
+\item 
+double \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_adc55171f888c155d151c08600b769c5a}{train\+\_\+test\+\_\+split}}
+\begin{DoxyCompactList}\small\item\em percentage of total data to use for testing data \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_ab740b64cb5a4a665d14df3dfbae8aaec}{accuracy}}
+\begin{DoxyCompactList}\small\item\em accuracy of trained model \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to hold all pattern recognition model information and capabilities 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_acfb5ea7ef262529d0cb3f1d04ded3874}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_acfb5ea7ef262529d0cb3f1d04ded3874}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!Model@{Model}}
+\index{Model@{Model}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+flag to indicate whether real-\/time is enabled 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_af9eb45226fb9e43212dc11aaffaa4583}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_af9eb45226fb9e43212dc11aaffaa4583}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!get\_scores@{get\_scores}}
+\index{get\_scores@{get\_scores}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{get\_scores()}{get\_scores()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+get\+\_\+scores (\begin{DoxyParamCaption}\item[{List$<$ List$<$ double $>$$>$}]{input }\end{DoxyParamCaption})}
+
+
+
+predicts scores for a single input of filtered data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs\+\_\+} & already filtered data\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a2ca45cf8c484a0590c8355513e772036}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a2ca45cf8c484a0590c8355513e772036}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!map\_trainingdata\_to\_features@{map\_trainingdata\_to\_features}}
+\index{map\_trainingdata\_to\_features@{map\_trainingdata\_to\_features}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{map\_trainingdata\_to\_features()}{map\_trainingdata\_to\_features()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+map\+\_\+trainingdata\+\_\+to\+\_\+features (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+runs all of the training data through the Mapper pipeline and stores features and outputs in the Data object 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a6554ce685d57a13f0b59ffde2695cb59}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a6554ce685d57a13f0b59ffde2695cb59}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!train\_model@{train\_model}}
+\index{train\_model@{train\_model}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{train\_model()}{train\_model()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+train\+\_\+model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Splits data into training and testing set, trains model, and calculates accuracy 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_ab740b64cb5a4a665d14df3dfbae8aaec}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_ab740b64cb5a4a665d14df3dfbae8aaec}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!accuracy@{accuracy}}
+\index{accuracy@{accuracy}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{accuracy}{accuracy}}
+{\footnotesize\ttfamily double EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+accuracy}
+
+
+
+accuracy of trained model 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a3f8766ef71c1c66e191eef1b90f5196b}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a3f8766ef71c1c66e191eef1b90f5196b}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!data@{data}}
+\index{data@{data}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager}{Data\+Manager}} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+data}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a7fa159037f22a2a6e65b4635745a60f5}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a7fa159037f22a2a6e65b4635745a60f5}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!mapper@{mapper}}
+\index{mapper@{mapper}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{mapper}{mapper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper}{Mapper}} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+mapper}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a90f0d39877997e698c0e6cf7df20b21a}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_a90f0d39877997e698c0e6cf7df20b21a}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!model@{model}}
+\index{model@{model}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor}{IPredictor}} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+model}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_abd977cac93db7fca0262e614737093de}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_abd977cac93db7fca0262e614737093de}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!postprocessor@{postprocessor}}
+\index{postprocessor@{postprocessor}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{postprocessor}{postprocessor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor}{Post\+Processor}} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+postprocessor}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_adc55171f888c155d151c08600b769c5a}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model_adc55171f888c155d151c08600b769c5a}} 
+\index{EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}!train\_test\_split@{train\_test\_split}}
+\index{train\_test\_split@{train\_test\_split}!EMG\_PatternRec\_CS.PatternRec.Model@{EMG\_PatternRec\_CS.PatternRec.Model}}
+\doxysubsubsection{\texorpdfstring{train\_test\_split}{train\_test\_split}}
+{\footnotesize\ttfamily double EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Model.\+train\+\_\+test\+\_\+split}
+
+
+
+percentage of total data to use for testing data 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

@@ -80,9 +80,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RealTimePatternRec\RealTimePatternRec.csproj">
+    <ProjectReference Include="..\EMG_PatternRec_CS\EMG_PatternRec_CS.csproj">
       <Project>{3857aebd-2ec3-4b63-8108-7488e4f8cb11}</Project>
-      <Name>RealTimePatternRec</Name>
+      <Name>EMG_PatternRec_CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

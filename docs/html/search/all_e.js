@@ -1,19 +1,16 @@
 var searchData=
 [
-  ['datalogging_144',['DataLogging',['../namespace_real_time_pattern_rec_1_1_data_logging.html',1,'RealTimePatternRec']]],
-  ['examples_145',['Examples',['../namespace_real_time_pattern_rec_1_1_examples.html',1,'RealTimePatternRec']]],
-  ['mapping_146',['Mapping',['../namespace_real_time_pattern_rec_1_1_mapping.html',1,'RealTimePatternRec']]],
-  ['patternrec_147',['PatternRec',['../namespace_real_time_pattern_rec_1_1_pattern_rec.html',1,'RealTimePatternRec']]],
-  ['random_5fdata_5fgrabber_148',['random_data_grabber',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ae82e38363195d86038444a808280e68d',1,'RealTimePatternRec::Examples::Examples']]],
-  ['raw_149',['RAW',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#a4bd0cbb9ab38385234c5ed745f508445',1,'RealTimePatternRec::Mapping::Features']]],
-  ['realtimebasicusage_150',['RealTimeBasicUsage',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#ab943be10309862940903952cad6ee12e',1,'RealTimePatternRec::Examples::Examples']]],
-  ['realtimefilterflag_151',['realtimeFilterFlag',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a0099c3522754b669b97fb2cd5457ad03',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
-  ['realtimemodel_152',['RealTimeModel',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a078fddfe1cf96f05efd80652d0f6b1dc',1,'RealTimePatternRec.PatternRec.RealTimeModel.RealTimeModel()'],['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html',1,'RealTimePatternRec.PatternRec.RealTimeModel']]],
-  ['realtimepatternrec_153',['RealTimePatternRec',['../namespace_real_time_pattern_rec.html',1,'']]],
-  ['realtimepredictflag_154',['realtimePredictFlag',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a183e5305e72cf4e5a18df852724ddcca',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
-  ['realtimescores_155',['RealTimeScores',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#a8f922962376d15d3f67b7ccd4ec21bb0',1,'RealTimePatternRec::PatternRec::RealTimeModel']]],
-  ['recordflag_156',['recordflag',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ab96c1a140f7323f61878cd3e0fe4c0d7',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['relax_5ftime_157',['relax_time',['../class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#ab05402a28d93a35d8e1804a19de01648',1,'RealTimePatternRec::DataLogging::PR_Logger']]],
-  ['relaxation_5ftime_158',['relaxation_time',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_data_manager.html#a3ff971e93293ec58b7a8742b9f8677d1',1,'RealTimePatternRec::PatternRec::DataManager']]],
-  ['rng_159',['rng',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html#af6098160348eb106a356c6a5d26b2aab',1,'RealTimePatternRec::Examples::Examples']]]
+  ['patternrec_2ecs_139',['PatternRec.cs',['../_pattern_rec_8cs.html',1,'']]],
+  ['postprocessor_140',['PostProcessor',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html',1,'EMG_PatternRec_CS::Mapping']]],
+  ['postprocessor_141',['postprocessor',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#abd977cac93db7fca0262e614737093de',1,'EMG_PatternRec_CS::PatternRec::Model']]],
+  ['postprocessor_142',['PostProcessor',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#ae3e2b553e511d181a05701bf9a689929',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]],
+  ['postprocessorbasicusage_143',['PostProcessorBasicUsage',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a524dc4f27065f586168863f2affb6373',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['pr_5flogger_144',['PR_Logger',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html',1,'EMG_PatternRec_CS.DataLogging.PR_Logger'],['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#aae0d3005057e89808b1da0ea9e937c48',1,'EMG_PatternRec_CS.DataLogging.PR_Logger.PR_Logger()']]],
+  ['pr_5floggerbasicusage_145',['PR_LoggerBasicUsage',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a5cce07b931aaed0619ba3b3ad5f37d22',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['pr_5fsw_146',['PR_sw',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#ac67808dd67f543cc49a3169732d115e7',1,'EMG_PatternRec_CS::DataLogging::PR_Logger']]],
+  ['pr_5ftick_147',['PR_tick',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#a7e30d0795d610533a173d7422de049b3',1,'EMG_PatternRec_CS::DataLogging::PR_Logger']]],
+  ['predict_148',['predict',['../interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor.html#ada16e624ce44db7801f0507e0bad4abc',1,'EMG_PatternRec_CS.PatternRec.IPredictor.predict()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_gaussian_model.html#af352c2fbca8bda71fb53fddb6ec64e94',1,'EMG_PatternRec_CS.PatternRec.AccordSVMGaussianModel.predict()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_s_v_m_linear_model.html#ae7f87b8716ec27c187a7dcecf9ff9e25',1,'EMG_PatternRec_CS.PatternRec.AccordSVMLinearModel.predict()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model.html#a6ae4e2ae8ad2a95b84bbd8de330d53a7',1,'EMG_PatternRec_CS.PatternRec.AccordLDAModel.predict()'],['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#a18779a4d4ee4853aaa6fc201d0109ccd',1,'EMG_PatternRec_CS.PatternRec.ONNXModel.predict()']]],
+  ['prevtime_149',['prevtime',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#ab31aa92407877159619777083b6032e4',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['primitive_5ftype_150',['primitive_type',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model.html#ab8ab2a271cd027e2b4270e93c795d8c8',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]],
+  ['process_151',['process',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#a29a9653a8262ef3790bc42ac42eb4f59',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]]
 ];

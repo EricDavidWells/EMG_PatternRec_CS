@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_5fdata_332',['_data',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ace03e04d966c52b1a56c6ca787739280',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['_5fdata_5fhistory_333',['_data_history',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#aaac80c2a4840263c99e62e6817fb6de5',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['_5frealtimescores_334',['_realtimeScores',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_real_time_model.html#ac4e088058b49f5bb7a9be8223a59a0ac',1,'RealTimePatternRec::PatternRec::RealTimeModel']]]
+  ['_5fdata_337',['_data',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a91ec14934f756b3deb44374b5b9fe71a',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['_5fdata_5fhistory_338',['_data_history',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a0e00e2db8458ff12b75f5b6ead8a5fac',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['_5frealtimescores_339',['_realtimeScores',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model.html#ac32528d58c240c5b3e18e095504570f5',1,'EMG_PatternRec_CS::PatternRec::RealTimeModel']]]
 ];

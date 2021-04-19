@@ -44,5 +44,5 @@
   "freq": 100,
   "collection_cycles": 1,
   "contraction_time": 1000,
-  "relaxation_time": 100
+  "relaxation_time": 1000
 }

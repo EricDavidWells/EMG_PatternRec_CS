@@ -1,0 +1,177 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model}\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+
+
+LDA predictor using model from ACCORD.\+NET library  
+
+
+Inheritance diagram for EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a50173d7088ab1c79bcbb8332895bbe44}{Accord\+LDAModel}} ()
+\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6f45efb3c63c60aad22ee846c918f0d4}{train}} (double\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} inputs, int\mbox{[}$\,$\mbox{]} outputs)
+\begin{DoxyCompactList}\small\item\em trains model \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6ae4e2ae8ad2a95b84bbd8de330d53a7}{predict}} (double\mbox{[}$\,$\mbox{]} input)
+\begin{DoxyCompactList}\small\item\em predicts output \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a966631d347bb7ded4adf0e25c094fd8e}{save}} (string filepath)
+\begin{DoxyCompactList}\small\item\em serializes model to a .bin file and deletes model \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_ae35b8e72376970073abf64dc28bfa94e}{load}} (string filepath)
+\begin{DoxyCompactList}\small\item\em deserializes .bin file into model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Linear\+Discriminant\+Analysis.\+Pipeline \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a43186fc4201ed8ce62cf592068618cba}{learner}}
+\begin{DoxyCompactList}\small\item\em ACCORD.\+NET model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_acb45b62fdab8e1e33a954efc891f8c0b}{model\+\_\+type}} = \char`\"{}lda\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em type of model \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_af28137071805fad5517290f82138cb76}{is\+\_\+trained}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em indicates model has been trained \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+LDA predictor using model from ACCORD.\+NET library 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a50173d7088ab1c79bcbb8332895bbe44}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a50173d7088ab1c79bcbb8332895bbe44}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!AccordLDAModel@{AccordLDAModel}}
+\index{AccordLDAModel@{AccordLDAModel}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{AccordLDAModel()}{AccordLDAModel()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+Accord\+LDAModel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_ae35b8e72376970073abf64dc28bfa94e}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_ae35b8e72376970073abf64dc28bfa94e}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!load@{load}}
+\index{load@{load}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+load (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+deserializes .bin file into model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor_aba82c6e532f3679b26e7fbec900421b1}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6ae4e2ae8ad2a95b84bbd8de330d53a7}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6ae4e2ae8ad2a95b84bbd8de330d53a7}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!predict@{predict}}
+\index{predict@{predict}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+predict (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{input }\end{DoxyParamCaption})}
+
+
+
+predicts output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor_ada16e624ce44db7801f0507e0bad4abc}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a966631d347bb7ded4adf0e25c094fd8e}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a966631d347bb7ded4adf0e25c094fd8e}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!save@{save}}
+\index{save@{save}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+save (\begin{DoxyParamCaption}\item[{string}]{filepath }\end{DoxyParamCaption})}
+
+
+
+serializes model to a .bin file and deletes model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor_abb42c594e0287a204fb598e982e56c8b}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+IPredictor}}.
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6f45efb3c63c60aad22ee846c918f0d4}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a6f45efb3c63c60aad22ee846c918f0d4}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!train@{train}}
+\index{train@{train}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+train (\begin{DoxyParamCaption}\item[{double}]{inputs\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int\mbox{[}$\,$\mbox{]}}]{outputs }\end{DoxyParamCaption})}
+
+
+
+trains model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & input features\\
+\hline
+{\em outputs} & ground truth classes\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_i_predictor_ae9dbe16084557201acdd635355033a7d}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+IPredictor}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a43186fc4201ed8ce62cf592068618cba}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_a43186fc4201ed8ce62cf592068618cba}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!learner@{learner}}
+\index{learner@{learner}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{learner}{learner}}
+{\footnotesize\ttfamily Linear\+Discriminant\+Analysis.\+Pipeline EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+learner}
+
+
+
+ACCORD.\+NET model 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_af28137071805fad5517290f82138cb76}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_af28137071805fad5517290f82138cb76}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!is\_trained@{is\_trained}}
+\index{is\_trained@{is\_trained}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{is\_trained}{is\_trained}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+is\+\_\+trained = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+indicates model has been trained 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_acb45b62fdab8e1e33a954efc891f8c0b}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_accord_l_d_a_model_acb45b62fdab8e1e33a954efc891f8c0b}} 
+\index{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}!model\_type@{model\_type}}
+\index{model\_type@{model\_type}!EMG\_PatternRec\_CS.PatternRec.AccordLDAModel@{EMG\_PatternRec\_CS.PatternRec.AccordLDAModel}}
+\doxysubsubsection{\texorpdfstring{model\_type}{model\_type}}
+{\footnotesize\ttfamily string EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Accord\+LDAModel.\+model\+\_\+type = \char`\"{}lda\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+type of model 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

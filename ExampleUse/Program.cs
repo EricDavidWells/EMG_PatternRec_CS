@@ -1,6 +1,6 @@
 ﻿using System;
 
-using RealTimePatternRec.Examples;
+using EMG_PatternRec_CS.Examples;
 
 
 namespace ExampleUse
@@ -24,8 +24,8 @@ namespace ExampleUse
             //Console.WriteLine("Running Data Logger Basic Usage Example");
             //Examples.DataLoggerBasicUsage();
 
-            //Console.WriteLine("Running PR_Logger Example");
-            //Examples.PR_LoggerBasicUsage();
+            Console.WriteLine("Running PR_Logger Example");
+            Examples.PR_LoggerBasicUsage();
 
             //Console.WriteLine("Running Model Example");
             //Examples.ModelBasicUsage();
@@ -33,8 +33,8 @@ namespace ExampleUse
             //Console.WriteLine("Running Filters Example");
             //Examples.FilterTesting();
 
-            Console.WriteLine("Running MultiDimensional Filter Example");
-            Examples.MultidimensionalFilterTest();
+            //Console.WriteLine("Running MultiDimensional Filter Example");
+            //Examples.MultidimensionalFilterTest();
 
             Console.WriteLine("Examples Complete");
             Console.Read();

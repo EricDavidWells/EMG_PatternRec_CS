@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['wamp_326',['WAMP',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#aeea21b917f32ecb407bffdec23c20de1',1,'RealTimePatternRec::Mapping::Features']]],
-  ['wl_327',['WL',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html#abcfa70d1942349630524b04e2b21c9ee',1,'RealTimePatternRec::Mapping::Features']]],
-  ['write_5fcsv_328',['write_csv',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a5155b6a7e37005050f7d4a1e47643ae7',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['write_5fdata_5fwith_5ftimestamp_329',['write_data_with_timestamp',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ae49c4de5079f2382e4666d4daacb5ec4',1,'RealTimePatternRec.DataLogging.DataLogger.write_data_with_timestamp()'],['../class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#a07fcd112d382f80a62c228d2b2b03b98',1,'RealTimePatternRec.DataLogging.PR_Logger.write_data_with_timestamp()']]]
+  ['wamp_331',['WAMP',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#ae6db8003e92f0287a86602bc0bd31d6c',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['wl_332',['WL',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#a068b0d812ade3d6575bc85fc8dc41d0e',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['write_5fcsv_333',['write_csv',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#ae63090da8f311684fbe0c3c0b70b8da5',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['write_5fdata_5fwith_5ftimestamp_334',['write_data_with_timestamp',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#ad48ff1c6828fd754099a011880b2cf36',1,'EMG_PatternRec_CS.DataLogging.DataLogger.write_data_with_timestamp()'],['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_p_r___logger.html#a8fd0d6c479e0befeb17e93ba473a8cee',1,'EMG_PatternRec_CS.DataLogging.PR_Logger.write_data_with_timestamp()']]]
 ];

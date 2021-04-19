@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['emg_5ffeature_5fpipeline_37',['emg_feature_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a8a4695caf7db4b89b887a59253c16ffd',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5ffeature_5fpipeline_5ftitles_38',['emg_feature_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a163a3dc89fae8004ceaf79a3306b6c49',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5ffilter_5fparams_39',['emg_filter_params',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a4a3bebe32a87400b59130705c120b21d',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5ffilter_5fpipeline_40',['emg_filter_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#aaddd33667c65e36de6a68bbedd553109',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5ffilter_5fpipeline_5ftitles_41',['emg_filter_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#aec156480a6659381c882555d3c303646',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5fscaler_5fpipeline_42',['emg_scaler_pipeline',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#add62d2396ae93a0933142310756f1ba1',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['emg_5fscaler_5fpipeline_5ftitles_43',['emg_scaler_pipeline_titles',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#ab2ec1def6302e9fb6cd464e1e45f44ca',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['end_5fdata_5fcollection_44',['end_data_collection',['../class_real_time_pattern_rec_1_1_data_logging_1_1_p_r___logger.html#aa8491dddf7d88b4581d4f8ef06edd03d',1,'RealTimePatternRec::DataLogging::PR_Logger']]],
-  ['examples_45',['Examples',['../class_real_time_pattern_rec_1_1_examples_1_1_examples.html',1,'RealTimePatternRec::Examples']]],
-  ['examples_2ecs_46',['Examples.cs',['../_examples_8cs.html',1,'']]]
+  ['data_28',['Data',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a5831ab2448c07cefb20a066f34541495',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['data_29',['data',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#a3f8766ef71c1c66e191eef1b90f5196b',1,'EMG_PatternRec_CS::PatternRec::Model']]],
+  ['data_5fhistory_30',['Data_history',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#ae3a43ad175988d1276bdf56ee120ef35',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['datalogger_31',['DataLogger',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#aa81ca3f09fd6c73289a020ca8aeb84d4',1,'EMG_PatternRec_CS.DataLogging.DataLogger.DataLogger()'],['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html',1,'EMG_PatternRec_CS.DataLogging.DataLogger']]],
+  ['dataloggerbasicusage_32',['DataLoggerBasicUsage',['../class_e_m_g___pattern_rec___c_s_1_1_examples_1_1_examples.html#a6ce3b9f645058d6c50324a4876065f3e',1,'EMG_PatternRec_CS::Examples::Examples']]],
+  ['datalogging_2ecs_33',['DataLogging.cs',['../_data_logging_8cs.html',1,'']]],
+  ['datamanager_34',['DataManager',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_data_manager.html',1,'EMG_PatternRec_CS::PatternRec']]],
+  ['dummy_5ffeature_5fexample_35',['dummy_feature_example',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html#aa6d3922c57de98927c1e058367ab3afd',1,'EMG_PatternRec_CS::Mapping::Features']]],
+  ['dynamicinputtype_36',['DynamicInputType',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_input_type.html',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]],
+  ['dynamicoutputtype_37',['DynamicOutputType',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_o_n_n_x_model_1_1_dynamic_output_type.html',1,'EMG_PatternRec_CS::PatternRec::ONNXModel']]]
 ];

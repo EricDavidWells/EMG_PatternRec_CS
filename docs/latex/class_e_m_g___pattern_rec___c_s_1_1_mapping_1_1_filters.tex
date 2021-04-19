@@ -1,0 +1,161 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters}\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+
+
+static class of various filter techniques using the NWaves library for preprocessing signals.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static NWaves.\+Filters.\+Bi\+Quad.\+Notch\+Filter \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a91830fb7e5e7db88222fd68175261d41}{create\+\_\+notch\+\_\+filter}} (double f\+\_\+notch, double fs)
+\begin{DoxyCompactList}\small\item\em create a notch filter \end{DoxyCompactList}\item 
+static NWaves.\+Filters.\+Butterworth.\+Low\+Pass\+Filter \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_abfe2c571f0dbc4710f3950d8af5f2dbb}{create\+\_\+lowpass\+\_\+butterworth\+\_\+filter}} (double fc, double fs, int order)
+\begin{DoxyCompactList}\small\item\em create a low pass butterworth filter \end{DoxyCompactList}\item 
+static NWaves.\+Filters.\+Butterworth.\+High\+Pass\+Filter \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a30ab5920d51e255418c237e266c19a9a}{create\+\_\+highpass\+\_\+butterworth\+\_\+filter}} (double fc, double fs, int order)
+\begin{DoxyCompactList}\small\item\em create a a high pass butterworth filter \end{DoxyCompactList}\item 
+static NWaves.\+Filters.\+Moving\+Average\+Filter \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_af9c5eefc3c4600f27bcfbcabbab87b6c}{create\+\_\+movingaverage\+\_\+filter}} (int order)
+\begin{DoxyCompactList}\small\item\em create a moving average filter \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_ab53f9dc0cc3e0ee7ae2c852187b861d9}{apply\+\_\+filter}} (NWaves.\+Filters.\+Base.\+IOnline\+Filter filter, List$<$ double $>$ raw\+\_\+values)
+\begin{DoxyCompactList}\small\item\em applies a filter to all samples in the signal \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a9f3aeced72215a2249769d4616d32cde}{apply\+\_\+filter}} (List$<$ NWaves.\+Filters.\+Base.\+IOnline\+Filter $>$ filters, List$<$ double $>$ raw\+\_\+values, int channel\+\_\+num)
+\begin{DoxyCompactList}\small\item\em selects the filter from a list of filters and applies it to all samples in the signal \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+static class of various filter techniques using the NWaves library for preprocessing signals. 
+
+note that signals cannot share a single filter, as digital filters depend on previous inputs and outputs on a per-\/signal basis 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a9f3aeced72215a2249769d4616d32cde}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a9f3aeced72215a2249769d4616d32cde}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!apply\_filter@{apply\_filter}}
+\index{apply\_filter@{apply\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{apply\_filter()}{apply\_filter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+apply\+\_\+filter (\begin{DoxyParamCaption}\item[{List$<$ NWaves.\+Filters.\+Base.\+IOnline\+Filter $>$}]{filters,  }\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{channel\+\_\+num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+selects the filter from a list of filters and applies it to all samples in the signal 
+
+This overloaded function allows a single delegate function to apply a filter type to all signals in the \mbox{\hyperlink{namespace_e_m_g___pattern_rec___c_s_1_1_mapping}{Mapping}} class. The delegate created will have the list of filters specified, and which filter is used is specified by the channel\+\_\+num parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filters} & \\
+\hline
+{\em raw\+\_\+values} & \\
+\hline
+{\em channel\+\_\+num} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_ab53f9dc0cc3e0ee7ae2c852187b861d9}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_ab53f9dc0cc3e0ee7ae2c852187b861d9}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!apply\_filter@{apply\_filter}}
+\index{apply\_filter@{apply\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{apply\_filter()}{apply\_filter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+apply\+\_\+filter (\begin{DoxyParamCaption}\item[{NWaves.\+Filters.\+Base.\+IOnline\+Filter}]{filter,  }\item[{List$<$ double $>$}]{raw\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+applies a filter to all samples in the signal 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & \\
+\hline
+{\em raw\+\_\+values} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a30ab5920d51e255418c237e266c19a9a}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a30ab5920d51e255418c237e266c19a9a}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!create\_highpass\_butterworth\_filter@{create\_highpass\_butterworth\_filter}}
+\index{create\_highpass\_butterworth\_filter@{create\_highpass\_butterworth\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{create\_highpass\_butterworth\_filter()}{create\_highpass\_butterworth\_filter()}}
+{\footnotesize\ttfamily static NWaves.\+Filters.\+Butterworth.\+High\+Pass\+Filter EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+create\+\_\+highpass\+\_\+butterworth\+\_\+filter (\begin{DoxyParamCaption}\item[{double}]{fc,  }\item[{double}]{fs,  }\item[{int}]{order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create a a high pass butterworth filter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fc} & cutoff frequency \\
+\hline
+{\em fs} & sample frequency \\
+\hline
+{\em order} & filter order\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_abfe2c571f0dbc4710f3950d8af5f2dbb}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_abfe2c571f0dbc4710f3950d8af5f2dbb}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!create\_lowpass\_butterworth\_filter@{create\_lowpass\_butterworth\_filter}}
+\index{create\_lowpass\_butterworth\_filter@{create\_lowpass\_butterworth\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{create\_lowpass\_butterworth\_filter()}{create\_lowpass\_butterworth\_filter()}}
+{\footnotesize\ttfamily static NWaves.\+Filters.\+Butterworth.\+Low\+Pass\+Filter EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+create\+\_\+lowpass\+\_\+butterworth\+\_\+filter (\begin{DoxyParamCaption}\item[{double}]{fc,  }\item[{double}]{fs,  }\item[{int}]{order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create a low pass butterworth filter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fc} & cutoff frequency \\
+\hline
+{\em fs} & sample frequency \\
+\hline
+{\em order} & filter order \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_af9c5eefc3c4600f27bcfbcabbab87b6c}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_af9c5eefc3c4600f27bcfbcabbab87b6c}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!create\_movingaverage\_filter@{create\_movingaverage\_filter}}
+\index{create\_movingaverage\_filter@{create\_movingaverage\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{create\_movingaverage\_filter()}{create\_movingaverage\_filter()}}
+{\footnotesize\ttfamily static NWaves.\+Filters.\+Moving\+Average\+Filter EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+create\+\_\+movingaverage\+\_\+filter (\begin{DoxyParamCaption}\item[{int}]{order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create a moving average filter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order} & filter order number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a91830fb7e5e7db88222fd68175261d41}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters_a91830fb7e5e7db88222fd68175261d41}} 
+\index{EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}!create\_notch\_filter@{create\_notch\_filter}}
+\index{create\_notch\_filter@{create\_notch\_filter}!EMG\_PatternRec\_CS.Mapping.Filters@{EMG\_PatternRec\_CS.Mapping.Filters}}
+\doxysubsubsection{\texorpdfstring{create\_notch\_filter()}{create\_notch\_filter()}}
+{\footnotesize\ttfamily static NWaves.\+Filters.\+Bi\+Quad.\+Notch\+Filter EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Filters.\+create\+\_\+notch\+\_\+filter (\begin{DoxyParamCaption}\item[{double}]{f\+\_\+notch,  }\item[{double}]{fs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create a notch filter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+\_\+notch} & notch frequency \\
+\hline
+{\em fs} & sampel frequency \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

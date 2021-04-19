@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_344',['data',['../class_real_time_pattern_rec_1_1_pattern_rec_1_1_model.html#a4806fb156a66f7191421051ca87d34eb',1,'RealTimePatternRec::PatternRec::Model']]]
+  ['data_349',['data',['../class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model.html#a3f8766ef71c1c66e191eef1b90f5196b',1,'EMG_PatternRec_CS::PatternRec::Model']]]
 ];

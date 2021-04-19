@@ -1,8 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node0 [label="RealTimePatternRec.Mapping.\lFeatures",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_real_time_pattern_rec_1_1_mapping_1_1_features.html",tooltip="static class of window based feature mapping methods for time series data structured as Lists"];
-}

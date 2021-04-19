@@ -1,0 +1,124 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model}\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+
+
+Enables consistent real-\/time prediction from a \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}} object at the specified frequency it was trained on. Inherits from Data\+Logger class  
+
+
+Inheritance diagram for EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a75cb6d406fc3c89bdea54802baa78488}{Real\+Time\+Model}} (\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}} model\+\_\+)
+\item 
+override void \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0f8e2e7afe7e96afe842dae378e94c7c}{thread\+\_\+loop}} ()
+\begin{DoxyCompactList}\small\item\em override Data\+Loggers thread to filter all inputs and make a prediction on each successive data grab \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0da6e6caf6de4ef99bd5458afe4c29fb}{model}}
+\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a32458299849176e6bc6fbc1195136338}{realtime\+Filter\+Flag}}
+\begin{DoxyCompactList}\small\item\em if true, data will be filtered using model.\+mapper each time data is collected \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a3b64a78de20600e4332b117af81b6ffe}{realtime\+Predict\+Flag}}
+\begin{DoxyCompactList}\small\item\em if true, prediction will be updated each time data is collected \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a7b0a92c6d34cfc04a012ea0c2689fee6}{Real\+Time\+Scores}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em gets current realtime prediction scores \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_ac32528d58c240c5b3e18e095504570f5}{\+\_\+realtime\+Scores}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Enables consistent real-\/time prediction from a \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}} object at the specified frequency it was trained on. Inherits from Data\+Logger class 
+
+A seperate digital filter must be used for each signal due to digital filters reliance on previous inputs. These digital filters rely on signals at the specified sampling frequency, and must be updated consistently, not just each time a prediction is made. Similarly, the post-\/processing algorithms are dependent on sampling rate, and must be done consistently. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a75cb6d406fc3c89bdea54802baa78488}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a75cb6d406fc3c89bdea54802baa78488}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!RealTimeModel@{RealTimeModel}}
+\index{RealTimeModel@{RealTimeModel}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{RealTimeModel()}{RealTimeModel()}}
+{\footnotesize\ttfamily EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+Real\+Time\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}}}]{model\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0f8e2e7afe7e96afe842dae378e94c7c}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0f8e2e7afe7e96afe842dae378e94c7c}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!thread\_loop@{thread\_loop}}
+\index{thread\_loop@{thread\_loop}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{thread\_loop()}{thread\_loop()}}
+{\footnotesize\ttfamily override void EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+thread\+\_\+loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+override Data\+Loggers thread to filter all inputs and make a prediction on each successive data grab 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger_aef60ab3d5de7c68a6a6a1246b867b41f}{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Data\+Logging.\+Data\+Logger}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_ac32528d58c240c5b3e18e095504570f5}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_ac32528d58c240c5b3e18e095504570f5}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!\_realtimeScores@{\_realtimeScores}}
+\index{\_realtimeScores@{\_realtimeScores}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{\_realtimeScores}{\_realtimeScores}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+\_\+realtime\+Scores\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0da6e6caf6de4ef99bd5458afe4c29fb}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a0da6e6caf6de4ef99bd5458afe4c29fb}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!model@{model}}
+\index{model@{model}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_model}{Model}} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+model}
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a32458299849176e6bc6fbc1195136338}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a32458299849176e6bc6fbc1195136338}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!realtimeFilterFlag@{realtimeFilterFlag}}
+\index{realtimeFilterFlag@{realtimeFilterFlag}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{realtimeFilterFlag}{realtimeFilterFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+realtime\+Filter\+Flag}
+
+
+
+if true, data will be filtered using model.\+mapper each time data is collected 
+
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a3b64a78de20600e4332b117af81b6ffe}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a3b64a78de20600e4332b117af81b6ffe}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!realtimePredictFlag@{realtimePredictFlag}}
+\index{realtimePredictFlag@{realtimePredictFlag}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{realtimePredictFlag}{realtimePredictFlag}}
+{\footnotesize\ttfamily bool EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+realtime\+Predict\+Flag}
+
+
+
+if true, prediction will be updated each time data is collected 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a7b0a92c6d34cfc04a012ea0c2689fee6}\label{class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model_a7b0a92c6d34cfc04a012ea0c2689fee6}} 
+\index{EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}!RealTimeScores@{RealTimeScores}}
+\index{RealTimeScores@{RealTimeScores}!EMG\_PatternRec\_CS.PatternRec.RealTimeModel@{EMG\_PatternRec\_CS.PatternRec.RealTimeModel}}
+\doxysubsubsection{\texorpdfstring{RealTimeScores}{RealTimeScores}}
+{\footnotesize\ttfamily double \mbox{[}$\,$\mbox{]} EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Pattern\+Rec.\+Real\+Time\+Model.\+Real\+Time\+Scores\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+gets current realtime prediction scores 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_pattern_rec_8cs}{Pattern\+Rec.\+cs}}\end{DoxyCompactItemize}

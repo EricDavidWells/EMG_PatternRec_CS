@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['features_218',['Features',['../class_real_time_pattern_rec_1_1_mapping_1_1_features.html',1,'RealTimePatternRec::Mapping']]],
-  ['filters_219',['Filters',['../class_real_time_pattern_rec_1_1_mapping_1_1_filters.html',1,'RealTimePatternRec::Mapping']]]
+  ['features_221',['Features',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features.html',1,'EMG_PatternRec_CS::Mapping']]],
+  ['filters_222',['Filters',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_filters.html',1,'EMG_PatternRec_CS::Mapping']]]
 ];

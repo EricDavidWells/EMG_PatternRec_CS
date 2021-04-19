@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['next_5ftick_5ftime_387',['next_tick_time',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#ae4bfde1a1b9721a329804ee38837df09',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['num_5foutputs_388',['num_outputs',['../class_real_time_pattern_rec_1_1_mapping_1_1_post_processor.html#aec8f8ccb224a75eee46b0c12329af1c4',1,'RealTimePatternRec::Mapping::PostProcessor']]]
+  ['next_5ftick_5ftime_392',['next_tick_time',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a932ca317a57f0be41ebbed97ae37bb10',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['num_5foutputs_393',['num_outputs',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_post_processor.html#ac8b36fb95484b15a23dd17dc994b0b4e',1,'EMG_PatternRec_CS::Mapping::PostProcessor']]]
 ];

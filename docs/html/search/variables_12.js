@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['window_5fn_419',['window_n',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a0275c68655a865bbb31ea3df855c5218',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['window_5foverlap_5fn_420',['window_overlap_n',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#aa66bb4b5fa9e242d156d0a7ec050ee8e',1,'RealTimePatternRec::Mapping::Mapper']]],
-  ['window_5fsize_5fn_421',['window_size_n',['../class_real_time_pattern_rec_1_1_mapping_1_1_mapper.html#a1ac0343ae21ff81682d0069d968d5f1a',1,'RealTimePatternRec::Mapping::Mapper']]]
+  ['window_5fn_424',['window_n',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#adac12e38a6a7c2f022bb4aa627245fb9',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['window_5foverlap_5fn_425',['window_overlap_n',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a2ba6182af85b7100e4f1de2003e16a57',1,'EMG_PatternRec_CS::Mapping::Mapper']]],
+  ['window_5fsize_5fn_426',['window_size_n',['../class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_mapper.html#a9f72f51cb5c167c55e26f22658bc0626',1,'EMG_PatternRec_CS::Mapping::Mapper']]]
 ];

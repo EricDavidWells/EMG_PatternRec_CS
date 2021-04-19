@@ -56,7 +56,7 @@
   },
 
   "model":{
-    "$type": "RealTimePatternRec.PatternRec.ONNXModel, RealTimePatternRec",
+    "$type": "EMG_PatternRec_CS.PatternRec.ONNXModel, EMG_PatternRec_CS",
     "input_layer_name": "input",
     "output_layer_name": "softmax",
     "primitive_type": "float",

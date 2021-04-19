@@ -1,9 +1,0 @@
-digraph "RealTimePatternRec.PatternRec.ONNXModel"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="RealTimePatternRec.Pattern\lRec.ONNXModel",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="holds a pre-trained Open Neural Network eXchange model and provides some simple functionality to mani..."];
-  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="IPredictor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_real_time_pattern_rec_1_1_pattern_rec_1_1_i_predictor.html",tooltip="Predictor interface to standardize implemented predictors"];
-}

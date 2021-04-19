@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['history_5fnum_367',['history_num',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#a97e28ee83b8476d6ee3a8e4739e7bf61',1,'RealTimePatternRec::DataLogging::DataLogger']]],
-  ['historyflag_368',['historyflag',['../class_real_time_pattern_rec_1_1_data_logging_1_1_data_logger.html#af5d68477cc68779de0b0895c9d611aa0',1,'RealTimePatternRec::DataLogging::DataLogger']]]
+  ['history_5fnum_372',['history_num',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#ad52c8b78bd382e8c22b0350cd8843b63',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]],
+  ['historyflag_373',['historyflag',['../class_e_m_g___pattern_rec___c_s_1_1_data_logging_1_1_data_logger.html#a9617221ba63ea714079ec0c0e746db22',1,'EMG_PatternRec_CS::DataLogging::DataLogger']]]
 ];

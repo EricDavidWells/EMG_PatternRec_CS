@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "RealTimePatternRec", "index.html", [
+  [ "EMG_PatternRec_CS", "index.html", [
     [ "Packages", "namespaces.html", [
       [ "Packages", "namespaces.html", "namespaces_dup" ],
       [ "Package Functions", "namespacemembers.html", [
@@ -51,8 +51,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_assembly_info_8cs.html",
-"dir_713f14b196ccb66578552dd7868a2f17.html"
+"_8_n_e_t_framework_00_version_0av4_87_82_8_assembly_attributes_8cs.html",
+"class_e_m_g___pattern_rec___c_s_1_1_pattern_rec_1_1_real_time_model.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

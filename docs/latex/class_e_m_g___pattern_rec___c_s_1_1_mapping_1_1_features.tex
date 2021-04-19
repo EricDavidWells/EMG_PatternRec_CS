@@ -1,0 +1,337 @@
+\hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features}{}\doxysection{EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features Class Reference}
+\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features}\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+
+
+static class of window based feature mapping methods for time series data structured as Lists  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_aa6d3922c57de98927c1e058367ab3afd}{dummy\+\_\+feature\+\_\+example}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n, double offset)
+\begin{DoxyCompactList}\small\item\em Returns the windowed raw value (downsamples to match other windowed features) \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a3bb5214acb24ea67346a3fe94334658f}{RAW}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed raw value (downsampled to match other windowed features) \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_afba898aab32fcdf2887ee638b1c5fbb9}{MV}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed mean value \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a90aa147c00550fde84fd79cd69ab83f7}{IEMG}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed integrated emg value \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_af70a5cce034e24dc5bba591ab3507735}{MAV}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed mean absolute value \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a351660b14f5504f19099adad8a82534e}{MMAV1}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed modified mean absolute value 1 \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a91b88fa72179d82f4ac353ba876e2fc8}{MMAV2}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed modified mean absolute value 2 \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a61a84ed2854ea2d5deb4688f49dc38f9}{SSI}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the winowed simple square integral value \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a53d48ffa56fd4b15c77dafe262c3eaa3}{VAR}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed variance \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a1124b6886403f8483765fe99a00ea6fb}{ZC}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed number of zero crossings \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a5c0a36239b2ff4fa90b6da77ce1f9d09}{SSC}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed number of slope sign changes \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a068b0d812ade3d6575bc85fc8dc41d0e}{WL}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Returns the windowed waveform length \end{DoxyCompactList}\item 
+static List$<$ double $>$ \mbox{\hyperlink{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_ae6db8003e92f0287a86602bc0bd31d6c}{WAMP}} (List$<$ double $>$ raw\+\_\+values, int window\+\_\+size\+\_\+n, int window\+\_\+overlap\+\_\+n, double threshold)
+\begin{DoxyCompactList}\small\item\em Returns the windowed wilson amplitude \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+static class of window based feature mapping methods for time series data structured as Lists 
+
+list of sources\+: \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7250028/}{\texttt{ https\+://www.\+ncbi.\+nlm.\+nih.\+gov/pmc/articles/\+PMC7250028/}} \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3821366/}{\texttt{ https\+://www.\+ncbi.\+nlm.\+nih.\+gov/pmc/articles/\+PMC3821366/}} \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5017469/}{\texttt{ https\+://www.\+ncbi.\+nlm.\+nih.\+gov/pmc/articles/\+PMC5017469/}} \href{https://doi.org/10.1016/j.eswa.2012.01.102}{\texttt{ https\+://doi.\+org/10.\+1016/j.\+eswa.\+2012.\+01.\+102}} 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_aa6d3922c57de98927c1e058367ab3afd}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_aa6d3922c57de98927c1e058367ab3afd}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!dummy\_feature\_example@{dummy\_feature\_example}}
+\index{dummy\_feature\_example@{dummy\_feature\_example}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{dummy\_feature\_example()}{dummy\_feature\_example()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+dummy\+\_\+feature\+\_\+example (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n,  }\item[{double}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed raw value (downsamples to match other windowed features) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em window\+\_\+size\+\_\+n} & \\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a90aa147c00550fde84fd79cd69ab83f7}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a90aa147c00550fde84fd79cd69ab83f7}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!IEMG@{IEMG}}
+\index{IEMG@{IEMG}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{IEMG()}{IEMG()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+IEMG (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed integrated emg value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}windowed mean absolute value\char`\"{}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_af70a5cce034e24dc5bba591ab3507735}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_af70a5cce034e24dc5bba591ab3507735}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!MAV@{MAV}}
+\index{MAV@{MAV}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{MAV()}{MAV()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+MAV (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed mean absolute value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}windowed mean absolute value\char`\"{}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a351660b14f5504f19099adad8a82534e}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a351660b14f5504f19099adad8a82534e}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!MMAV1@{MMAV1}}
+\index{MMAV1@{MMAV1}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{MMAV1()}{MMAV1()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+MMAV1 (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed modified mean absolute value 1 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}windowed mean absolute value\char`\"{}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a91b88fa72179d82f4ac353ba876e2fc8}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a91b88fa72179d82f4ac353ba876e2fc8}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!MMAV2@{MMAV2}}
+\index{MMAV2@{MMAV2}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{MMAV2()}{MMAV2()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+MMAV2 (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed modified mean absolute value 2 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}windowed mean absolute value\char`\"{}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_afba898aab32fcdf2887ee638b1c5fbb9}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_afba898aab32fcdf2887ee638b1c5fbb9}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!MV@{MV}}
+\index{MV@{MV}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{MV()}{MV()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+MV (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed mean value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a3bb5214acb24ea67346a3fe94334658f}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a3bb5214acb24ea67346a3fe94334658f}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!RAW@{RAW}}
+\index{RAW@{RAW}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{RAW()}{RAW()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+RAW (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed raw value (downsampled to match other windowed features) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em window\+\_\+size\+\_\+n} & \\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a5c0a36239b2ff4fa90b6da77ce1f9d09}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a5c0a36239b2ff4fa90b6da77ce1f9d09}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!SSC@{SSC}}
+\index{SSC@{SSC}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{SSC()}{SSC()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+SSC (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed number of slope sign changes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a61a84ed2854ea2d5deb4688f49dc38f9}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a61a84ed2854ea2d5deb4688f49dc38f9}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!SSI@{SSI}}
+\index{SSI@{SSI}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{SSI()}{SSI()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+SSI (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the winowed simple square integral value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}windowed mean absolute value\char`\"{}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a53d48ffa56fd4b15c77dafe262c3eaa3}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a53d48ffa56fd4b15c77dafe262c3eaa3}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!VAR@{VAR}}
+\index{VAR@{VAR}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{VAR()}{VAR()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+VAR (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed variance 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em window\+\_\+size\+\_\+n} & \\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_ae6db8003e92f0287a86602bc0bd31d6c}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_ae6db8003e92f0287a86602bc0bd31d6c}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!WAMP@{WAMP}}
+\index{WAMP@{WAMP}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{WAMP()}{WAMP()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+WAMP (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n,  }\item[{double}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed wilson amplitude 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & \\
+\hline
+{\em window\+\_\+size\+\_\+n} & \\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & \\
+\hline
+{\em threshold} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a068b0d812ade3d6575bc85fc8dc41d0e}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a068b0d812ade3d6575bc85fc8dc41d0e}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!WL@{WL}}
+\index{WL@{WL}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{WL()}{WL()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+WL (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed waveform length 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a1124b6886403f8483765fe99a00ea6fb}\label{class_e_m_g___pattern_rec___c_s_1_1_mapping_1_1_features_a1124b6886403f8483765fe99a00ea6fb}} 
+\index{EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}!ZC@{ZC}}
+\index{ZC@{ZC}!EMG\_PatternRec\_CS.Mapping.Features@{EMG\_PatternRec\_CS.Mapping.Features}}
+\doxysubsubsection{\texorpdfstring{ZC()}{ZC()}}
+{\footnotesize\ttfamily static List$<$double$>$ EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS.\+Mapping.\+Features.\+ZC (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{raw\+\_\+values,  }\item[{int}]{window\+\_\+size\+\_\+n,  }\item[{int}]{window\+\_\+overlap\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the windowed number of zero crossings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+values} & List of unwindowed values\\
+\hline
+{\em window\+\_\+size\+\_\+n} & Number of data points in each window\\
+\hline
+{\em window\+\_\+overlap\+\_\+n} & Number of data points to overlap in each subsequent window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Rico5678/\+Documents/\+BLINC stuff/\+BLINC\+\_\+brachioplexus/rev43c2/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\+EMG\+\_\+\+Pattern\+Rec\+\_\+\+CS/\mbox{\hyperlink{_mapping_8cs}{Mapping.\+cs}}\end{DoxyCompactItemize}

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;                // For save/open parameters functionality
+using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Accord.IO;
 using Accord.Math;
@@ -866,6 +867,9 @@ namespace EMG_PatternRec_CS.PatternRec
         }
         private double[] _realtimeScores;
 
+        public int realtimePredict_N = 1;
+        public int count = 0;
+        public Task prediction_task;
 
         public RealTimeModel(Model model_)
         {
@@ -875,6 +879,10 @@ namespace EMG_PatternRec_CS.PatternRec
             freq = model.data.freq;
             signal_num = model.data.input_num;
             _realtimeScores = new double[model.data.output_num];
+
+            //realtimePredict_N = model.mapper.window_n - model.mapper.window_overlap_n;
+            realtimePredict_N = model.mapper.realtimePredict_n;
+            prediction_task = new Task(realtimePredictTask);
             return;
         }
 
@@ -911,13 +919,29 @@ namespace EMG_PatternRec_CS.PatternRec
                             _data_history[i].RemoveAt(0);
                         }
                     }
-
                     if (realtimePredictFlag)
                     {
-                        // make prediction
-                        _realtimeScores = model.get_scores(Data_history);
+                        // make prediction if realtimePredict_N samples have been obtained
+                        if (count >= realtimePredict_N && 
+                            (prediction_task.Status == TaskStatus.RanToCompletion || prediction_task.Status == TaskStatus.Created))
+                        {
+                            prediction_task = new Task(realtimePredictTask);
+                            prediction_task.Start();
+                            count = 0;
+                            //_realtimeScores = model.get_scores(Data_history);
+                        }
                     }
                 }
+                count++;
+            }
+        }
+
+        public void realtimePredictTask()
+        {
+            double[] scores = model.get_scores(Data_history);
+            lock (lockObj)
+            {
+                _realtimeScores = scores;
             }
         }
     }

@@ -572,6 +572,8 @@ namespace EMG_PatternRec_CS.Mapping
         public int window_overlap_n;
         /// <summary>number of windows to use per model input</summary>
         public int window_n;
+        /// <summary> number of samples to acquire before making a new prediction during realtime use </summary>
+        public int realtimePredict_n;
 
         /// <summary>
         /// delegate for Feature functions
